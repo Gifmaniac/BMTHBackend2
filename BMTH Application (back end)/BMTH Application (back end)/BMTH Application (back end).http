@@ -1,0 +1,6 @@
+@BMTH_Application__back_end__HostAddress = http://localhost:5221
+
+GET {{BMTH_Application__back_end__HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
