@@ -1,4 +1,4 @@
-﻿using DataLayer.Dtos;
+﻿using DataLayer.Dtos.Store.TShirt;
 
 namespace DataLayer.Interfaces
 {

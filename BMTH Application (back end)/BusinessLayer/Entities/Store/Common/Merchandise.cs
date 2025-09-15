@@ -4,13 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Entities
+namespace BusinessLayer.Entities.Store.Common
 {
     public abstract class Merchandise
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public bool InStock { get; set; }
+
+        protected Merchandise(int id, string name, decimal price, bool inStock)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+            InStock = inStock;
+        }
+
     }
+
+
 }
