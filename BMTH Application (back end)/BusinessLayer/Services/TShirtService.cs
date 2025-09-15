@@ -1,19 +1,22 @@
-﻿using DataLayer.Entities;
+﻿using DataLayer.Dtos;
+using DataLayer.Repositories;
 
-namespace BusinessLayer.Service
+namespace BusinessLayer.Services
 {
     public class TShirtService
     {
-        private readonly TShirtService _repo;
+        private readonly TShirtRepository _repo;
 
-        public TShirtService(TShirtService repo)
+        public TShirtService(TShirtRepository repo)
         {
             _repo = repo;
         }
 
-        public List<TShirtEntity> GetAllTShirts()
+        public List<TShirtDto> GetAllTShirts()
         {
-            return _repo.GetAllTShirts();
+            var shirtDto = _repo.MakeShirts();
+
         }
+
     }
 }

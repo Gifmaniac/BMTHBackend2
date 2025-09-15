@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Contracts.Enums.Store;
+﻿using Contracts.Enums.Store;
 
-namespace DataLayer.Entities
+namespace DataLayer.Dtos
 {
-    public class TShirtVariantEntity
+    public class TShirtVariantDto
     {
         public int Id { get; set; }
         public int TShirtId { get; set; }
