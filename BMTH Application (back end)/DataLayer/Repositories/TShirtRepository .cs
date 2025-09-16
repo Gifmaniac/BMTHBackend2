@@ -1,9 +1,10 @@
 ﻿using Contracts.Enums.Store;
 using DataLayer.Dtos.Store.TShirt;
+using DataLayer.Interfaces;
 
 namespace DataLayer.Repositories
 {
-    public class TShirtRepository
+    public class TShirtRepository : ITShirtRepository
     {
         public List<TShirtDto> MakeShirts()
         {

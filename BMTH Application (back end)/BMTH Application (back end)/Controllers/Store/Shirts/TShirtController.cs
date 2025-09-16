@@ -1,4 +1,5 @@
-﻿using APIContracts.DTOs.StoreItems.Common;
+﻿using System.Diagnostics.Eventing.Reader;
+using APIContracts.DTOs.StoreItems.Common;
 using APIContracts.DTOs.StoreItems.Shirts;
 using BMTH_Application__back_end_.Mappers.StoreItems.TShirts;
 using BusinessLayer.Mappers.Store;
@@ -27,17 +28,24 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
             // Parses the genders.
             Genders? parsedGender = null;
 
-            if (!string.IsNullOrWhiteSpace(genders) && Enum.TryParse<Genders>(genders, true, out var gender))   // Convert the string to Enum, ignores uppercases if Success filters on gender
+            // Convert the string to Enum, ignores uppercases if success filters on gender
+            if (!string.IsNullOrWhiteSpace(genders) && Enum.TryParse<Genders>(genders, true, out var gender))
             {
                 parsedGender = gender;
             }
+
+            // Makes a invalid check. 
+            else
+            {
+                return NotFound();
+            }
+            
 
             // Get the filtered entities
             var entities = _tShirtService.GetAllTShirts(parsedGender);
 
             // Maps the entities
             var overview = entities.Select(TShirtApiMapper.ToOverviewDto);
-
 
             return Ok(overview);
         }
