@@ -58,8 +58,8 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
                 return NotFound();
             }
 
-            var dto = TShirtApiMapper.ToOverviewDto(shirt);
-            return Ok(shirt);
+            var dto = TShirtApiMapper.ToDetailDto(shirt);
+            return Ok(dto);
         }
     }
 }

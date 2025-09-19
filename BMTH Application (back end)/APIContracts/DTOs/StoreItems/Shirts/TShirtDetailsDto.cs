@@ -5,11 +5,13 @@ namespace APIContracts.DTOs.StoreItems.Shirts
 {
     public class TShirtDetailsDto : StoreItemDto
     {
-        public TShirtDetailsDto(int id, string name, decimal price, int quantity, Genders gender) : base(id, StoreCategoryType.TShirts, name, price, quantity)
+        public TShirtDetailsDto(
+            int id, string category, string name, decimal price, int quantity, string gender) : base(id, category, name, price, quantity)
         {
             Gender = gender;
         }
-        public Genders Gender { get; set; }
+
+        public string Gender { get; set; }
         public List<TShirtVariantDto> Variants { get; set; } = new();
     }
 }

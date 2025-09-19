@@ -33,7 +33,6 @@ namespace DataLayer.Repositories
                     Gender = Genders.Unisex,
                     Material = "Cotton",
                     Price = 19.99m,
-                    TotalQuantity = 30,
                     Variants = new List<TShirtVariant>
                     {
                         new TShirtVariant
@@ -51,7 +50,6 @@ namespace DataLayer.Repositories
                     Gender = Genders.Men,
                     Material = "Organic Cotton",
                     Price = 24.99m,
-                    TotalQuantity = 20,
                     Variants = new List<TShirtVariant>
                     {
                         new TShirtVariant { VariantId = 4, TShirtId = 2, Color = "Navy", Size = Sizes.S, Quantity = 5 },
@@ -67,7 +65,6 @@ namespace DataLayer.Repositories
                     Gender = Genders.Women,
                     Material = "Polyester",
                     Price = 29.99m,
-                    TotalQuantity = 18,
                     Variants = new List<TShirtVariant>
                     {
                         new TShirtVariant { VariantId = 7, TShirtId = 3, Color = "Red", Size = Sizes.M, Quantity = 6 },
