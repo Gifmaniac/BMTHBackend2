@@ -1,8 +1,8 @@
 ﻿using Contracts.Enums.Store;
 
-namespace DataLayer.Dtos.Store.TShirt
+namespace DataLayer.Entity.Store.TShirt
 {
-    public class TShirtVariantDto
+    public class TShirtVariantEntity
     {
         public int VariantId { get; set; }
         public int TShirtId { get; set; }

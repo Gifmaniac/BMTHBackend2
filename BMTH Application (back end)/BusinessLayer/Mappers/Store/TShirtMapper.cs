@@ -36,7 +36,7 @@ namespace BusinessLayer.Mappers.Store
                 InStock = entity.InStock,
                 Gender = entity.Gender,
                 Material = entity.Material,
-                Variants = entity.Variants.Select(v => new TShirtVariantDto
+                Variants = entity.Variants.Select(v => new TShirtVariantEntity
                 {
                     VariantId = v.VariantId,
                     TShirtId = entity.Id,

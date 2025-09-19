@@ -16,7 +16,7 @@ namespace BusinessLayer.Services
 
         public List<TShirt> GetAllTShirts(Genders? gender = null)
         {
-            var shirtDtos = _repo.MakeShirts();
+            var shirtDtos = _repo.GetAllShirts();
 
             var entities = shirtDtos.Select(TShirtMapper.ToEntity);
 

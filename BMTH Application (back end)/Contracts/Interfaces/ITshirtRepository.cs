@@ -1,9 +1,12 @@
-﻿using DataLayer.Dtos.Store.TShirt;
+﻿using Contracts.Interfaces;
+
 
 namespace DataLayer.Interfaces
 {
     public interface ITShirtRepository
     {
-        List<TShirtDto> GetAll();
+        List<TShirt> GetMaleShirts();
+        List<TShirt> GetWomenShirts();
+        List<TShirt> GetUnisexShirts()
     }
 }
