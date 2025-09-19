@@ -1,12 +1,9 @@
-﻿using Contracts.Interfaces;
+﻿using Contracts.Enums.Store;
 
-
-namespace DataLayer.Interfaces
+namespace Contracts.Interfaces
 {
     public interface ITShirtRepository
     {
-        List<TShirt> GetMaleShirts();
-        List<TShirt> GetWomenShirts();
-        List<TShirt> GetUnisexShirts()
+        List<TShirt> GetShirtsByGender(Genders? gender = null);
     }
 }

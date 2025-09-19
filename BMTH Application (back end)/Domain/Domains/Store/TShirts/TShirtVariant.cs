@@ -1,8 +1,13 @@
 ﻿using Contracts.Enums.Store;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DataLayer.Entity.Store.TShirt
+namespace Domain.Domains.Store.TShirts
 {
-    public class TShirtVariantEntity
+    public class TShirtVariant
     {
         public int VariantId { get; set; }
         public int TShirtId { get; set; }

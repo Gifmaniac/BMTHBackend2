@@ -1,6 +1,6 @@
 ﻿using APIContracts.DTOs.StoreItems.Common;
-using BusinessLayer.Entities.Store.TShirts;
 using Contracts.Enums.Store;
+using Domain.Domains.Store.TShirts;
 
 namespace BMTH_Application__back_end_.Mappers.StoreItems.TShirts
 {

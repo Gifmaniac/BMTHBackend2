@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\APIContracts\APIContracts.csproj" />
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

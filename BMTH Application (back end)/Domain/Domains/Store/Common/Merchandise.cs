@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Contracts.Enums.Store;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Entities.Store.Common
+namespace Domain.Domains.Store.Common
 {
     public abstract class Merchandise
     {
@@ -12,16 +13,6 @@ namespace BusinessLayer.Entities.Store.Common
         public string Name { get; set; }
         public decimal Price { get; set; }
         public bool InStock { get; set; }
-
-        protected Merchandise(int id, string name, decimal price, bool inStock)
-        {
-            Id = id;
-            Name = name;
-            Price = price;
-            InStock = inStock;
-        }
-
+        public Genders Gender { get; set; }
     }
-
-
 }

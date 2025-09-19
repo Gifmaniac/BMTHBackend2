@@ -1,7 +1,6 @@
-﻿using BusinessLayer.Entities.Store.TShirts;
-using BusinessLayer.Mappers.Store;
-using Contracts.Enums.Store;
+﻿using Contracts.Enums.Store;
 using DataLayer.Repositories;
+using Domain.Domains.Store.TShirts;
 
 namespace BusinessLayer.Services
 {
@@ -14,17 +13,9 @@ namespace BusinessLayer.Services
             _repo = repo;
         }
 
-        public List<TShirt> GetAllTShirts(Genders? gender = null)
+        public List<TShirt> GetShirtsByGender(Genders? gender = null)
         {
-            var shirtDtos = _repo.GetAllShirts();
-
-            var entities = shirtDtos.Select(TShirtMapper.ToEntity);
-
-            if (gender.HasValue)
-                entities = entities.Where(s => s.Gender == gender.Value || s.Gender == Genders.Unisex);
-
-            return entities.ToList();
+            return _repo.GetShirtsByGender(gender);
         }
-
     }
 }
