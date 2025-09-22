@@ -31,7 +31,7 @@ namespace BMTH_Application__back_end_.Mappers.StoreItems.TShirts
                 Gender = entity.Gender.ToString(),
                 Material = entity.Material,
                 TotalQuantity = total,
-                InStock = entity.TotalQuantity > 0,
+                InStock = total > 0,
                 Variants = entity.Variants.Select(variant => new TShirtVariantDto
                 {
                     Color = variant.Color,

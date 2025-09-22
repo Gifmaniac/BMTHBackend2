@@ -1,4 +1,5 @@
 ﻿using Contracts.Enums.Store;
+using Domain.Domains.Store.TShirts;
 
 namespace Contracts.Interfaces
 {

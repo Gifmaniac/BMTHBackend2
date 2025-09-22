@@ -1,11 +1,15 @@
 ﻿using Contracts.Enums.Store;
-using DataLayer.Mapper;
 using Domain.Domains.Store.TShirts;
 
 
 namespace DataLayer.Repositories
 {
-    public class TShirtRepository
+    public interface ITShirtRepository
+    {
+        List<TShirt> GetShirtsByGender(Genders? gender = null);
+    }
+
+    public class TShirtRepository : ITShirtRepository
     {
         private readonly List<TShirt> _tShirts;
 
