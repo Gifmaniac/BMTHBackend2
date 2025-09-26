@@ -1,3 +1,4 @@
+using BMTH_Application__back_end_.Middleware;
 using BusinessLayer.Services;
 using DataLayer.Repositories;
 
@@ -21,6 +22,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseMiddleware<ApiMiddleWare>();
 }
 
 app.UseHttpsRedirection();

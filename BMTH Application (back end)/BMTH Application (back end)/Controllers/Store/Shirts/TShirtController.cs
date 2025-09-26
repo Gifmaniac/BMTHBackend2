@@ -1,5 +1,4 @@
-﻿using APIContracts.DTOs.StoreItems.Shirts;
-using BMTH_Application__back_end_.Mappers.StoreItems.TShirts;
+﻿using BMTH_Application__back_end_.Mappers.StoreItems.TShirts;
 using BusinessLayer.Services;
 using Contracts.Enums.Store;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +30,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
                 parsedGender = gender;
             }
 
-            // Makes a invalid check. 
+            // Makes an invalid check. 
             else
             {
                 return NotFound();
