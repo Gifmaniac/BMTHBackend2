@@ -1,4 +1,4 @@
-﻿using
+﻿using BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts;
 using BusinessLayer.Services;
 using Contracts.Enums.Store;
 using Microsoft.AspNetCore.Mvc;
@@ -19,45 +19,26 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
 
 
         [HttpGet]
-        public IActionResult GetTShirtsResponse([FromQuery] string? genders)
+        public IActionResult GetTShirtsResponse([FromQuery] string? gender)
         {
-            if (!Enum.TryParse(genders, true, out Genders gender))
+
+            if (string.IsNullOrEmpty(gender) || !Enum.TryParse<Genders>(gender, true, out var parsedGender))
             {
-                return BadRequest("Invalid gender value.");
+                return BadRequest("Invalid request");
             }
 
-            var overviewDtos = _tShirtService.GetShirtsByGender(gender);
-            return Ok(overviewDtos);
+            var domainModels = _tShirtService.GetTShirtsByGender(parsedGender);
 
-            //// Parses the genders.
-            //Genders? parsedGender = null;
+            var dtoList = domainModels.Select(TShirtApiMapper.ToDetailsDto).ToList();
 
-            //// Convert the string to Enum, ignores uppercases if success filters on gender
-            //if (!string.IsNullOrWhiteSpace(genders) && Enum.TryParse<Genders>(genders, true, out var gender))
-            //{
-            //    parsedGender = gender;
-            //}
-
-            //// Makes an invalid check. 
-            //else
-            //{
-            //    return NotFound();
-            //}
-            
-
-            //// Get the filtered entities
-            //var entities = _tShirtService.GetShirtsByGender(parsedGender);
-
-            //// Maps the entities
-            //var overview = entities.Select(TShirtApiMapper.ToOverviewDto);
-
-            return Ok(overview);
+            return Ok(dtoList);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetTShirtByIdResponse(int id)
         {
-            var shirts = _tShirtService.GetShirtsByGender();
+            var shirts = _tShirtService.GetTShirtsByGender();
+
             var shirt = shirts.FirstOrDefault(s => s.Id == id);
 
             if (shirt == null)
@@ -65,7 +46,8 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
                 return NotFound();
             }
 
-            var dto = TShirtApiMapper.ToDetailDto(shirt);
+            var dto = TShirtApiMapper.ToDetailsDto(shirt);
+
             return Ok(dto);
         }
     }

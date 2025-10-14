@@ -1,5 +1,7 @@
 ﻿using Contracts.Enums.Store;
 using Contracts.Interfaces;
+using DataLayer.Context;
+using DataLayer.Models.Store.TShirts;
 using Domain.Domains.Store.TShirts;
 
 
@@ -7,19 +9,18 @@ namespace DataLayer.Repositories
 {
     public class TShirtRepository : ITShirtRepository
     {
-        private readonly List<TShirt> _tShirts;
+        private readonly StoreDbContext _context;
 
-        public List<TShirt> GetShirtsByGender(Genders? gender = null)
+        public TShirtRepository(StoreDbContext context)
         {
-            IEnumerable<TShirt> getTShirts = _tShirts;
+            _context = context;
+        }
 
-            if (gender.HasValue)
-            {
-                getTShirts = getTShirts
-                    .Where(tShirt => tShirt.Gender == gender.Value || tShirt.Gender == Genders.Unisex);
-            }
+        public List<TShirtModel> GetTShirtByGender(Genders? gender = null)
+        {
+            var query = new List<TShirtModel>();
 
-            return getTShirts.ToList();
+            return query;
         }
     }
 }

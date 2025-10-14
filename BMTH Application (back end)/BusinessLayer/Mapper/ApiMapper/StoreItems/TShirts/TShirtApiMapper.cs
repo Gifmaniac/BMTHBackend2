@@ -1,12 +1,11 @@
 ﻿using Contracts.DTOs.StoreItems.Shirts;
 using Contracts.Enums.Store;
 using Domain.Domains.Store.TShirts;
-using System.Reflection;
 using BusinessLayer.Helper;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
 {
-    public static class TShirtMapper
+    public static class TShirtApiMapper
     {
         public static TShirtDetailsDto ToDetailsDto(TShirt model)
         {
@@ -28,22 +27,24 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
             };
         }
 
-        public static TShirt ToDetailsDomain(TShirtDetailsDto Dto)
+        public static TShirt ToDetailsDomain(TShirtDetailsDto dto)
         {
             return new TShirt()
             {
-                Id = Dto.Id,
-                Name = Dto.Name,
-                Price = Dto.Price,
-                Category = EnumHelper.ParseEnum(Dto.Category, StoreCategoryType.TShirts),
-                InStock = Dto.InStock,
-                Gender = EnumHelper.ParseEnum(Dto.Gender, Genders.Unisex),
-                Variants = Dto.Variants.Select(v => new TShirtVariant()
+                Id = dto.Id,
+                Name = dto.Name,
+                Price = dto.Price,
+                Category = EnumHelper.ParseEnum(dto.Category, StoreCategoryType.TShirts),
+                InStock = dto.InStock,
+                Material = dto.Material,
+                Gender = EnumHelper.ParseEnum(dto.Gender, Genders.Unisex),
+                Variants = dto.Variants.Select(v => new TShirtVariant()
                 {
                     Color = v.Color,
-                    Size = EnumHelper.ParseEnum()
-                }
-            }
+                    Size = EnumHelper.ParseEnum(v.Size, Sizes.M),
+                    Quantity = v.Quantity
+                }).ToList()
+            };
         }
     }
 }

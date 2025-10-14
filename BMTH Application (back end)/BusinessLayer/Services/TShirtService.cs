@@ -1,5 +1,6 @@
-﻿using BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts;
+﻿using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
 using Contracts.Enums.Store;
+using DataLayer.Models.Store.TShirts;
 using DataLayer.Repositories;
 using Domain.Domains.Store.TShirts;
 
@@ -13,13 +14,24 @@ namespace BusinessLayer.Services
         {
             _tShirtRepository = repo;
         }
-
-        public List<TShirt> GetShirtsByGender(Genders? gender = null)
+        private static List<TShirt> MapToDomain(List<TShirtModel> models)
         {
-            var entities = _tShirtRepository.GetShirtsByGender(gender);
+            return models.Select(TShirtDalMapper.ToDomain).ToList();
+        }
 
-            var domainModels = entities.Select(TShirtMapper.ToDetailsDto(tshirt));
 
+        public List<TShirt> GetTShirtsByGender(Genders? gender = null)
+        {
+            List<TShirtModel> models = _tShirtRepository.GetTShirtByGender(gender);
+
+            List<TShirt> domainModels = MapToDomain(models);
+
+            foreach (TShirt shirt in domainModels)
+            {  
+                if (shirt.Variants.Sum(v => v.Quantity) == 0)
+                    shirt.InStock = false;
+            }
+            return domainModels;
         }
     }
 }

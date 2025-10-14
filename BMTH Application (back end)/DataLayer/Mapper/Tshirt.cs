@@ -1,5 +1,8 @@
 ﻿
 
+using APIContracts.DTOs.StoreItems.Common;
+using Contracts.DTOs.StoreItems.Common;
+using Contracts.DTOs.StoreItems.Shirts;
 using Domain.Domains.Store.TShirts;
 
 namespace DataLayer.Mapper

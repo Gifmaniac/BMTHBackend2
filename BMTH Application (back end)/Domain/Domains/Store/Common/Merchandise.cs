@@ -9,7 +9,6 @@ namespace Domain.Domains.Store.Common
         public string Name { get; set; }
         public decimal Price { get; set; }
         public bool InStock { get; set; }
-        public Genders Gender { get; set; }
         public StoreCategoryType Category { get; set; }
     }
 }
