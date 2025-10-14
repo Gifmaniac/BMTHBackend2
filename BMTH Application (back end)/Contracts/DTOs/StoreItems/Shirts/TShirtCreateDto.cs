@@ -1,6 +1,6 @@
 ﻿using Contracts.Enums.Store;
 
-namespace APIContracts.DTOs.StoreItems.Shirts
+namespace Contracts.DTOs.StoreItems.Shirts
 {
     public class TShirtCreateDto
     {

@@ -1,4 +1,4 @@
-﻿using BMTH_Application__back_end_.Mappers.StoreItems.TShirts;
+﻿using
 using BusinessLayer.Services;
 using Contracts.Enums.Store;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
 {
     [ApiController]
 
-    [Route("store/tshirts")]
+    [Route("/api/store/apparel")]
     public class TShirtController : ControllerBase
     {
         private readonly TShirtService _tShirtService;
@@ -21,27 +21,35 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
         [HttpGet]
         public IActionResult GetTShirtsResponse([FromQuery] string? genders)
         {
-            // Parses the genders.
-            Genders? parsedGender = null;
-
-            // Convert the string to Enum, ignores uppercases if success filters on gender
-            if (!string.IsNullOrWhiteSpace(genders) && Enum.TryParse<Genders>(genders, true, out var gender))
+            if (!Enum.TryParse(genders, true, out Genders gender))
             {
-                parsedGender = gender;
+                return BadRequest("Invalid gender value.");
             }
 
-            // Makes an invalid check. 
-            else
-            {
-                return NotFound();
-            }
+            var overviewDtos = _tShirtService.GetShirtsByGender(gender);
+            return Ok(overviewDtos);
+
+            //// Parses the genders.
+            //Genders? parsedGender = null;
+
+            //// Convert the string to Enum, ignores uppercases if success filters on gender
+            //if (!string.IsNullOrWhiteSpace(genders) && Enum.TryParse<Genders>(genders, true, out var gender))
+            //{
+            //    parsedGender = gender;
+            //}
+
+            //// Makes an invalid check. 
+            //else
+            //{
+            //    return NotFound();
+            //}
             
 
-            // Get the filtered entities
-            var entities = _tShirtService.GetShirtsByGender(parsedGender);
+            //// Get the filtered entities
+            //var entities = _tShirtService.GetShirtsByGender(parsedGender);
 
-            // Maps the entities
-            var overview = entities.Select(TShirtApiMapper.ToOverviewDto);
+            //// Maps the entities
+            //var overview = entities.Select(TShirtApiMapper.ToOverviewDto);
 
             return Ok(overview);
         }
