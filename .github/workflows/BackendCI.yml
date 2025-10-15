@@ -20,10 +20,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        working-directory: "BMTH Application (back end)"
+        run: dotnet restore "BMTHBackend2.sln"
 
       - name: Build
-        run: dotnet build "BMTH Application (back end)/BMTHBackend2.sln" --no-restore --configuration Release
+        working-directory: "BMTH Application (back end)"
+        run: dotnet build "BMTHBackend2.sln" --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
+        working-directory: "BMTH Application (back end)"
+        run: dotnet test "BMTHBackend2.sln" --no-build --configuration Release
