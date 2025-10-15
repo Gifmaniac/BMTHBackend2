@@ -2,8 +2,8 @@
 {
     public class TShirtVariantDto
     {
-        public string Color { get; set; } = string.Empty;
-        public string Size { get; set; } = string.Empty;
+        public required string Color { get; set; }
+        public required string Size { get; set; }
         public int Quantity { get; set; }
         public bool InStock => Quantity > 0;
     }
