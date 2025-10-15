@@ -24,14 +24,7 @@ namespace BusinessLayer.Services
         {
             List<TShirtModel> models = _tShirtRepository.GetTShirtByGender(gender);
 
-            List<TShirt> domainModels = MapToDomain(models);
-
-            foreach (TShirt shirt in domainModels)
-            {  
-                if (shirt.Variants.Sum(v => v.Quantity) == 0)
-                    shirt.InStock = false;
-            }
-            return domainModels;
+            return TShirtDalMapper.ToDomainList(models);
         }
     }
 }

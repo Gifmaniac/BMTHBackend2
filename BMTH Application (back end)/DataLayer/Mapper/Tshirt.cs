@@ -1,45 +1,44 @@
-﻿
+﻿//using APIContracts.DTOs.StoreItems.Common;
+//using Contracts.DTOs.StoreItems.Common;
+//using Contracts.DTOs.StoreItems.Shirts;
+//using Domain.Domains.Store.TShirts;
 
-using APIContracts.DTOs.StoreItems.Common;
-using Contracts.DTOs.StoreItems.Common;
-using Contracts.DTOs.StoreItems.Shirts;
-using Domain.Domains.Store.TShirts;
+//namespace DataLayer.Mapper
+//{
+//    public class TshirtModelMapper
+//    {
+//        public static StoreItemOverviewDto ToOverviewDto(TShirt entity)
+//        {
+//            return new StoreItemOverviewDto
+//            {
+//                Id = entity.Id,
+//                Name = entity.Name,
+//                Price = entity.Price,
+//                Category = entity.Category.ToString(),
+//                Gender = entity.Gender.ToString()
+//            };
+//        }
 
-namespace DataLayer.Mapper
-{
-    public class TshirtModelMapper
-    {
-        public static StoreItemOverviewDto ToOverviewDto(TShirt entity)
-        {
-            return new StoreItemOverviewDto
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Price = entity.Price,
-                Category = entity.Category.ToString(),
-                Gender = entity.Gender.ToString()
-            };
-        }
+//        public static MerchandiseDetailDto ToDetailDto(TShirt entity)
+//        {
+//            var total = entity.Variants.Sum(variant => variant.Quantity);
 
-        public static StoreItemDetailDto ToDetailDto(TShirt entity)
-        {
-            var total = entity.Variants.Sum(variant => variant.Quantity);
-
-            return new StoreItemDetailDto
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Price = entity.Price,
-                Gender = entity.Gender.ToString(),
-                Material = entity.Material,
-                TotalQuantity = total,
-                InStock = total > 0,
-                Variants = entity.Variants.Select(variant => new TShirtVariantDto
-                {
-                    Color = variant.Color,
-                    Size = variant.Size.ToString(),
-                    Quantity = variant.Quantity
-                }).ToList()
-            };
-        }
-}
+//            return new MerchandiseDetailDto
+//            {
+//                Id = entity.Id,
+//                Name = entity.Name,
+//                Price = entity.Price,
+//                Gender = entity.Gender.ToString(),
+//                Material = entity.Material,
+//                TotalQuantity = total,
+//                InStock = total > 0,
+//                Variants = entity.Variants.Select(variant => new TShirtVariantDto
+//                {
+//                    Color = variant.Color,
+//                    Size = variant.Size.ToString(),
+//                    Quantity = variant.Quantity
+//                }).ToList()
+//            };
+//        }
+//    }
+//}

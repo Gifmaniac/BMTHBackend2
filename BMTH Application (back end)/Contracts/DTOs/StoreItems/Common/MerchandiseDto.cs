@@ -1,8 +1,8 @@
 ﻿namespace Contracts.DTOs.StoreItems.Common
 {
-    public class StoreItemDto
+    public class MerchandiseDto
     {
-        public StoreItemDto(int id, string category, string name, decimal price, int quantity)
+        public MerchandiseDto(int id, string category, string name, decimal price, int quantity)
         {
             Id = id;
             Category = category;
@@ -17,6 +17,6 @@
         public string Description { get; set; } = string.Empty;
         public int Quantity { get; set; }
         public string Category { get; set; }
-        public bool InStock { get; set; } = false;
+        public bool InStock { get; set; }
     }
 }

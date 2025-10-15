@@ -36,7 +36,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
 
         [HttpGet("{id}")]
         public IActionResult GetTShirtByIdResponse(int id)
-        {
+        { 
             var shirts = _tShirtService.GetTShirtsByGender();
 
             var shirt = shirts.FirstOrDefault(s => s.Id == id);

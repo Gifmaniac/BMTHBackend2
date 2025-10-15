@@ -9,5 +9,6 @@ namespace DataLayer.Models.Store.Common
         public decimal Price { get; set; }
         public bool InStock { get; set; }
         public StoreCategoryType Category { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

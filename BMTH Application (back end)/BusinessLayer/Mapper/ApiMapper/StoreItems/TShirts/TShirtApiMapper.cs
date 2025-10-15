@@ -22,7 +22,7 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                 {
                     Color = v.Color,
                     Size = v.Size.ToString(),
-                    Quantity = v.Quantity
+                    Quantity = v.Quantity,
                 }).ToList()
             };
         }
@@ -42,7 +42,7 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                 {
                     Color = v.Color,
                     Size = EnumHelper.ParseEnum(v.Size, Sizes.M),
-                    Quantity = v.Quantity
+                    Quantity = v.Quantity,
                 }).ToList()
             };
         }
