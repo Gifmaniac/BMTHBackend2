@@ -21,12 +21,12 @@ jobs:
 
       - name: Restore dependencies
         working-directory: "BMTH Application (back end)"
-        run: dotnet restore "BMTHBackend2.sln"
+        run: dotnet restore "BMTH Application (back end).sln"
 
       - name: Build
         working-directory: "BMTH Application (back end)"
-        run: dotnet build "BMTHBackend2.sln" --no-restore --configuration Release
+        run: dotnet build "BMTH Application (back end).sln" --no-restore --configuration Release
 
       - name: Run tests
         working-directory: "BMTH Application (back end)"
-        run: dotnet test "BMTHBackend2.sln" --no-build --configuration Release
+        run: dotnet test "BMTH Application (back end).sln" --no-build --configuration Release
