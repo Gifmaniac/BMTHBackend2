@@ -37,7 +37,7 @@ jobs:
         run: |
           New-Item -Path ${{ runner.temp }}\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
-        name: Build and analyze
+      - name: Build and analyze
           working-directory: "BMTH Application (back end)"
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

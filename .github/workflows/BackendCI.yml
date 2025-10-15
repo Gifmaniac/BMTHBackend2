@@ -25,8 +25,8 @@ jobs:
 
       - name: Build
         working-directory: "BMTH Application (back end)"
-        run: dotnet build "BMTH Application (back end).sln" --no-restore --configuration Release
+        run: dotnet build "Test.Unit/Test.Unit.csproj" --no-restore --configuration Release
 
       - name: Run tests
         working-directory: "BMTH Application (back end)"
-        run: dotnet test "BMTH Application (back end).sln" --no-build --configuration Release
+        run: dotnet test "Test.Unit/Test.Unit.csproj --no-build --configuration Release
