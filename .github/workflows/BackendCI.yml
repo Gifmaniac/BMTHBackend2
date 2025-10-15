@@ -29,4 +29,4 @@ jobs:
 
       - name: Run tests
         working-directory: "BMTH Application (back end)"
-        run: dotnet test "Test.Unit/Test.Unit.csproj --no-build --configuration Release
+        run: dotnet test "Test.Unit/Test.Unit.csproj" --no-build --configuration Release
