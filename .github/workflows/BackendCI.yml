@@ -1,4 +1,4 @@
-name: .NET CI
+name: BackendCI
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build "BMTH Application (back end)/BMTHBackend2.sln" --no-restore --configuration Release
 
       - name: Run tests
         run: dotnet test --no-build --configuration Release --verbosity normal
