@@ -1,17 +1,15 @@
-using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Services;
 using Contracts.Enums.Store;
-using Contracts.Interfaces;
+using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
 using Moq;
 
 namespace Test.Integration
 {
-    public class UnitTest1
+    public class MapperTestTShirt
     {
         [Fact]
-        public void Test1()
+        public void Should_Map_From_Model_To_Domain()
         {
             // Arrange
             var repo = new Mock<ITShirtRepository>();
@@ -27,7 +25,7 @@ namespace Test.Integration
                     }
                 });
 
-            // ?? Create a *real* service, using your mocked repo
+            
             var service = new TShirtService(repo.Object);
 
             // Act

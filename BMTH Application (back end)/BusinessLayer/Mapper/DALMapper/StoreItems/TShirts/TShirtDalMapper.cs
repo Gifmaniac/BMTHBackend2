@@ -19,7 +19,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
                 Variants = domain.Variants.Select(v => new TShirtVariantModel()
                 {
                     VariantId = v.VariantId,
-                    TShirtId = v.TShirtId,
+                    TShirtModelId = v.TShirtId,
                     Color = v.Color,
                     Size = v.Size,
                     Quantity = v.Quantity

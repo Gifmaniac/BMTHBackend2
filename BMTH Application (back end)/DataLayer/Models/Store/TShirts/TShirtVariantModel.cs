@@ -1,11 +1,13 @@
-﻿using Contracts.Enums.Store;
+﻿using System.ComponentModel.DataAnnotations;
+using Contracts.Enums.Store;
 
 namespace DataLayer.Models.Store.TShirts
 {
     public class TShirtVariantModel
     {
-        public int VariantId { get; set; }      // PK
-        public required int TShirtId { get; set; }       // FK
+        [Key]
+        public int VariantId { get; set; }// PK
+        public required int TShirtModelId { get; set; } // FK
         public required string Color { get; set; }
         public Sizes Size { get; set; }
         public int Quantity { get; set; }

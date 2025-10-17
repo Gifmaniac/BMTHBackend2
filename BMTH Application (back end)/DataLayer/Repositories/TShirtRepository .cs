@@ -1,6 +1,7 @@
 ﻿using Contracts.Enums.Store;
-using Contracts.Interfaces;
 using DataLayer.Context;
+
+using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
 
 
@@ -9,9 +10,9 @@ namespace DataLayer.Repositories
 {
     public class TShirtRepository : ITShirtRepository
     {
-        private readonly StoreDbContext _context;
+        private readonly AppDbContext _context;
 
-        public TShirtRepository(StoreDbContext context)
+        public TShirtRepository(AppDbContext context)
         {
             _context = context;
         }

@@ -1,18 +1,26 @@
 using BMTH_Application__back_end_.Middleware;
+using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Services;
-using DataLayer.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using DataLayer.Context;
+using DataLayer.Interfaces;
+using DataLayer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<TShirtRepository>();
-builder.Services.AddScoped<TShirtService>();
+builder.Services.AddScoped<ITShirtRepository, TShirtRepository>();
+builder.Services.AddScoped<ITShirtService, TShirtService>();
 
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Adds Database connection
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestConnection")));
 
 // Adds Api authorization
 builder.Services.AddSwaggerGen(c =>

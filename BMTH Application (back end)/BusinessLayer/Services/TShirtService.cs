@@ -1,17 +1,17 @@
 ﻿using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
 using Contracts.Enums.Store;
+using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
-using DataLayer.Repositories;
 using Domain.Domains.Store.TShirts;
 
 namespace BusinessLayer.Services
 {
     public class TShirtService : ITShirtService
     {
-        private readonly TShirtRepository _tShirtRepository;
+        private readonly ITShirtRepository _tShirtRepository;
 
-        public TShirtService(TShirtRepository repo)
+        public TShirtService(ITShirtRepository repo)
         {
             _tShirtRepository = repo;
         }

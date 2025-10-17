@@ -2,7 +2,7 @@
 using DataLayer.Models.Store.TShirts;
 using Domain.Domains.Store.TShirts;
 
-namespace Contracts.Interfaces
+namespace DataLayer.Interfaces
 {
     public interface ITShirtRepository
     {
