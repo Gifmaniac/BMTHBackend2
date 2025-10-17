@@ -26,9 +26,9 @@ namespace Test.Unit
                     Variants = new List<TShirtVariantModel>
                     {
                         new TShirtVariantModel 
-                            { VariantId = 101, Color = "Black", Size = Sizes.M, Quantity = 4 },
+                            { VariantId = 101, TShirtId = 1, Color = "Black", Size = Sizes.M, Quantity = 4 },
                         new TShirtVariantModel 
-                            { VariantId = 102, Color = "Red", Size = Sizes.L, Quantity = 0 }
+                            { VariantId = 102, TShirtId = 1, Color = "Red", Size = Sizes.L, Quantity = 0 }
                     }
                 },
 
@@ -44,9 +44,9 @@ namespace Test.Unit
                     Variants = new List<TShirtVariantModel>
                     {
                         new TShirtVariantModel 
-                            { VariantId = 103, Color = "Orange", Size = Sizes.S, Quantity = 3 },
+                            { VariantId = 103, TShirtId = 2, Color = "Orange", Size = Sizes.S, Quantity = 3 },
                         new TShirtVariantModel 
-                            { VariantId = 104, Color = "White", Size = Sizes.XL, Quantity = 2 },
+                            { VariantId = 104, TShirtId = 2, Color = "White", Size = Sizes.XL, Quantity = 2 },
                     }
                 }
                 

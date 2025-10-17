@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
+﻿using BusinessLayer.Interfaces.Store.TShirts;
+using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
 using Contracts.Enums.Store;
 using DataLayer.Models.Store.TShirts;
 using DataLayer.Repositories;
@@ -6,7 +7,7 @@ using Domain.Domains.Store.TShirts;
 
 namespace BusinessLayer.Services
 {
-    public class TShirtService
+    public class TShirtService : ITShirtService
     {
         private readonly TShirtRepository _tShirtRepository;
 
@@ -14,11 +15,6 @@ namespace BusinessLayer.Services
         {
             _tShirtRepository = repo;
         }
-        private static List<TShirt> MapToDomain(List<TShirtModel> models)
-        {
-            return models.Select(TShirtDalMapper.ToDomain).ToList();
-        }
-
 
         public List<TShirt> GetTShirtsByGender(Genders? gender = null)
         {

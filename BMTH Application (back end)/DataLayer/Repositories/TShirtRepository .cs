@@ -2,7 +2,7 @@
 using Contracts.Interfaces;
 using DataLayer.Context;
 using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
+
 
 
 namespace DataLayer.Repositories

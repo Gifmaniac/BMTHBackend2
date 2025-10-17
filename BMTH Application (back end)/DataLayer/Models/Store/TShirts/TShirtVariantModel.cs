@@ -10,5 +10,6 @@ namespace DataLayer.Models.Store.TShirts
         public Sizes Size { get; set; }
         public int Quantity { get; set; }
         public bool InStock  => Quantity > 0;
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }

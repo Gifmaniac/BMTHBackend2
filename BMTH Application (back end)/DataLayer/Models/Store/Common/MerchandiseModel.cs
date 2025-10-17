@@ -8,7 +8,6 @@ namespace DataLayer.Models.Store.Common
         public required string Name { get; set; }
         public decimal Price { get; set; }
         public bool InStock { get; set; }
-        public StoreCategoryType Category { get; set; }
-        public required string ImageUrl { get; set; }
+        public StoreCategoryType Category { get; set; } 
     }
 }

@@ -10,6 +10,5 @@ namespace Domain.Domains.Store.Common
         public decimal Price { get; set; }
         public bool InStock { get; set; }
         public StoreCategoryType Category { get; set; }
-        public required string ImageUrl { get; set; }
     }
 }
