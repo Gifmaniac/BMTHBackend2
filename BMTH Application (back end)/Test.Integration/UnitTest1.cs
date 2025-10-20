@@ -1,9 +1,7 @@
 using BusinessLayer.Interfaces.Store.TShirts;
-using BusinessLayer.Services;
 using Contracts.Enums.Store;
-using Contracts.Interfaces;
+using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
 using Moq;
 
 namespace Test.Integration
@@ -27,8 +25,7 @@ namespace Test.Integration
                     }
                 });
 
-            // ?? Create a *real* service, using your mocked repo
-            var service = new TShirtService(repo.Object);
+            var service = new ITShirtService(repo);
 
             // Act
             var result = service.GetTShirtsByGender(Genders.Men);
