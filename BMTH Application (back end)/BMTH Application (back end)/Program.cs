@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // Adds Database connection
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<StoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TestConnection")));
 
 // Adds Api authorization

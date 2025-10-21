@@ -20,7 +20,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
                 Variants = domain.Variants.Select(v => new TShirtVariantModel()
                 {
                     VariantId = v.VariantId,
-                    TShirtModelId = v.TShirtId,
+                    TShirtModelId = v.TShirtModelId,
                     Color = v.Color,
                     Size = v.Size,
                     Quantity = v.Quantity
@@ -46,6 +46,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
                 Material = model.Material,
                 Variants = model.Variants.Select(v => new TShirtVariant
                 {
+                    TShirtModelId = v.TShirtModelId,
                     VariantId = v.VariantId,
                     Color = v.Color,
                     Size = v.Size,
