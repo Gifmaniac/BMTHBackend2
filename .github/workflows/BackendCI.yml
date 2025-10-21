@@ -27,6 +27,6 @@ jobs:
         working-directory: "BMTH Application (back end)"
         run: dotnet build "Test.Unit/Test.Unit.csproj" --no-restore --configuration Release
 
-      - name: Run tests
+      - name: Run tests with coverage
         working-directory: "BMTH Application (back end)"
-        run: dotnet test "Test.Unit/Test.Unit.csproj" --no-build --configuration Release
+        run: dotnet test "Test.Unit/Test.Unit.csproj" --no-build --configuration Release --collect:"XPlat Code Coverage"
