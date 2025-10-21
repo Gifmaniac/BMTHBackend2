@@ -1,4 +1,4 @@
-using BusinessLayer.Services;
+using BusinessLayer.Interfaces.Store.TShirts;
 using Contracts.Enums.Store;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
@@ -6,10 +6,10 @@ using Moq;
 
 namespace Test.Integration
 {
-    public class MapperTestTShirt
+    public class UnitTest1
     {
         [Fact]
-        public void Should_Map_From_Model_To_Domain()
+        public void Test1()
         {
             // Arrange
             var repo = new Mock<ITShirtRepository>();
@@ -25,8 +25,7 @@ namespace Test.Integration
                     }
                 });
 
-            
-            var service = new TShirtService(repo.Object);
+            var service = new ITShirtService(repo);
 
             // Act
             var result = service.GetTShirtsByGender(Genders.Men);

@@ -22,5 +22,12 @@ namespace BusinessLayer.Services
 
             return TShirtDalMapper.ToDomainList(models);
         }
+
+        public TShirt GetShirtById(int id)
+        {
+            TShirtModel tShirtId = _tShirtRepository.GetById(id);
+
+            return TShirtDalMapper.ToDomain(tShirtId);
+        }
     }
 }
