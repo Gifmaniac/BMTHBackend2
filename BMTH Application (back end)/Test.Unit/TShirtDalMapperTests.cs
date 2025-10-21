@@ -1,7 +1,7 @@
+using BusinessLayer.Domain.Store.Shirts;
 using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
 using Contracts.Enums.Store;
 using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
 
 
 namespace Test.Unit
@@ -90,9 +90,9 @@ namespace Test.Unit
                     Variants = new List<TShirtVariant>
                     {
                         new TShirtVariant 
-                            { VariantId = 101, TShirtId = 1, Color = "Black", Size = Sizes.XXL, Quantity = 6 },
+                            { VariantId = 101, TShirtModelId = 1, Color = "Black", Size = Sizes.XXL, Quantity = 6 },
                         new TShirtVariant 
-                            { VariantId = 102, TShirtId = 1, Color = "Green", Size = Sizes.L, Quantity = 2 }
+                            { VariantId = 102, TShirtModelId = 1, Color = "Green", Size = Sizes.L, Quantity = 2 }
                     }
                 },
 
@@ -108,9 +108,9 @@ namespace Test.Unit
                     Variants = new List<TShirtVariant>
                     {
                         new TShirtVariant
-                            { VariantId = 103, TShirtId = 2, Color = "Purple", Size = Sizes.S, Quantity = 0 },
+                            { VariantId = 103, TShirtModelId = 2, Color = "Purple", Size = Sizes.S, Quantity = 0 },
                         new TShirtVariant
-                            { VariantId = 104, TShirtId = 2, Color = "Blue", Size = Sizes.XL, Quantity = 1 }
+                            { VariantId = 104, TShirtModelId = 2, Color = "Blue", Size = Sizes.XL, Quantity = 1 }
                     }
                 }
             };
