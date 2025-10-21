@@ -4,8 +4,8 @@ namespace BusinessLayer.Domain.Store.Shirts
 {
     public class TShirtVariant
     {
-        public int VariantId { get; set; }// PK
-        public required int TShirtModelId { get; set; } // FK
+        public required int VariantId { get; set; }
+        public required int TShirtModelId { get; set; }
         public required string Color { get; set; }
         public Sizes Size { get; set; }
         public int Quantity { get; set; }

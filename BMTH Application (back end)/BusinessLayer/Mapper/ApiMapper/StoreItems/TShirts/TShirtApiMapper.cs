@@ -1,6 +1,7 @@
-﻿using Contracts.DTOs.StoreItems.Shirts;
+﻿using BusinessLayer.Domain.Store.Shirts;
+using Contracts.DTOs.StoreItems.Shirts;
 using Contracts.Enums.Store;
-using Domain.Domains.Store.TShirts;
+
 using BusinessLayer.Helper;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
@@ -20,6 +21,8 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                 Gender = model.Gender.ToString(),
                 Variants = model.Variants.Select(v => new TShirtVariantDto
                 {
+                    TShirtModelId = v.TShirtModelId,
+                    VariantId = v.VariantId,
                     Color = v.Color,
                     Size = v.Size.ToString(),
                     Quantity = v.Quantity,
@@ -40,6 +43,8 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                 Gender = EnumHelper.ParseEnum(dto.Gender, Genders.Unisex),
                 Variants = dto.Variants.Select(v => new TShirtVariant()
                 {
+                    TShirtModelId = v.TShirtModelId,
+                    VariantId = v.VariantId,
                     Color = v.Color,
                     Size = EnumHelper.ParseEnum(v.Size, Sizes.M),
                     Quantity = v.Quantity,
