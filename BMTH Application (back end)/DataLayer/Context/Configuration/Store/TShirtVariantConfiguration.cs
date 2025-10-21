@@ -1,12 +1,13 @@
-﻿using Domain.Domains.Store.TShirts;
+﻿using DataLayer.Models.Store.TShirts;
+using Domain.Domains.Store.TShirts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataLayer.Context.Configuration.Store
 {
-    class TShirtVariantConfiguration : IEntityTypeConfiguration<TShirtVariant>
+    class TShirtVariantConfiguration : IEntityTypeConfiguration<TShirtVariantModel>
     {
-        public void Configure(EntityTypeBuilder<TShirtVariant> builder)
+        public void Configure(EntityTypeBuilder<TShirtVariantModel> builder)
         {
             builder.ToTable("TShirtVariants");
 
@@ -25,13 +26,13 @@ namespace DataLayer.Context.Configuration.Store
             builder.Property(v => v.Size)
                 .IsRequired();
 
-            builder.Property(v => v.TShirtId)
+            builder.Property(v => v.TShirtModelId)
                 .IsRequired();
 
 
-            builder.HasOne<TShirt>()
+            builder.HasOne<TShirtModel>()
                 .WithMany(t => t.Variants)
-                .HasForeignKey(v => v.TShirtId)
+                .HasForeignKey(v => v.TShirtModelId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

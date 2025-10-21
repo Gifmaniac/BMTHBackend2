@@ -1,4 +1,5 @@
 using BusinessLayer.Interfaces.Store.TShirts;
+using BusinessLayer.Services;
 using Contracts.Enums.Store;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
@@ -25,14 +26,14 @@ namespace Test.Integration
                     }
                 });
 
-            var service = new ITShirtService(repo);
+            var service = new TShirtService(repo.Object);
 
             // Act
             var result = service.GetTShirtsByGender(Genders.Men);
 
             // Assert
             Assert.Single(result);
-            Assert.Equal("Unit Test Shirt", result[0].Name);
+            Assert.Equal("Unit Test Shirt");
         }
     }
 }
