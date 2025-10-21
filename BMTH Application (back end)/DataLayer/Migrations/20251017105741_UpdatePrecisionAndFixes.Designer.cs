@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(StoreDbContext))]
     [Migration("20251017105741_UpdatePrecisionAndFixes")]
     partial class UpdatePrecisionAndFixes
     {

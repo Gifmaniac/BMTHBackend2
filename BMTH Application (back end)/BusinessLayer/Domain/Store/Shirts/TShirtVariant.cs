@@ -1,0 +1,15 @@
+﻿using Contracts.Enums.Store;
+
+namespace BusinessLayer.Domain.Store.Shirts
+{
+    public class TShirtVariant
+    {
+        public int VariantId { get; set; }// PK
+        public required int TShirtModelId { get; set; } // FK
+        public required string Color { get; set; }
+        public Sizes Size { get; set; }
+        public int Quantity { get; set; }
+        public bool InStock => Quantity > 0;
+        public string ImageUrl { get; set; } = string.Empty;
+    }
+}

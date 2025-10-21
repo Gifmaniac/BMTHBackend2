@@ -2,7 +2,6 @@
 using DataLayer.Context;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 

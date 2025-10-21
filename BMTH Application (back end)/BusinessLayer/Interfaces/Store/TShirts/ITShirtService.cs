@@ -1,5 +1,5 @@
-﻿using Contracts.Enums.Store;
-using Domain.Domains.Store.TShirts;
+﻿using BusinessLayer.Domain.Store.Shirts;
+using Contracts.Enums.Store;
 
 namespace BusinessLayer.Interfaces.Store.TShirts
 {

@@ -1,5 +1,4 @@
 ﻿using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,5 +1,6 @@
-﻿using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
+﻿using BusinessLayer.Domain.Store.Shirts;
+using DataLayer.Models.Store.TShirts;
+
 
 namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
 {

@@ -1,9 +1,9 @@
-﻿using BusinessLayer.Interfaces.Store.TShirts;
+﻿using BusinessLayer.Domain.Store.Shirts;
+using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
 using Contracts.Enums.Store;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
-using Domain.Domains.Store.TShirts;
 
 namespace BusinessLayer.Services
 {
