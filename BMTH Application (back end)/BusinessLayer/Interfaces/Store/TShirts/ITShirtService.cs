@@ -1,10 +1,11 @@
-﻿using BusinessLayer.Domain.Store.Shirts;
-using Contracts.Enums.Store;
+﻿using BusinessLayer.Domain.Store.Common;
+using BusinessLayer.Domain.Store.Shirts;
 
 namespace BusinessLayer.Interfaces.Store.TShirts
 {
     public interface ITShirtService
     {
-        public List<TShirt> GetTShirtsByGender(Genders? gender = null);
+        public List<StoreItemOverview> GetTShirtsByGender(string? gender);
+        public TShirt? GetShirtById(int? id);
     }
 }

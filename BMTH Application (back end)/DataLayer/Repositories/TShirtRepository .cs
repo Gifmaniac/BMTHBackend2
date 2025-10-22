@@ -1,9 +1,11 @@
 ﻿using Contracts.Enums.Store;
 using DataLayer.Context;
 using DataLayer.Interfaces;
+using DataLayer.Models.Store.Common;
 using DataLayer.Models.Store.TShirts;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using Microsoft.Extensions.Logging;
 
 
 namespace DataLayer.Repositories
@@ -11,28 +13,62 @@ namespace DataLayer.Repositories
     public class TShirtRepository : ITShirtRepository
     {
         private readonly StoreDbContext _context;
-
-        public TShirtRepository(StoreDbContext context)
+        private readonly ILogger<ITShirtRepository> _logger;
+        public TShirtRepository(StoreDbContext context, ILogger<ITShirtRepository> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
-        public List<TShirtModel> GetTShirtByGender(Genders? gender = null)
+        public List<StoreOverviewModel> GetTShirtOverviewByGender(Genders gender)
         {
-            return _context.TShirts
-                .AsNoTracking()
-                .Include(t => t.Variants)
-                .Where(t => t.Gender == gender)
-                .ToList();
+            try
+            {
+                return _context.TShirts
+                    .Where(t => t.Gender == gender)
+                    .Select(t => new StoreOverviewModel
+                    {
+                        Id = t.Id,
+                        Name = t.Name,
+                        Price = t.Price,
+                        InStock = t.Variants.Any(v => v.Quantity > 0),
+                        Category = t.Category
+                    })
+                    .AsNoTracking()
+                    .ToList();
+            }
+            catch (SqlException ex)
+            {
+                _logger.LogError(ex, "A database error while retrieving T-shirt with Gender {gender}", gender);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error in GetTShirtByGender{gender}", gender);
+                throw;
+            }
         }
 
-        public TShirtModel GetById(int id)
+        public TShirtModel? GetById(int? id)
         {
-           return _context.TShirts
-                .Include(t => t.Variants)
-                .AsNoTracking()
-                .FirstOrDefault(t => t.Id == id);
+            try
+            {
+                return _context.TShirts
+                    .Include(t => t.Variants)
+                    .AsNoTracking()
+                    .FirstOrDefault(t => t.Id == id);
+            }
 
+            catch (SqlException ex)
+            {
+                _logger.LogError(ex, "A database error while retrieving T-shirt with ID {Id}", id);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error in GetById({Id})", id);
+                throw;
+            }
         }
     }
 }

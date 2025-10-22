@@ -76,6 +76,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Configures the ExceptionHandeling
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("AllowFrontend");
 
 app.UseWhen(

@@ -1,4 +1,6 @@
-﻿using BusinessLayer.Domain.Store.Shirts;
+﻿using APIContracts.DTOs.StoreItems.Common;
+using BusinessLayer.Domain.Store.Shirts;
+using DataLayer.Models.Store.Common;
 using DataLayer.Models.Store.TShirts;
 
 
@@ -6,7 +8,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
 {
     public static class TShirtDalMapper
     {
-        public static TShirtModel ToEntity(TShirt domain)
+        public static TShirtModel ToDetailEntity(TShirt domain)
         {
             return new TShirtModel
             {
@@ -30,7 +32,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
 
         public static List<TShirtModel> ToEntityList(List<TShirt> domain)
         {
-            return domain.Select(ToEntity).ToList();
+            return domain.Select(ToDetailEntity).ToList();
         }
 
         public static TShirt ToDomain(TShirtModel model)
@@ -59,7 +61,6 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
         {
             return models.Select(ToDomain).ToList();
         }
-
     }
 }
 

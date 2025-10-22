@@ -3,6 +3,8 @@ using Contracts.DTOs.StoreItems.Shirts;
 using Contracts.Enums.Store;
 
 using BusinessLayer.Helper;
+using APIContracts.DTOs.StoreItems.Common;
+using BusinessLayer.Domain.Store.Common;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
 {
@@ -46,7 +48,7 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                     TShirtModelId = v.TShirtModelId,
                     VariantId = v.VariantId,
                     Color = v.Color,
-                    Size = EnumHelper.ParseEnum(v.Size, Sizes.M),
+                    Size = Enum.Parse<Sizes>(v.Size, true),
                     Quantity = v.Quantity,
                 }).ToList()
             };
