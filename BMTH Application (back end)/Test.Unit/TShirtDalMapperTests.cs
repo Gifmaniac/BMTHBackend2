@@ -1,4 +1,4 @@
-using BusinessLayer.Domain.Store.Shirts;
+﻿using BusinessLayer.Domain.Store.Shirts;
 using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
 using Contracts.Enums.Store;
 using DataLayer.Models.Store.TShirts;
@@ -25,9 +25,9 @@ namespace Test.Unit
                     Material = "Cotton",
                     Variants = new List<TShirtVariantModel>
                     {
-                        new TShirtVariantModel 
+                        new TShirtVariantModel
                             { VariantId = 101, TShirtModelId = 1, Color = "Black", Size = Sizes.M, Quantity = 4 },
-                        new TShirtVariantModel 
+                        new TShirtVariantModel
                             { VariantId = 102, TShirtModelId = 1, Color = "Red", Size = Sizes.L, Quantity = 0 }
                     }
                 },
@@ -43,13 +43,13 @@ namespace Test.Unit
                     Material = "Cotton",
                     Variants = new List<TShirtVariantModel>
                     {
-                        new TShirtVariantModel 
+                        new TShirtVariantModel
                             { VariantId = 103, TShirtModelId = 2, Color = "Orange", Size = Sizes.S, Quantity = 3 },
-                        new TShirtVariantModel 
+                        new TShirtVariantModel
                             { VariantId = 104, TShirtModelId = 2, Color = "White", Size = Sizes.XL, Quantity = 2 },
                     }
                 }
-                
+
             };
 
             // Act
@@ -89,9 +89,9 @@ namespace Test.Unit
                     Material = "Cotton",
                     Variants = new List<TShirtVariant>
                     {
-                        new TShirtVariant 
+                        new TShirtVariant
                             { VariantId = 101, TShirtModelId = 1, Color = "Black", Size = Sizes.XXL, Quantity = 6 },
-                        new TShirtVariant 
+                        new TShirtVariant
                             { VariantId = 102, TShirtModelId = 1, Color = "Green", Size = Sizes.L, Quantity = 2 }
                     }
                 },

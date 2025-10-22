@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using DataLayer.Context;
 using DataLayer.Interfaces;
 using DataLayer.Repositories;
+using DataLayer.Context.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-// Adds Database connection
+// Adds Database connection + context
+string TestConnectionString = DatabaseConfigurations.GetTestDatabaseConnection();
+
 builder.Services.AddDbContext<StoreDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("TestConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString(TestConnectionString)));
 
 // Adds Api authorization
 builder.Services.AddSwaggerGen(c =>
