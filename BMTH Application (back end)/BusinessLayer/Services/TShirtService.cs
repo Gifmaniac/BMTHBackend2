@@ -14,12 +14,10 @@ namespace BusinessLayer.Services
     public class TShirtService : ITShirtService
     {
         private readonly ITShirtRepository _tShirtRepository;
-        private readonly ILogger<ITShirtService> _logger;
 
-        public TShirtService(ITShirtRepository repo, ILogger<ITShirtService> logger)
+        public TShirtService(ITShirtRepository repo)
         {
             _tShirtRepository = repo;
-            _logger = logger;
         }
 
         public List<StoreItemOverview> GetTShirtsByGender(string? gender)

@@ -41,7 +41,7 @@ namespace Test.Unit
             mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Men))
                     .Returns(dbModels);
 
-            var service = new TShirtService(mockRepo.Object, null!);
+            var service = new TShirtService(mockRepo.Object);
 
             // Act
             var result = service.GetTShirtsByGender("Men");
@@ -62,7 +62,7 @@ namespace Test.Unit
             mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Men))
                     .Returns(new List<StoreOverviewModel>());
 
-            var service = new TShirtService(mockRepo.Object, null!);
+            var service = new TShirtService(mockRepo.Object);
 
             // Act
             Action act = () => service.GetTShirtsByGender("Men");
