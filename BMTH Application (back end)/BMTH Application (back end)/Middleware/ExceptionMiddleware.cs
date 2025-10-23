@@ -35,7 +35,7 @@ namespace BMTH_Application__back_end_.Middleware
                 _logger.LogError(ex, "Unhandled exception");
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new
-                    { error = "Something went wrong. Please try again later." });
+                    { error = "Something went wrong. Please try again later. CODE 500." });
             }
         }
     }

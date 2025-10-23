@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
+﻿using BusinessLayer.Interfaces.Store.TShirts;
+using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts;
 using BusinessLayer.Services;
 using DataLayer.Models.Store.TShirts;
@@ -11,9 +12,9 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
     [Route("/api/store/apparel")]
     public class TShirtController : ControllerBase
     {
-        private readonly TShirtService _tShirtService;
+        private readonly ITShirtService _tShirtService;
 
-        public TShirtController(TShirtService service)
+        public TShirtController(ITShirtService service)
         {
             _tShirtService = service;
         }

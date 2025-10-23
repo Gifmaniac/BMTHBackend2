@@ -16,7 +16,7 @@ namespace DataLayer.Context.Configurations
         string Server = Environment.GetEnvironmentVariable("DB_SERVER") ?? String.Empty;
 
         return
-            $"Server={Server};Database={TestHost}n;User Id = {TestUserId}; Password={TestPassword};TrustServerCertificate=True;";
+            $"Server={Server};Database={TestHost};User Id={TestUserId};Password={TestPassword};TrustServerCertificate=True;";
         }
     }
 }
