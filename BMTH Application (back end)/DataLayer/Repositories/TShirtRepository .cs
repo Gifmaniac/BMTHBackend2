@@ -32,7 +32,8 @@ namespace DataLayer.Repositories
                         Name = t.Name,
                         Price = t.Price,
                         InStock = t.Variants.Any(v => v.Quantity > 0),
-                        Category = t.Category
+                        Category = t.Category,  
+                        Gender = t.Gender
                     })
                     .AsNoTracking()
                     .ToList();

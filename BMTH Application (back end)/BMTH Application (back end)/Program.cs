@@ -6,7 +6,6 @@ using Microsoft.OpenApi.Models;
 using DataLayer.Context;
 using DataLayer.Interfaces;
 using DataLayer.Repositories;
-using DataLayer.Context.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +19,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // Adds Database connection + context
-string TestConnectionString = DatabaseConfigurations.GetTestDatabaseConnection();
-
 builder.Services.AddDbContext<StoreDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString(TestConnectionString)));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BMTH_Test")));
 
-// Adds Api authorization
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -92,6 +88,25 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<StoreDbContext>();
+    try
+    {
+        Console.WriteLine("Testing database connection...");
+        db.Database.OpenConnection();
+        Console.WriteLine("Database connection succeeded!");
+        db.Database.CloseConnection();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Database connection failed!");
+        Console.WriteLine("------------------------------------------------------");
+        Console.WriteLine(ex.ToString());
+        Console.WriteLine("------------------------------------------------------");
+    }
+}
 
 
 app.Run();
