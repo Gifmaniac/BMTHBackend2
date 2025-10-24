@@ -42,12 +42,17 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-              $scannerPath = "$env:RUNNER_TEMP\scanner\dotnet-sonarscanner"
-              cd "$env:GITHUB_WORKSPACE\BMTH Application (back end)"
-              
-              & $scannerPath begin /k:"Gifmaniac_BMTHWebsite" /o:"gifmaniac" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml" /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/coverage-report/**, **/Contracts/**" /d:sonar.scanner.skipJreProvisioning=true
-              
-              dotnet build
-              dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/coverage.cobertura.xml
-              
-              & $scannerPath end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          $scannerPath = "$env:RUNNER_TEMP\scanner\dotnet-sonarscanner"
+          cd "$env:GITHUB_WORKSPACE\BMTH Application (back end)"
+          
+          & $scannerPath begin /k:"Gifmaniac_BMTHWebsite" /o:"gifmaniac" `
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml" `
+            /d:sonar.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/coverage-report/**, **/Contracts/**" `
+            /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/coverage-report/**, **/Contracts/**" `
+            /d:sonar.scanner.skipJreProvisioning=true
+          
+          dotnet build
+          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/coverage.cobertura.xml
+          
+          & $scannerPath end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
