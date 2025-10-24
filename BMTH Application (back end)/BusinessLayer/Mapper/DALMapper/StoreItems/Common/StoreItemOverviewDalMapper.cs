@@ -3,7 +3,7 @@ using DataLayer.Models.Store.Common;
 
 namespace BusinessLayer.Mapper.DALMapper.StoreItems.Common
 {
-    public class StoreItemOverviewDalMapper
+    public static class StoreItemOverviewDalMapper
     {
         public static StoreItemOverview ToOverviewDomain(StoreOverviewModel model)
         {

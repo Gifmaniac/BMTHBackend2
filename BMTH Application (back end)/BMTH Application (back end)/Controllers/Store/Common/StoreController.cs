@@ -16,6 +16,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Common
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetStoreCategories([FromQuery] string? Category)
         {
+            // TODO: Implement category filtering once front end is ready
 
             if (string.IsNullOrWhiteSpace(Category) && !Enum.TryParse<Genders>(Category, true, out var parsedCategory))
             {
@@ -29,7 +30,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Common
                 new StoreCategoryDto { Category = StoreCategoryType.Jackets, DisplayName = "Jackets" },
                 new StoreCategoryDto { Category = StoreCategoryType.Misc, DisplayName = "Miscellaneous" }
             };
-
+            
             return Ok(categories);
         }
     }

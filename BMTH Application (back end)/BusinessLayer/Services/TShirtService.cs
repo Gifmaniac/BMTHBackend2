@@ -7,9 +7,6 @@ using BusinessLayer.Mapper.DALMapper.StoreItems.Common;
 using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.TShirts;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BusinessLayer.Services
 {
@@ -27,7 +24,7 @@ namespace BusinessLayer.Services
             var validatedGender = MerchandiseValidator.ValidateGender(gender);
             var models = _tShirtRepository.GetTShirtOverviewByGender(validatedGender);
 
-            if (models == null || !models.Any()) 
+            if (models == null) 
             { 
                 throw new NotFoundException("No T-Shirts have been found for the selected gender");
             }
