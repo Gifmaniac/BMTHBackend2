@@ -53,6 +53,6 @@ jobs:
             /d:sonar.scanner.skipJreProvisioning=true
           
           dotnet build
-          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/coverage.cobertura.xml
+          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=coverage-report/coverage.cobertura.xml
           
           & $scannerPath end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
