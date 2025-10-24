@@ -12,32 +12,15 @@ namespace BMTH_Application__back_end_.Controllers.Store.Common
     public class StoreController : ControllerBase
     {
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<StoreCategoryType>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetStoreCategories([FromQuery] string? Category)
         {
-            // Parses the genders.
-            Genders? parsedCategory = null;
 
-            // Convert the string to Enum, ignores uppercases if success filters on gender
-            if (!string.IsNullOrWhiteSpace(Category) && Enum.TryParse<Genders>(Category, true, out var category))
-            {
-                parsedCategory = category;
-            }
-
-            // Makes a invalid check. 
-            else
+            if (string.IsNullOrWhiteSpace(Category) && !Enum.TryParse<Genders>(Category, true, out var parsedCategory))
             {
                 return NotFound();
             }
-
-
-            // Get the filtered entities
-            // var entities = _tShirtService.GetShirtsByGender(parsedGender);
-
-            // Maps the entities
-            // var overview = entities.Select(TShirtApiMapper.ToOverviewDto);
-
-            // return Ok(overview);
-
 
             var categories = new List<StoreCategoryDto>
             {

@@ -13,8 +13,8 @@ namespace DataLayer.Repositories
     public class TShirtRepository : ITShirtRepository
     {
         private readonly StoreDbContext _context;
-        private readonly ILogger<ITShirtRepository> _logger;
-        public TShirtRepository(StoreDbContext context, ILogger<ITShirtRepository> logger)
+        private readonly ILogger<TShirtRepository> _logger;
+        public TShirtRepository(StoreDbContext context, ILogger<TShirtRepository> logger)
         {
             _context = context;
             _logger = logger;
@@ -40,12 +40,12 @@ namespace DataLayer.Repositories
             }
             catch (SqlException ex)
             {
-                _logger.LogError(ex, "A database error while retrieving T-shirt with Gender {gender}", gender);
+                _logger.LogError(ex, "A database error while retrieving T-shirt with Gender {Gender}", gender);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unexpected error in GetTShirtByGender{gender}", gender);
+                _logger.LogError(ex, "Unexpected error in GetTShirtByGender{Gender}", gender);
                 throw;
             }
         }

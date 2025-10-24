@@ -1,8 +1,8 @@
-﻿using BusinessLayer.Interfaces.Store.TShirts;
+﻿using APIContracts.DTOs.StoreItems.Common;
+using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts;
-using BusinessLayer.Services;
-using DataLayer.Models.Store.TShirts;
+using Contracts.DTOs.StoreItems.Shirts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BMTH_Application__back_end_.Controllers.Store.Shirts
@@ -21,14 +21,25 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
 
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<StoreItemOverviewDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTShirtsOverviewResponse([FromQuery] string? gender)
         {
+
             var overviewDomains = _tShirtService.GetTShirtsByGender(gender);
+
+            if (!overviewDomains.Any())
+            {
+                return NotFound();
+            }
+
             var overviewDtos = StoreItemOverviewApiMapper.ToOverViewDtoList(overviewDomains);
             return Ok(overviewDtos);
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(IEnumerable<TShirtDetailsDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTShirtByIdResponse(int id)
         { 
             var shirt = _tShirtService.GetShirtById(id);
@@ -39,7 +50,6 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
             }
 
             var dto = TShirtApiMapper.ToDetailsDto(shirt);
-
             return Ok(dto);
         }
     }
