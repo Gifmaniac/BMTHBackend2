@@ -48,6 +48,7 @@ jobs:
           & $scannerPath begin /k:"Gifmaniac_BMTHWebsite" /o:"gifmaniac" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.cs.opencover.reportsPaths="TestResults/coverage.cobertura.xml" `
+            /d:sonar.projectBaseDir="BMTH Application (back end)" `
             /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/coverage-report/**, **/Dockerfile, **/Program.cs" `
             /d:sonar.exclusions="**/coverage-report/**" `
             /d:sonar.scanner.skipJreProvisioning=true
