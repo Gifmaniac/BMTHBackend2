@@ -44,16 +44,15 @@ jobs:
         run: |
           $scannerPath = "$env:RUNNER_TEMP\scanner\dotnet-sonarscanner"
           cd "$env:GITHUB_WORKSPACE\BMTH Application (back end)"
-          
+
           & $scannerPath begin /k:"Gifmaniac_BMTHWebsite" /o:"gifmaniac" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
-            /d:sonar.cs.opencover.reportsPaths="TestResults/coverage.cobertura.xml" `
-            /d:sonar.projectBaseDir="BMTH Application (back end)" `
-            /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/coverage-report/**, **/Dockerfile, **/Program.cs" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage-report/coverage.cobertura.xml" `
             /d:sonar.exclusions="**/coverage-report/**" `
+            /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/Contracts/**, **/Dockerfile**" `
             /d:sonar.scanner.skipJreProvisioning=true
-          
+
           dotnet build
-          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=coverage-report/coverage.cobertura.xml
-          
+          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=coverage-report/
+
           & $scannerPath end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
