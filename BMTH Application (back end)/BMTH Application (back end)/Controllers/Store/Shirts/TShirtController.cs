@@ -33,7 +33,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
 
             var overviewDomains = _tShirtService.GetTShirtsByGender(genders);
 
-            if (!overviewDomains.Any())
+            if (overviewDomains.Count == 0)
             {
                 return NotFound();
             }

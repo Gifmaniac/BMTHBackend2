@@ -26,7 +26,7 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.Common
                 Category = model.Category.ToString(),
                 Gender = model.Gender.ToString(),
                 ImageUrl = imageService.BuildImageUrl(
-                    $"{model.Id}.png",
+                    $"{model.Name}.png",
                     model.Category.ToString(),
                     model.Gender.ToString(),
                     model.Name

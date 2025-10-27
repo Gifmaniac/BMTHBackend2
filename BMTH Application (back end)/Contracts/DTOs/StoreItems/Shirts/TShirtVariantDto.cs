@@ -8,5 +8,6 @@
         public required string Size { get; set; }
         public int Quantity { get; set; }
         public bool InStock => Quantity > 0;
+        public List<string> ImageUrlsList { get; set; } = new List<string>();
     }
 }

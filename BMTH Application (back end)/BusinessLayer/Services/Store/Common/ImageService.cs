@@ -23,9 +23,6 @@ namespace BusinessLayer.Services.Store.Common
         {
             var categoryFolder = SwitchCaseHelper.SetStoreCategoryType(category);
             var genderFolder = SwitchCaseHelper.SetGender(gender);
-
-
-
             var folderPath = $"Store/{categoryFolder}/{genderFolder}/{productName}";
 
             return _cloudinary.Api.UrlImgUp

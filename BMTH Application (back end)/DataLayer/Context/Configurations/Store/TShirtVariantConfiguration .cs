@@ -13,9 +13,6 @@ namespace DataLayer.Context.Configurations.Store
             builder.Property(v => v.Color)
                 .IsRequired()
                 .HasMaxLength(30);
-
-            builder.Property(v => v.ImageUrl)
-                .HasMaxLength(255);
         }
     }
 }
