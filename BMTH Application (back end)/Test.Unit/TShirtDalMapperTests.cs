@@ -38,7 +38,7 @@ namespace Test.Unit
                     Name = "Retro Tee",
                     Price = 24.99m,
                     InStock = true,
-                    Gender = Genders.Women,
+                    Gender = Genders.Female,
                     Category = StoreCategoryType.TShirts,
                     Material = "Cotton",
                     Variants = new List<TShirtVariantModel>
@@ -60,7 +60,7 @@ namespace Test.Unit
             Assert.Equal(1, result[0].Id);
             Assert.Equal("Classic Tee", result[0].Name);
             Assert.Equal(24.99m, result[1].Price);
-            Assert.Equal(Genders.Women, result[1].Gender);
+            Assert.Equal(Genders.Female, result[1].Gender);
             Assert.All(result, shirt => Assert.Equal(StoreCategoryType.TShirts, shirt.Category));
             Assert.Equal("Cotton", result[0].Material);
 
@@ -102,7 +102,7 @@ namespace Test.Unit
                     Name = "Retro Tee",
                     Price = 24.99m,
                     InStock = true,
-                    Gender = Genders.Women,
+                    Gender = Genders.Female,
                     Category = StoreCategoryType.TShirts,
                     Material = "Cotton",
                     Variants = new List<TShirtVariant>
@@ -123,7 +123,7 @@ namespace Test.Unit
             Assert.Equal(1, result[0].Id);
             Assert.Equal("Classic Tee", result[0].Name);
             Assert.Equal(24.99m, result[1].Price);
-            Assert.Equal(Genders.Women, result[1].Gender);
+            Assert.Equal(Genders.Female, result[1].Gender);
             Assert.All(result, shirt => Assert.Equal(StoreCategoryType.TShirts, shirt.Category));
             Assert.Equal("Cotton", result[0].Material);
             Assert.Equal(2, result[0].Variants.Count);

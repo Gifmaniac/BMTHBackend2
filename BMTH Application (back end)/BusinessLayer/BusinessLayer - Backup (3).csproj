@@ -16,4 +16,8 @@
     <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Store\NewFolder\" />
+  </ItemGroup>
+
 </Project>

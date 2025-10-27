@@ -9,5 +9,6 @@ namespace BusinessLayer.Domain.Store.Common
         public decimal Price { get; set; }
         public bool InStock { get; set; }
         public StoreCategoryType Category { get; set; }
+        public Genders Gender { get; set; }
     }
 }

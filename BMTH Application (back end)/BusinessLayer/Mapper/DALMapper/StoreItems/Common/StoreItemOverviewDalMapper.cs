@@ -13,7 +13,9 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.Common
                 Name = model.Name,
                 Price = model.Price,
                 InStock = model.InStock,
-                Category = model.Category
+                Category = model.Category,
+                Gender = model.Gender,
+
             };
         }
         public static List<StoreItemOverview> ToOverviewDomainList(List<StoreOverviewModel> models)
@@ -29,7 +31,8 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.Common
                 Name = domain.Name,
                 Price = domain.Price,
                 InStock = domain.InStock,
-                Category = domain.Category
+                Category = domain.Category,
+                Gender = domain.Gender,
             };
         }
 

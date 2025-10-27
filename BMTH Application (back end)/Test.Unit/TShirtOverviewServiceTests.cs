@@ -1,11 +1,9 @@
-﻿using BusinessLayer.Domain.Store.Common;
-using BusinessLayer.Exceptions;
-using BusinessLayer.Services;
+﻿using BusinessLayer.Exceptions;
+using BusinessLayer.Services.Store.TShirts;
 using Contracts.Enums.Store;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.Common;
 using Moq;
-using Xunit;
 
 
 
@@ -59,7 +57,7 @@ namespace Test.Unit
         {
             // Arrange
             var mockRepo = new Mock<ITShirtRepository>();
-            mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Men))
+            mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Female))
                     .Returns(new List<StoreOverviewModel>());
 
             var service = new TShirtService(mockRepo.Object);

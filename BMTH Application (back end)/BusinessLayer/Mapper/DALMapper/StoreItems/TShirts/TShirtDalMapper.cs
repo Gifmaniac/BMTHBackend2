@@ -1,6 +1,4 @@
-﻿using APIContracts.DTOs.StoreItems.Common;
-using BusinessLayer.Domain.Store.Shirts;
-using DataLayer.Models.Store.Common;
+﻿using BusinessLayer.Domain.Store.Shirts;
 using DataLayer.Models.Store.TShirts;
 
 

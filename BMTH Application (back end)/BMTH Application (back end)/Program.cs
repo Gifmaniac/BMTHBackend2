@@ -1,11 +1,11 @@
 using BMTH_Application__back_end_.Middleware;
 using BusinessLayer.Interfaces.Store.TShirts;
-using BusinessLayer.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using DataLayer.Context;
 using DataLayer.Interfaces;
 using DataLayer.Repositories;
+using BusinessLayer.Services.Store.TShirts;
 
 var builder = WebApplication.CreateBuilder(args);
 

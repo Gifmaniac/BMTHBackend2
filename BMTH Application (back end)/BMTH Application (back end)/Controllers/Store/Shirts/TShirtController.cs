@@ -1,7 +1,9 @@
-﻿using APIContracts.DTOs.StoreItems.Common;
+﻿using BusinessLayer.Interfaces.Store.Common;
 using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts;
+using BusinessLayer.Services.Store.Common;
+using Contracts.DTOs.StoreItems.Common;
 using Contracts.DTOs.StoreItems.Shirts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +15,14 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
     public class TShirtController : ControllerBase
     {
         private readonly ITShirtService _tShirtService;
+        private readonly IImageService _imageService;
 
-        public TShirtController(ITShirtService service)
+        public TShirtController(ITShirtService service, IImageService imageService)
         {
             _tShirtService = service;
+            _imageService = imageService;
         }
+
 
 
         [HttpGet]
@@ -33,7 +38,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
                 return NotFound();
             }
 
-            var overviewDtos = StoreItemOverviewApiMapper.ToOverViewDtoList(overviewDomains);
+            var overviewDtos = StoreItemOverviewApiMapper.ToOverViewDtoList(overviewDomains, _imageService);
             return Ok(overviewDtos);
         }
 

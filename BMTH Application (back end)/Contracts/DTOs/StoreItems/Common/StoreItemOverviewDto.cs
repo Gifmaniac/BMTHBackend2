@@ -1,5 +1,4 @@
-﻿
-namespace APIContracts.DTOs.StoreItems.Common
+﻿namespace Contracts.DTOs.StoreItems.Common
 {
     public class StoreItemOverviewDto
     {
@@ -8,5 +7,8 @@ namespace APIContracts.DTOs.StoreItems.Common
         public required decimal Price { get; set; }
         public required bool InStock { get; set; }
         public required string Category { get; set; }
+        public required string ImageUrl { get; set; }
+        public required string Gender { get; set; }
+
     }
 }

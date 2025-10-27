@@ -1,14 +1,21 @@
-﻿using APIContracts.DTOs.StoreItems.Common;
-using BusinessLayer.Domain.Store.Common;
-using BusinessLayer.Domain.Store.Shirts;
+﻿using BusinessLayer.Domain.Store.Common;
+using BusinessLayer.Interfaces.Store.Common;
+using BusinessLayer.Services.Store.Common;
+using Contracts.DTOs.StoreItems.Common;
 using Contracts.Enums.Store;
-using DataLayer.Models.Store.Common;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.Common
 {
     public class StoreItemOverviewApiMapper
     {
-        public static StoreItemOverviewDto ToOverviewDto(StoreItemOverview model)
+        private readonly IImageService _imageService;
+
+        public StoreItemOverviewApiMapper(IImageService imageService)
+        {
+            _imageService = imageService;
+        }
+
+        public static StoreItemOverviewDto ToOverviewDto(StoreItemOverview model, IImageService imageService)
         {
             return new StoreItemOverviewDto
             {
@@ -16,24 +23,34 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.Common
                 Name = model.Name,
                 Price = model.Price,
                 InStock = model.InStock,
-                Category = model.Category.ToString()
+                Category = model.Category.ToString(),
+                Gender = model.Gender.ToString(),
+                ImageUrl = imageService.BuildImageUrl(
+                    $"{model.Id}.png",
+                    model.Category.ToString(),
+                    model.Gender.ToString(),
+                    model.Name
+                )
             };
         }
 
-        public static List<StoreItemOverviewDto> ToOverViewDtoList(List<StoreItemOverview> models)
+        public static List<StoreItemOverviewDto> ToOverViewDtoList(List<StoreItemOverview> models, IImageService imageService)
         {
-            return models.Select(ToOverviewDto).ToList();
+            return models
+                .Select(model => ToOverviewDto(model, imageService))
+                .ToList();
         }
 
         public static StoreItemOverview ToOverviewDomain(StoreItemOverviewDto overview)
         {
-            return new StoreItemOverview()
+            return new StoreItemOverview
             {
                 Id = overview.Id,
                 Name = overview.Name,
                 Price = overview.Price,
                 InStock = overview.InStock,
-                Category = Enum.Parse<StoreCategoryType>(overview.Category)
+                Category = Enum.Parse<StoreCategoryType>(overview.Category),
+                Gender = Enum.Parse<Genders>(overview.Gender)
             };
         }
 

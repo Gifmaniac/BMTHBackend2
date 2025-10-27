@@ -9,7 +9,7 @@ namespace Contracts.Enums.Store
     public enum Genders
     {
         Men,
-        Women,
+        Female,
         Unisex
     }
 }

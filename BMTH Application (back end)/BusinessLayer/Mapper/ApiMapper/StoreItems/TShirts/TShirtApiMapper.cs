@@ -1,10 +1,7 @@
 ﻿using BusinessLayer.Domain.Store.Shirts;
 using Contracts.DTOs.StoreItems.Shirts;
 using Contracts.Enums.Store;
-
 using BusinessLayer.Helper;
-using APIContracts.DTOs.StoreItems.Common;
-using BusinessLayer.Domain.Store.Common;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
 {
