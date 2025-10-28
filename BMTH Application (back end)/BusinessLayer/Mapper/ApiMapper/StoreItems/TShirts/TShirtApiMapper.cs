@@ -1,13 +1,15 @@
-﻿using BusinessLayer.Domain.Store.Shirts;
+﻿using System.Net.Http.Headers;
+using BusinessLayer.Domain.Store.Shirts;
 using Contracts.DTOs.StoreItems.Shirts;
 using Contracts.Enums.Store;
 using BusinessLayer.Helper;
+using BusinessLayer.Interfaces.Store.Common;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
 {
     public static class TShirtApiMapper
     {
-        public static TShirtDetailsDto ToDetailsDto(TShirt model)
+        public static TShirtDetailsDto ToDetailsDto(TShirt model, IImageService imageService)
         {
             return new TShirtDetailsDto
             {
@@ -25,6 +27,12 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                     Color = v.Color,
                     Size = v.Size.ToString(),
                     Quantity = v.Quantity,
+                    ImageUrlsList = imageService.GetVariantImageUrls(
+                        category: model.Category.ToString(),
+                        gender: model.Gender.ToString(),
+                        productName: model.Name,
+                        color: v.Color,
+                        variantId: v.VariantId)
                 }).ToList()
             };
         }

@@ -92,24 +92,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<StoreDbContext>();
-    try
-    {
-        Console.WriteLine("Testing database connection...");
-        db.Database.OpenConnection();
-        Console.WriteLine("Database connection succeeded!");
-        db.Database.CloseConnection();
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Database connection failed!");
-        Console.WriteLine("------------------------------------------------------");
-        Console.WriteLine(ex.ToString());
-        Console.WriteLine("------------------------------------------------------");
-    }
-}
-
-
 app.Run();

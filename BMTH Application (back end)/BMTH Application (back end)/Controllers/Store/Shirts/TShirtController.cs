@@ -30,7 +30,6 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTShirtsOverviewResponse([FromQuery] string genders)
         {
-
             var overviewDomains = _tShirtService.GetTShirtsByGender(genders);
 
             if (overviewDomains.Count == 0)
@@ -42,7 +41,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
             return Ok(overviewDtos);
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(IEnumerable<TShirtDetailsDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTShirtByIdResponse(int id)
@@ -54,7 +53,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
                 return NotFound();
             }
 
-            var dto = TShirtApiMapper.ToDetailsDto(shirt);
+            var dto = TShirtApiMapper.ToDetailsDto(shirt, _imageService);
             return Ok(dto);
         }
     }

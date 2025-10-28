@@ -33,6 +33,29 @@ namespace BusinessLayer.Services.Store.Common
                 .BuildUrl($"{folderPath}/{imageName}");
         }
 
+        public List<string> GetVariantImageUrls(int variantId, string category, string gender, string productName, string color)
+        {
+            var views = new List<string>
+            {
+                "front",
+                "back"
+            };
+
+            var urls = new List<string>();
+
+            foreach (var view in views)
+            {
+                var imageName = $"{productName}-{color}-{view}.png";
+
+                var url = BuildImageUrl(imageName, category, gender, productName);
+
+                urls.Add(url);
+            }
+
+            return urls;
+        }
+
+
         //TODO: Make the user able to upload a image.
 
         //TODO: Make the user able to update/ remove images.
