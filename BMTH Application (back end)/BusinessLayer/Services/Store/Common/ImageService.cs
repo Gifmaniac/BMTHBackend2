@@ -38,7 +38,7 @@ namespace BusinessLayer.Services.Store.Common
             var views = new List<string>
             {
                 "front",
-                "back"
+                "back",
             };
 
             var urls = new List<string>();

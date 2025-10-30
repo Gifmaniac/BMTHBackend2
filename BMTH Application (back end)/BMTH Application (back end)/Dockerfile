@@ -13,7 +13,6 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["BMTH Application (back end)/BMTH Application (back end).csproj", "BMTH Application (back end)/"]
-COPY ["APIContracts/APIContracts.csproj", "APIContracts/"]
 COPY ["Contracts/Contracts.csproj", "Contracts/"]
 COPY ["BusinessLayer/BusinessLayer.csproj", "BusinessLayer/"]
 COPY ["DataLayer/DataLayer.csproj", "DataLayer/"]
