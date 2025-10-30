@@ -45,7 +45,7 @@ jobs:
           $scannerPath = "$env:RUNNER_TEMP\scanner\dotnet-sonarscanner"
           cd "$env:GITHUB_WORKSPACE\BMTH Application (back end)"
 
-          & $scannerPath begin /k:"Gifmaniac_BackEnd" /o:"gifmaniac" `
+          & $scannerPath begin /k:"Gifmaniac_BMTHWebsite"  /o:"gifmaniac" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.cs.opencover.reportsPaths="**/coverage-report/coverage.opencover.xml" `
             /d:sonar.exclusions="**/coverage-report/**" `
