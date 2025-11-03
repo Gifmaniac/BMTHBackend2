@@ -1,15 +1,15 @@
-﻿using System.Net.Http.Headers;
-using BusinessLayer.Domain.Store.Shirts;
-using Contracts.DTOs.StoreItems.Shirts;
+﻿using Contracts.DTOs.StoreItems.Shirts;
 using Contracts.Enums.Store;
 using BusinessLayer.Helper;
 using BusinessLayer.Interfaces.Store.Common;
+using BusinessLayer.Domain.Store.Products;
 
-namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
+
+namespace BusinessLayer.Mapper.ApiMapper.StoreItems.Product
 {
-    public static class TShirtApiMapper
+    public static class ProductsApiMapper
     {
-        public static TShirtDetailsDto ToDetailsDto(TShirt model, IImageService imageService)
+        public static TShirtDetailsDto ToDetailsDto(Products model, IImageService imageService)
         {
             return new TShirtDetailsDto
             {
@@ -22,7 +22,7 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                 Gender = model.Gender.ToString(),
                 Variants = model.Variants.Select(v => new TShirtVariantDto
                 {
-                    TShirtModelId = v.TShirtModelId,
+                    TShirtModelId = v.ProductModelId,
                     VariantId = v.VariantId,
                     Color = v.Color,
                     Size = v.Size.ToString(),
@@ -37,9 +37,9 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
             };
         }
 
-        public static TShirt ToDetailsDomain(TShirtDetailsDto dto)
+        public static Products ToDetailsDomain(TShirtDetailsDto dto)
         {
-            return new TShirt()
+            return new Products()
             {
                 Id = dto.Id,
                 Name = dto.Name,
@@ -48,9 +48,9 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts
                 InStock = dto.InStock,
                 Material = dto.Material,
                 Gender = EnumHelper.ParseEnum(dto.Gender, Genders.Unisex),
-                Variants = dto.Variants.Select(v => new TShirtVariant()
+                Variants = dto.Variants.Select(v => new ProductsVariants()
                 {
-                    TShirtModelId = v.TShirtModelId,
+                    ProductModelId = v.TShirtModelId,
                     VariantId = v.VariantId,
                     Color = v.Color,
                     Size = Enum.Parse<Sizes>(v.Size, true),

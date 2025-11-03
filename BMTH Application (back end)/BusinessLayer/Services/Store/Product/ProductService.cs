@@ -1,20 +1,20 @@
 ﻿using BusinessLayer.Domain.Store.Common;
-using BusinessLayer.Domain.Store.Shirts;
+using BusinessLayer.Domain.Store.Products;
 using BusinessLayer.Exceptions;
 using BusinessLayer.Helper.Validator.Store;
 using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.DALMapper.StoreItems.Common;
-using BusinessLayer.Mapper.DALMapper.StoreItems.Products;
+using BusinessLayer.Mapper.DALMapper.StoreItems.Product;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.Products;
 
-namespace BusinessLayer.Services.Store.TShirts
+namespace BusinessLayer.Services.Store.Product
 {
-    public class TShirtService : ITShirtService
+    public class ProductService : ITShirtService
     {
         private readonly ITShirtRepository _tShirtRepository;
 
-        public TShirtService(ITShirtRepository repo)
+        public ProductService(ITShirtRepository repo)
         {
             _tShirtRepository = repo;
         }
@@ -32,7 +32,7 @@ namespace BusinessLayer.Services.Store.TShirts
             return StoreItemOverviewDalMapper.ToOverviewDomainList(models);
         }
 
-        public TShirt? GetShirtById(int? id)
+        public Products? GetShirtById(int? id)
         {
             ProductsModel? tShirtId = _tShirtRepository.GetById(id);
 
@@ -40,7 +40,7 @@ namespace BusinessLayer.Services.Store.TShirts
             {
                 throw new NotFoundException($"No T-shirt found with ID {id}.");
             }
-            return ProductsDalMapper.ToDomain(tShirtId);
+            return ProductDalMapper.ToDomain(tShirtId);
         }
     }
 }

@@ -1,23 +1,22 @@
 ﻿using BusinessLayer.Interfaces.Store.Common;
 using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
-using BusinessLayer.Mapper.ApiMapper.StoreItems.TShirts;
-using BusinessLayer.Services.Store.Common;
+using BusinessLayer.Mapper.ApiMapper.StoreItems.Product;
 using Contracts.DTOs.StoreItems.Common;
 using Contracts.DTOs.StoreItems.Shirts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BMTH_Application__back_end_.Controllers.Store.Shirts
+namespace BMTH_Application__back_end_.Controllers.Store.Product
 {
     [ApiController]
 
     [Route("/api/store/apparel")]
-    public class TShirtController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly ITShirtService _tShirtService;
         private readonly IImageService _imageService;
 
-        public TShirtController(ITShirtService service, IImageService imageService)
+        public ProductController(ITShirtService service, IImageService imageService)
         {
             _tShirtService = service;
             _imageService = imageService;
@@ -45,7 +44,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
         [ProducesResponseType(typeof(IEnumerable<TShirtDetailsDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTShirtByIdResponse(int id)
-        { 
+        {
             var shirt = _tShirtService.GetShirtById(id);
 
             if (shirt == null)
@@ -53,7 +52,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Shirts
                 return NotFound();
             }
 
-            var dto = TShirtApiMapper.ToDetailsDto(shirt, _imageService);
+            var dto = ProductsApiMapper.ToDetailsDto(shirt, _imageService);
             return Ok(dto);
         }
     }

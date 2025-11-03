@@ -5,15 +5,15 @@ using Microsoft.OpenApi.Models;
 using DataLayer.Context;
 using DataLayer.Interfaces;
 using DataLayer.Repositories;
-using BusinessLayer.Services.Store.TShirts;
 using BusinessLayer.Interfaces.Store.Common;
 using BusinessLayer.Services.Store.Common;
+using BusinessLayer.Services.Store.Product;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ITShirtRepository, TShirtRepository>();
-builder.Services.AddScoped<ITShirtService, TShirtService>();
+builder.Services.AddScoped<ITShirtService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 
 builder.Services.AddControllers();

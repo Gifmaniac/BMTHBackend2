@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Exceptions;
-using BusinessLayer.Services.Store.TShirts;
+using BusinessLayer.Services.Store.Product;
 using Contracts.Enums.Store;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.Common;
@@ -39,7 +39,7 @@ namespace Test.Unit
             mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Men))
                     .Returns(dbModels);
 
-            var service = new TShirtService(mockRepo.Object);
+            var service = new ProductService(mockRepo.Object);
 
             // Act
             var result = service.GetTShirtsByGender("Men");
@@ -60,7 +60,7 @@ namespace Test.Unit
             mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Female))
                     .Returns(new List<StoreOverviewModel>());
 
-            var service = new TShirtService(mockRepo.Object);
+            var service = new ProductService(mockRepo.Object);
 
             // Act
             Action act = () => service.GetTShirtsByGender("Men");

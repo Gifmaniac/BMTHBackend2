@@ -1,12 +1,12 @@
 ﻿using BusinessLayer.Domain.Store.Common;
 using Contracts.Enums.Store;
 
-namespace BusinessLayer.Domain.Store.Shirts
+namespace BusinessLayer.Domain.Store.Products
 {
-    public class TShirt : Merchandise
+    public class Products : Merchandise
     {
         public Genders Gender { get; set; }
         public required string Material { get; set; }
-        public List<TShirtVariant> Variants { get; set; } = new();
+        public List<ProductsVariants> Variants { get; set; } = [];
     }
 }
