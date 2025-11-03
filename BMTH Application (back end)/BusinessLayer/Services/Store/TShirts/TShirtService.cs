@@ -4,9 +4,9 @@ using BusinessLayer.Exceptions;
 using BusinessLayer.Helper.Validator.Store;
 using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.DALMapper.StoreItems.Common;
-using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
+using BusinessLayer.Mapper.DALMapper.StoreItems.Products;
 using DataLayer.Interfaces;
-using DataLayer.Models.Store.TShirts;
+using DataLayer.Models.Store.Products;
 
 namespace BusinessLayer.Services.Store.TShirts
 {
@@ -34,13 +34,13 @@ namespace BusinessLayer.Services.Store.TShirts
 
         public TShirt? GetShirtById(int? id)
         {
-            TShirtModel? tShirtId = _tShirtRepository.GetById(id);
+            ProductsModel? tShirtId = _tShirtRepository.GetById(id);
 
             if (tShirtId == null)
             {
                 throw new NotFoundException($"No T-shirt found with ID {id}.");
             }
-            return TShirtDalMapper.ToDomain(tShirtId);
+            return ProductsDalMapper.ToDomain(tShirtId);
         }
     }
 }

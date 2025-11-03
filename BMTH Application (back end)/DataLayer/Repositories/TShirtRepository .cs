@@ -2,7 +2,7 @@
 using DataLayer.Context;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.Common;
-using DataLayer.Models.Store.TShirts;
+using DataLayer.Models.Store.Products;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,7 +24,7 @@ namespace DataLayer.Repositories
         {
             try
             {
-                return _context.TShirts
+                return _context.Products
                     .Where(t => t.Gender == gender)
                     .Select(t => new StoreOverviewModel
                     {
@@ -50,11 +50,11 @@ namespace DataLayer.Repositories
             }
         }
 
-        public TShirtModel? GetById(int? id)
+        public ProductsModel? GetById(int? id)
         {
             try
             {
-                return _context.TShirts
+                return _context.Products
                     .Include(t => t.Variants)
                     .AsNoTracking()
                     .FirstOrDefault(t => t.Id == id);

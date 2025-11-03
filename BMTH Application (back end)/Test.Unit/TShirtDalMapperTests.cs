@@ -1,7 +1,7 @@
 ﻿using BusinessLayer.Domain.Store.Shirts;
-using BusinessLayer.Mapper.DALMapper.StoreItems.TShirts;
+using BusinessLayer.Mapper.DALMapper.StoreItems.Products;
 using Contracts.Enums.Store;
-using DataLayer.Models.Store.TShirts;
+using DataLayer.Models.Store.Products;
 
 
 namespace Test.Unit
@@ -12,9 +12,9 @@ namespace Test.Unit
         public void ToDomain_Should_Map_All_Properties_Correctly()
         {
             // Arrange
-            var models = new List<TShirtModel>
+            var models = new List<ProductsModel>
             {
-                new TShirtModel
+                new ProductsModel
                 {
                     Id = 1,
                     Name = "Classic Tee",
@@ -23,16 +23,16 @@ namespace Test.Unit
                     Gender = Genders.Men,
                     Category = StoreCategoryType.TShirts,
                     Material = "Cotton",
-                    Variants = new List<TShirtVariantModel>
+                    Variants = new List<ProductsVariantsModel>
                     {
-                        new TShirtVariantModel
-                            { VariantId = 101, TShirtModelId = 1, Color = "Black", Size = Sizes.M, Quantity = 4 },
-                        new TShirtVariantModel
-                            { VariantId = 102, TShirtModelId = 1, Color = "Red", Size = Sizes.L, Quantity = 0 }
+                        new ProductsVariantsModel()
+                            { VariantId = 101, ProductModelId = 1, Color = "Black", Size = Sizes.M, Quantity = 4 },
+                        new ProductsVariantsModel
+                            () { VariantId = 102, ProductModelId = 1, Color = "Red", Size = Sizes.L, Quantity = 0 }
                     }
                 },
 
-                new TShirtModel
+                new ProductsModel
                 {
                     Id = 2,
                     Name = "Retro Tee",
@@ -41,19 +41,19 @@ namespace Test.Unit
                     Gender = Genders.Female,
                     Category = StoreCategoryType.TShirts,
                     Material = "Cotton",
-                    Variants = new List<TShirtVariantModel>
+                    Variants = new List<ProductsVariantsModel>
                     {
-                        new TShirtVariantModel
-                            { VariantId = 103, TShirtModelId = 2, Color = "Orange", Size = Sizes.S, Quantity = 3 },
-                        new TShirtVariantModel
-                            { VariantId = 104, TShirtModelId = 2, Color = "White", Size = Sizes.XL, Quantity = 2 },
+                        new ProductsVariantsModel
+                            () { VariantId = 103, ProductModelId = 2, Color = "Orange", Size = Sizes.S, Quantity = 3 },
+                        new ProductsVariantsModel
+                            () { VariantId = 104, ProductModelId = 2, Color = "White", Size = Sizes.XL, Quantity = 2 },
                     }
                 }
 
             };
 
             // Act
-            var result = TShirtDalMapper.ToDomainList(models);
+            var result = ProductsDalMapper.ToDomainList(models);
 
             // Assert
             Assert.Equal(2, result.Count);
@@ -116,7 +116,7 @@ namespace Test.Unit
             };
 
             // Act
-            var result = TShirtDalMapper.ToEntityList(domain);
+            var result = ProductsDalMapper.ToEntityList(domain);
 
             // Assert
             Assert.Equal(2, result.Count);

@@ -1,14 +1,13 @@
 ﻿using BusinessLayer.Domain.Store.Shirts;
-using DataLayer.Models.Store.TShirts;
+using DataLayer.Models.Store.Products;
 
-
-namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
+namespace BusinessLayer.Mapper.DALMapper.StoreItems.Products
 {
-    public static class TShirtDalMapper
+    public static class ProductsDalMapper
     {
-        public static TShirtModel ToDetailEntity(TShirt domain)
+        public static ProductsModel ToDetailEntity(TShirt domain)
         {
-            return new TShirtModel
+            return new ProductsModel
             {
                 Id = domain.Id,
                 Name = domain.Name,
@@ -17,10 +16,10 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
                 Gender = domain.Gender,
                 Category = domain.Category,
                 Material = domain.Material,
-                Variants = domain.Variants.Select(v => new TShirtVariantModel()
+                Variants = domain.Variants.Select(v => new ProductsVariantsModel()
                 {
                     VariantId = v.VariantId,
-                    TShirtModelId = v.TShirtModelId,
+                    ProductModelId = v.TShirtModelId,
                     Color = v.Color,
                     Size = v.Size,
                     Quantity = v.Quantity
@@ -28,12 +27,12 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
             };
         }
 
-        public static List<TShirtModel> ToEntityList(List<TShirt> domain)
+        public static List<ProductsModel> ToEntityList(List<TShirt> domain)
         {
             return domain.Select(ToDetailEntity).ToList();
         }
 
-        public static TShirt ToDomain(TShirtModel model)
+        public static TShirt ToDomain(ProductsModel model)
         {
             return new TShirt
             {
@@ -46,7 +45,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
                 Material = model.Material,
                 Variants = model.Variants.Select(v => new TShirtVariant
                 {
-                    TShirtModelId = v.TShirtModelId,
+                    TShirtModelId = v.ProductModelId,
                     VariantId = v.VariantId,
                     Color = v.Color,
                     Size = v.Size,
@@ -55,7 +54,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.TShirts
             };
         }
 
-        public static List<TShirt> ToDomainList(List<TShirtModel> models)
+        public static List<TShirt> ToDomainList(List<ProductsModel> models)
         {
             return models.Select(ToDomain).ToList();
         }

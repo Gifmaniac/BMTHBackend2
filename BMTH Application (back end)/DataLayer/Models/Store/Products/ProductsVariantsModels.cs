@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Contracts.Enums.Store;
 
-namespace DataLayer.Models.Store.TShirts
+namespace DataLayer.Models.Store.Products
 {
-    public class TShirtVariantModel
+    public class ProductsVariantsModel
     {
         [Key]
         public int VariantId { get; set; }// PK
-        public required int TShirtModelId { get; set; } // FK
+        public required int ProductModelId { get; set; } // FK
         public required string Color { get; set; }
         public Sizes Size { get; set; }
         public int Quantity { get; set; }
-        public bool InStock  => Quantity > 0;
+        public bool InStock => Quantity > 0;
     }
 }

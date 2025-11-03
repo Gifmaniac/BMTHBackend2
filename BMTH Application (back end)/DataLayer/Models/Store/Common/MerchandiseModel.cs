@@ -2,7 +2,7 @@
 
 namespace DataLayer.Models.Store.Common
 {
-    abstract public class MerchandiseModel
+    public abstract class MerchandiseModel
     {
         public int Id { get; set; }
         public required string Name { get; set; }

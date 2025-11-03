@@ -1,6 +1,5 @@
-﻿using DataLayer.Models.Store.TShirts;
+﻿using DataLayer.Models.Store.Products;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataLayer.Context
 {
@@ -11,8 +10,8 @@ namespace DataLayer.Context
 
         }
 
-        public DbSet<TShirtModel> TShirts { get; set; }
-        public DbSet<TShirtVariantModel> TShirtVariants { get; set; }
+        public DbSet<ProductsModel> Products { get; set; }
+        public DbSet<ProductsVariantsModel> ProductsVariants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,12 +1,12 @@
-﻿using DataLayer.Models.Store.TShirts;
+﻿using DataLayer.Models.Store.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataLayer.Context.Configurations.Store
 {
-    public class TShirtVariantConfiguration : IEntityTypeConfiguration<TShirtVariantModel>
+    public class ProductsVariantsConfiguration : IEntityTypeConfiguration<ProductsVariantsModel>
     {
-        public void Configure(EntityTypeBuilder<TShirtVariantModel> builder)
+        public void Configure(EntityTypeBuilder<ProductsVariantsModel> builder)
         {
             builder.HasKey(v => v.VariantId);
 

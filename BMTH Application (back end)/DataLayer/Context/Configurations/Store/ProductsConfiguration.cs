@@ -1,12 +1,12 @@
-﻿using DataLayer.Models.Store.TShirts;
+﻿using DataLayer.Models.Store.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataLayer.Context.Configurations.Store
 {
-    public class TShirtConfiguration : IEntityTypeConfiguration<TShirtModel>
+    public class ProductsConfiguration : IEntityTypeConfiguration<ProductsModel>
     {
-        public void Configure(EntityTypeBuilder<TShirtModel> builder)
+        public void Configure(EntityTypeBuilder<ProductsModel> builder)
         {
             builder.HasKey(t => t.Id);
 
@@ -20,7 +20,7 @@ namespace DataLayer.Context.Configurations.Store
 
             builder.HasMany(t => t.Variants)
                 .WithOne()
-                .HasForeignKey(v => v.TShirtModelId);
+                .HasForeignKey(v => v.ProductModelId);
         }
     }
 }

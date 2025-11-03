@@ -1,12 +1,12 @@
 ﻿using Contracts.Enums.Store;
 using DataLayer.Models.Store.Common;
 
-namespace DataLayer.Models.Store.TShirts
+namespace DataLayer.Models.Store.Products
 {
-    public class TShirtModel : MerchandiseModel
+    public class ProductsModel : MerchandiseModel
     {
         public Genders Gender { get; set; }
         public required string Material { get; set; }
-        public List<TShirtVariantModel> Variants { get; set; } = new();
+        public List<ProductsVariantsModel> Variants { get; set; } = new();
     }
 }
