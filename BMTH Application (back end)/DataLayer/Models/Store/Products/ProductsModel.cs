@@ -7,6 +7,6 @@ namespace DataLayer.Models.Store.Products
     {
         public Genders Gender { get; set; }
         public required string Material { get; set; }
-        public List<ProductsVariantsModel> Variants { get; set; } = new();
+        public List<ProductsVariantsModel> Variants { get; set; } = [];
     }
 }

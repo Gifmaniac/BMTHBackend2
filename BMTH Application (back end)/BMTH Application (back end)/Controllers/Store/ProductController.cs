@@ -3,10 +3,10 @@ using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.Product;
 using Contracts.DTOs.StoreItems.Common;
-using Contracts.DTOs.StoreItems.Shirts;
+using Contracts.DTOs.StoreItems.Product;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BMTH_Application__back_end_.Controllers.Store.Product
+namespace BMTH_Application__back_end_.Controllers.Store
 {
     [ApiController]
 
@@ -41,7 +41,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Product
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(IEnumerable<TShirtDetailsDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ProductDetailDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTShirtByIdResponse(int id)
         {

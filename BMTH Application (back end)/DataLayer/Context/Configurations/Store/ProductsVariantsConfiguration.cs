@@ -11,8 +11,7 @@ namespace DataLayer.Context.Configurations.Store
             builder.HasKey(v => v.VariantId);
 
             builder.Property(v => v.Color)
-                .IsRequired()
-                .HasMaxLength(30);
+                .HasConversion<string>();
         }
     }
 }

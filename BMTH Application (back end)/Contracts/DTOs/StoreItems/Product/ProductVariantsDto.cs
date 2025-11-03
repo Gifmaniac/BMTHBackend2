@@ -1,9 +1,9 @@
-﻿namespace Contracts.DTOs.StoreItems.Shirts
+﻿namespace Contracts.DTOs.StoreItems.Product
 {
-    public class TShirtVariantDto
+    public class ProductVariantsDto
     {
         public required int VariantId { get; set; }
-        public required int TShirtModelId { get; set; }
+        public required int ProductModelId { get; set; }
         public required string Color { get; set; }
         public required string Size { get; set; }
         public int Quantity { get; set; }

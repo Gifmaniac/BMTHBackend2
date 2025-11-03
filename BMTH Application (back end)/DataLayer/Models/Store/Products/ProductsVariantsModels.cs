@@ -8,7 +8,7 @@ namespace DataLayer.Models.Store.Products
         [Key]
         public int VariantId { get; set; }// PK
         public required int ProductModelId { get; set; } // FK
-        public required string Color { get; set; }
+        public required Color Color { get; set; }
         public Sizes Size { get; set; }
         public int Quantity { get; set; }
         public bool InStock => Quantity > 0;

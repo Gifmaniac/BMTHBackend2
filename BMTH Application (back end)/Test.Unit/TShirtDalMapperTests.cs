@@ -26,9 +26,9 @@ namespace Test.Unit
                     Variants = new List<ProductsVariantsModel>
                     {
                         new ProductsVariantsModel()
-                            { VariantId = 101, ProductModelId = 1, Color = "Black", Size = Sizes.M, Quantity = 4 },
+                            { VariantId = 101, ProductModelId = 1, Color = Color.Black, Size = Sizes.M, Quantity = 4 },
                         new ProductsVariantsModel
-                            () { VariantId = 102, ProductModelId = 1, Color = "Red", Size = Sizes.L, Quantity = 0 }
+                            () { VariantId = 102, ProductModelId = 1, Color = Color.Red ,Size = Sizes.L, Quantity = 0 }
                     }
                 },
 
@@ -44,9 +44,9 @@ namespace Test.Unit
                     Variants = new List<ProductsVariantsModel>
                     {
                         new ProductsVariantsModel
-                            () { VariantId = 103, ProductModelId = 2, Color = "Orange", Size = Sizes.S, Quantity = 3 },
+                            () { VariantId = 103, ProductModelId = 2, Color = Color.Orange, Size = Sizes.S, Quantity = 3 },
                         new ProductsVariantsModel
-                            () { VariantId = 104, ProductModelId = 2, Color = "White", Size = Sizes.XL, Quantity = 2 },
+                            () { VariantId = 104, ProductModelId = 2, Color = Color.White, Size = Sizes.XL, Quantity = 2 },
                     }
                 }
 
@@ -66,7 +66,7 @@ namespace Test.Unit
 
             Assert.Equal(2, result[0].Variants.Count);
             Assert.Equal(2, result[1].Variants.Count);
-            Assert.Equal("White", result[1].Variants[1].Color);
+            Assert.Equal(Color.White, result[1].Variants[1].Color);
             Assert.Equal(Sizes.L, result[0].Variants[1].Size);
             Assert.False(result[0].Variants[1].InStock);
         }
@@ -90,9 +90,9 @@ namespace Test.Unit
                     Variants = new List<ProductsVariants>
                     {
                         new ProductsVariants
-                            { VariantId = 101, ProductModelId = 1, Color = "Black", Size = Sizes.XXL, Quantity = 6 },
+                            { VariantId = 101, ProductModelId = 1, Color = Color.Black, Size = Sizes.XXL, Quantity = 6 },
                         new ProductsVariants
-                            { VariantId = 102, ProductModelId = 1, Color = "Green", Size = Sizes.L, Quantity = 2 }
+                            { VariantId = 102, ProductModelId = 1, Color = Color.Green, Size = Sizes.L, Quantity = 2 }
                     }
                 },
 
@@ -108,9 +108,9 @@ namespace Test.Unit
                     Variants = new List<ProductsVariants>
                     {
                         new ProductsVariants
-                            { VariantId = 103, ProductModelId = 2, Color = "Purple", Size = Sizes.S, Quantity = 0 },
+                            { VariantId = 103, ProductModelId = 2, Color = Color.Purple, Size = Sizes.S, Quantity = 0 },
                         new ProductsVariants
-                            { VariantId = 104, ProductModelId = 2, Color = "Blue", Size = Sizes.XL, Quantity = 1 }
+                            { VariantId = 104, ProductModelId = 2, Color = Color.Blue, Size = Sizes.XL, Quantity = 1 }
                     }
                 }
             };
@@ -128,7 +128,7 @@ namespace Test.Unit
             Assert.Equal("Cotton", result[0].Material);
             Assert.Equal(2, result[0].Variants.Count);
             Assert.Equal(2, result[1].Variants.Count);
-            Assert.Equal("Blue", result[1].Variants[1].Color);
+            Assert.Equal(Color.Blue, result[1].Variants[1].Color);
             Assert.Equal(Sizes.L, result[0].Variants[1].Size);
             Assert.Equal(0, result[1].Variants[0].Quantity);
         }

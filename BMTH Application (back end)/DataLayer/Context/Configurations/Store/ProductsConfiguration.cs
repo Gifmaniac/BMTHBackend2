@@ -14,6 +14,12 @@ namespace DataLayer.Context.Configurations.Store
                 .IsRequired()
                 .HasMaxLength(100);
 
+            builder.Property(p => p.Gender)
+                .HasConversion<string>();
+
+            builder.Property(p => p.Category)
+                .HasConversion<string>();
+
             builder.Property(t => t.Material)
                 .IsRequired()
                 .HasMaxLength(50);

@@ -1,6 +1,4 @@
-﻿using Contracts.DTOs.StoreItems.Shirts;
-
-namespace Contracts.DTOs.StoreItems.Common
+﻿namespace Contracts.DTOs.StoreItems.Common
 {
     public class MerchandiseDetailDto
     {
