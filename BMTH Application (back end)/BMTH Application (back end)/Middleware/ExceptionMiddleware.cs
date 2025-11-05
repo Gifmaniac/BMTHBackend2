@@ -21,6 +21,7 @@ namespace BMTH_Application__back_end_.Middleware
             }
             catch (ValidationException ex)
             {
+                _logger.LogError(ex, "Bad Request");
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsJsonAsync(new { error = ex.Message });
             }

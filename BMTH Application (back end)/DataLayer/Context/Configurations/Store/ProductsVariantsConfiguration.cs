@@ -12,6 +12,12 @@ namespace DataLayer.Context.Configurations.Store
 
             builder.Property(v => v.Color)
                 .HasConversion<string>();
+
+            builder.Property(v => v.Color)
+                .HasConversion<string>();
+            
+            builder.Property(v => v.Size)
+                .HasConversion<string>();
         }
     }
 }

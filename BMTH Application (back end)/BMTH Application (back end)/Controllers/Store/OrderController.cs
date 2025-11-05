@@ -1,24 +1,34 @@
-﻿//using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
-//using Contracts.DTOs.StoreItems.Orders;
-//using Microsoft.AspNetCore.Mvc;
+﻿using Contracts.DTOs.StoreItems.Orders;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace BMTH_Application__back_end_.Controllers.Store
-//{
-//    public class OrderController
-//    {
-//        [HttpPost]
-//        [ProducesResponseType(typeof(IEnumerable<CreatedOrdersDto>), StatusCodes.Status200OK)]
-//        public IActionResult PostUserOrder([FromQuery] string genders)
-//        {
-//            var overviewDomains = _tShirtService.GetTShirtsByGender(genders);
+namespace BMTH_Application__back_end_.Controllers.Store
+{
+    [ApiController]
+    [Route("/api/orders")]
+    public class OrderController : ControllerBase
+    {
+        [HttpPost]
+        [Consumes("application/json")]
+        [ProducesResponseType(typeof(IEnumerable<CreatedOrdersDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult PostUserOrder([FromBody] CreatedOrdersDto request)
+        {
+            if (request.Orders.Count == 0)
+            {
+                return BadRequest("Orders cannot be empty.");
+            }
 
-//            if (overviewDomains.Count == 0)
-//            {
-//                return NotFound();
-//            }
+            if (string.IsNullOrWhiteSpace(request.Status))
+            {
+                request.Status = "Created";
+            }
 
-//            var overviewDtos = StoreItemOverviewApiMapper.ToOverViewDtoList(overviewDomains, _imageService);
-//            return Ok(overviewDtos);
-//        }
-//    }
-//}
+            if (request.UserId == 0)
+            {
+                request.UserId = 1;
+            }
+
+            return Ok(request);
+        }
+    }
+}

@@ -27,6 +27,11 @@ namespace Contracts.Enums.Store
         Teal,
         Maroon,
         Gold,
-        Silver
+        Silver,
+        Lavender,
+        Grey,
+        Coral,
+        Rose,
+        Cream,
     }
 }
