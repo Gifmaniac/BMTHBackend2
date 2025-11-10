@@ -15,7 +15,7 @@ namespace Test.Unit
         public void GetTShirtOverviewByGender_ShouldReturnOverviewDtos_WhenTShirtsExist()
         {
             // Arrange
-            var mockRepo = new Mock<ITShirtRepository>();
+            var mockRepo = new Mock<IProductsRepository>();
             var dbModels = new List<StoreOverviewModel>
             {
                 new StoreOverviewModel
@@ -56,7 +56,7 @@ namespace Test.Unit
         public void GetTShirtOverviewByGender_ShouldThrowNotFoundException_WhenNoTShirtsFound()
         {
             // Arrange
-            var mockRepo = new Mock<ITShirtRepository>();
+            var mockRepo = new Mock<IProductsRepository>();
             mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Female))
                     .Returns(new List<StoreOverviewModel>());
 

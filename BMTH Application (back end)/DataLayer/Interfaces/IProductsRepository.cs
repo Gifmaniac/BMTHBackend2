@@ -4,7 +4,7 @@ using DataLayer.Models.Store.Products;
 
 namespace DataLayer.Interfaces
 {
-    public interface ITShirtRepository
+    public interface IProductsRepository
     {
         public List<StoreOverviewModel> GetTShirtOverviewByGender(Genders gender);
 

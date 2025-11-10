@@ -12,9 +12,9 @@ namespace BusinessLayer.Services.Store.Product
 {
     public class ProductService : ITShirtService
     {
-        private readonly ITShirtRepository _tShirtRepository;
+        private readonly IProductsRepository _tShirtRepository;
 
-        public ProductService(ITShirtRepository repo)
+        public ProductService(IProductsRepository repo)
         {
             _tShirtRepository = repo;
         }

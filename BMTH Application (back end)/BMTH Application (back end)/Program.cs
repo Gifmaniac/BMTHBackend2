@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using DataLayer.Context;
 using DataLayer.Interfaces;
-using DataLayer.Repositories;
 using BusinessLayer.Interfaces.Store.Common;
 using BusinessLayer.Services.Store.Common;
 using BusinessLayer.Services.Store.Product;
+using DataLayer.Repositories.Store.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<ITShirtRepository, TShirtRepository>();
+builder.Services.AddScoped<IProductsRepository, TShirtRepository>();
 builder.Services.AddScoped<ITShirtService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 

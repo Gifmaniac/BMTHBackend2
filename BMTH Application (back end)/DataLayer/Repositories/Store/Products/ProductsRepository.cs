@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 
-namespace DataLayer.Repositories
+namespace DataLayer.Repositories.Store.Products
 {
-    public class TShirtRepository : ITShirtRepository
+    public class ProductsRepository : IProductsRepository
     {
         private readonly StoreDbContext _context;
-        private readonly ILogger<TShirtRepository> _logger;
-        public TShirtRepository(StoreDbContext context, ILogger<TShirtRepository> logger)
+        private readonly ILogger<ProductsRepository> _logger;
+        public ProductsRepository(StoreDbContext context, ILogger<ProductsRepository> logger)
         {
             _context = context;
             _logger = logger;
