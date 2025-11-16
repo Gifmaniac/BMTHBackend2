@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Services.Store.Orders;
+﻿using BusinessLayer.Interfaces.Store.Orders;
+using BusinessLayer.Services.Store.Orders;
 using Contracts.DTOs.StoreItems.Orders;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,38 +7,31 @@ namespace BMTH_Application__back_end_.Controllers.Store
 {
     [ApiController]
     [Route("/api/orders")]
-    public class OrderController : ControllerBase
+    public class OrderController(IOrderService orderService) : ControllerBase
     {
-        private readonly OrderService _orderService;
+        private readonly IOrderService _orderService = orderService;
 
-        public OrderController(OrderService orderService)
-        {
-            orderService = _orderService;
-        }
 
         [HttpPost]
         [Consumes("application/json")]
-        [ProducesResponseType(typeof(IEnumerable<CreatedOrdersDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<PostOrderDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult PostUserOrder([FromBody] CreatedOrdersDto request)
+        public IActionResult PostUserOrder([FromBody] PostOrderDto request)
         {
-            if (request.Orders.Count == 0)
+            if (request.Items.Count == 0)
             {
-                return BadRequest("Orders cannot be empty.");
+                return BadRequest("A order cannot be empty.");
             }
 
             if (request.UserId == 0)
             {
                 request.UserId = 1;
             }
-            if (string.IsNullOrWhiteSpace(request.Status))
-            {
-                request.Status = "Created";
-            }
 
             try
             {
-                var result = _orderService.PostUserOrder(request.OrderId);
+                
+                var result = _orderService.PostUserOrder(request);
                 return Ok(result);
             }
             catch

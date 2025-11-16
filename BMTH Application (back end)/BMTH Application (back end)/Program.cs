@@ -7,12 +7,15 @@ using DataLayer.Interfaces;
 using BusinessLayer.Interfaces.Store.Common;
 using BusinessLayer.Services.Store.Common;
 using BusinessLayer.Services.Store.Product;
+using DataLayer.Repositories.Store.Orders;
 using DataLayer.Repositories.Store.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Repositories to the container
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 // Add services to the container.
-builder.Services.AddScoped<IProductsRepository, TShirtRepository>();
 builder.Services.AddScoped<ITShirtService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 

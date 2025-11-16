@@ -2,7 +2,7 @@
 
 namespace BusinessLayer.Domain.Store.Orders
 {
-    public class CreateOrder
+    public class OrderItem
     {  
         public required int ProductId { get; set; }
         public required int VariantId { get; set; }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataLayer.Context.Configurations.Store
 {
-    public class CreatedOrdersConfiguration : IEntityTypeConfiguration<CreatedOrderModel>
+    public class CreatedOrdersConfiguration : IEntityTypeConfiguration<OrderModel>
     {
-        public void Configure(EntityTypeBuilder<CreatedOrderModel> builder)
+        public void Configure(EntityTypeBuilder<OrderModel> builder)
         {
             builder.HasKey(o => o.OrderId);
 

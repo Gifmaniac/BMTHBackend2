@@ -1,4 +1,5 @@
-﻿using DataLayer.Models.Store.Orders;
+﻿using DataLayer.Models.Common;
+using DataLayer.Models.Store.Orders;
 using DataLayer.Models.Store.Products;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,9 @@ namespace DataLayer.Context
 
         public DbSet<ProductsModel> Products { get; set; }
         public DbSet<ProductsVariantsModel> ProductsVariants { get; set; }  
-        public DbSet<CreatedOrderModel> Orders { get; set; }
+        public DbSet<OrderModel> Orders { get; set; }
+        public DbSet<OrderItemModel> OrderItems { get; set; }
+        public DbSet<UserModel> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

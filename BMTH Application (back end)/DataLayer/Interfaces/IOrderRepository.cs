@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataLayer.Models.Store.Orders;
 
 namespace DataLayer.Interfaces
 {
     public interface IOrderRepository
     {
-        public Task PostOrderById(int orderId);
+        public Task<int> PostOrder(OrderModel order);
     }
 }

@@ -8,8 +8,7 @@ namespace Contracts.Enums.Store
 {
     public enum OrderStatus
     {
-        Created,
-        Processing,
+        Pending,
         Shipped,
         Completed,
         Cancelled

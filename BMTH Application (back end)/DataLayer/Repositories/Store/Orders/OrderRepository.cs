@@ -6,25 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Repositories.Store.Orders
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository(StoreDbContext context) : IOrderRepository
     {
-        private readonly StoreDbContext _context;
+        private readonly StoreDbContext _context = context;
 
-        public OrderRepository(StoreDbContext context)
+        public async Task<int> PostOrder(OrderModel order)
         {
-            _context = context;
-        }
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
 
-        public async Task PostOrderById(int orderId)
-        {
-            CreatedOrderModel order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
-
-            if (order == null)
-            {
-                throw new Exception("Order Id has not been found");
-            }
-
-            order.Status = OrderStatus.Processing;
+            return order.OrderId;
         }
 
     }
