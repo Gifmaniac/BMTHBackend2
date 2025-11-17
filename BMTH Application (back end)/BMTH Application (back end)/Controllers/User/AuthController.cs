@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Interfaces.User;
+﻿using BusinessLayer.Domain.User;
+using BusinessLayer.Interfaces.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BMTH_Application__back_end_.Controllers.User
@@ -13,14 +14,14 @@ namespace BMTH_Application__back_end_.Controllers.User
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult RegisterUser([FromBody] BusinessLayer.Domain.User.Register newUser)
+        public IActionResult RegisterUser([FromBody] Register newUser)
         {
-            var (Success, errors) = _registerService.RegisterUser(newUser);
+            //var (Success, errors) = _registerService.RegisterUser(newUser);
 
-            if (!Success)
-            {
-                return BadRequest(new { Errors = errors });
-            }
+            //if (!Success)
+            //{
+            //    return BadRequest(new { Errors = errors });
+            //}
 
             return StatusCode(201);
         }

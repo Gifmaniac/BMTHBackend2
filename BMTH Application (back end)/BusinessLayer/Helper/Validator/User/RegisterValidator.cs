@@ -23,11 +23,6 @@ namespace BusinessLayer.Helper.Validator.User
                 .Matches("[0-9]").WithMessage("Password must contain at least one number")
                 .Matches("[^a-zA-Z0-9]").WithMessage("Password must contain at least one symbol");
 
-            // RoleValidation
-            RuleFor(x => x.Role)
-                .NotEqual(Roles.Guest)
-                .NotEqual(Roles.Admin);
-
             // FirstName validation
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("First name is required");

@@ -117,36 +117,5 @@ namespace Test.Unit
 
             result.ShouldNotHaveValidationErrorFor(x => x.LastName);
         }
-
-        // ROLE
-        [Fact]
-        public void Should_Have_Error_When_Role_Is_Admin()
-        {
-            var model = new Register { Role = Roles.Admin };
-
-            var result = _validator.TestValidate(model);
-
-            result.ShouldHaveValidationErrorFor(x => x.Role);
-        }
-
-        [Fact]
-        public void Should_Have_Error_When_Role_Is_Guest()
-        {
-            var model = new Register { Role = Roles.Guest };
-
-            var result = _validator.TestValidate(model);
-
-            result.ShouldHaveValidationErrorFor(x => x.Role);
-        }
-
-        [Fact]
-        public void Should_Not_Have_Error_When_Role_Is_Valid()
-        {
-            var model = new Register { Role = Roles.User };
-
-            var result = _validator.TestValidate(model);
-
-            result.ShouldNotHaveValidationErrorFor(x => x.Role);
-        }
     }
 }

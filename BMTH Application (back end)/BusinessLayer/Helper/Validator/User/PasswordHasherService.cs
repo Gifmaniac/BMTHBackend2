@@ -2,7 +2,7 @@
 using BusinessLayer.Services.Helper;
 using Microsoft.AspNetCore.Identity;
 
-namespace BusinessLayer.Helper
+namespace BusinessLayer.Helper.Validator.User
 {
     public class PasswordHasherService : IPasswordHasherService
     {

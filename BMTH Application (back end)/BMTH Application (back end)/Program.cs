@@ -1,4 +1,4 @@
-using BMTH_Application__back_end_.Middleware;
+﻿using BMTH_Application__back_end_.Middleware;
 using BusinessLayer.Interfaces.Store.TShirts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -34,7 +34,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 // Adds Database connection + context
 builder.Services.AddDbContext<StoreDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BMTH_Test")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BMTH_Real")));
 
 builder.Services.AddSwaggerGen(c =>
 {

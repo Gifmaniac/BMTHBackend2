@@ -8,7 +8,7 @@ using BusinessLayer.Domain.User;
 namespace BusinessLayer.Interfaces.User
 {
     public interface IRegisterService
-    { 
-        public (bool Success, List<string> errors) RegisterUser(Register newUser);
+    {
+        public Task<(bool Success, List<string> Errors)> RegisterUser(Register newUser);
     }
 }
