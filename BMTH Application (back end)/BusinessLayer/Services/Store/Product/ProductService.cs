@@ -1,7 +1,7 @@
 ﻿using BusinessLayer.Domain.Store.Common;
 using BusinessLayer.Domain.Store.Products;
 using BusinessLayer.Exceptions;
-using BusinessLayer.Helper.Validator.Store;
+using BusinessLayer.Helper.Store;
 using BusinessLayer.Interfaces.Store.TShirts;
 using BusinessLayer.Mapper.DALMapper.StoreItems.Common;
 using BusinessLayer.Mapper.DALMapper.StoreItems.Product;

@@ -1,7 +1,7 @@
 ﻿using BusinessLayer.Exceptions;
 using Contracts.Enums.Store;
 
-namespace BusinessLayer.Helper.Validator.Store
+namespace BusinessLayer.Helper.Store
 {
     public static class MerchandiseValidator
     {

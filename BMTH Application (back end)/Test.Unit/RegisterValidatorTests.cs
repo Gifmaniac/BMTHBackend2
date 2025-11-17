@@ -1,150 +1,152 @@
-﻿using Xunit;
-using FluentValidation.TestHelper;
+﻿using FluentValidation.TestHelper;
 using BusinessLayer.Helper.Validator.User;
 using BusinessLayer.Domain.User;
 using Contracts.Enums.User;
 
-public class RegisterValidatorTests
+namespace Test.Unit
 {
-    private readonly RegisterValidator _validator;
-
-    public RegisterValidatorTests()
+    public class RegisterValidatorTests
     {
-        _validator = new RegisterValidator();
-    }
+        private readonly RegisterValidator _validator;
 
-    // EMAIL TESTS
-    [Fact]
-    public void Should_Have_Error_When_Email_Is_Empty()
-    {
-        var model = new Register { Email = "" };
+        public RegisterValidatorTests()
+        {
+            _validator = new RegisterValidator();
+        }
 
-        var result = _validator.TestValidate(model);
+        // EMAIL TESTS
+        [Fact]
+        public void Should_Have_Error_When_Email_Is_Empty()
+        {
+            var model = new Register { Email = "" };
 
-        result.ShouldHaveValidationErrorFor(x => x.Email);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Have_Error_When_Email_Is_Invalid()
-    {
-        var model = new Register { Email = "invalid-email" };
+            result.ShouldHaveValidationErrorFor(x => x.Email);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Have_Error_When_Email_Is_Invalid()
+        {
+            var model = new Register { Email = "invalid-email" };
 
-        result.ShouldHaveValidationErrorFor(x => x.Email);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Not_Have_Error_When_Email_Is_Valid()
-    {
-        var model = new Register { Email = "test@example.com" };
+            result.ShouldHaveValidationErrorFor(x => x.Email);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Not_Have_Error_When_Email_Is_Valid()
+        {
+            var model = new Register { Email = "test@example.com" };
 
-        result.ShouldNotHaveValidationErrorFor(x => x.Email);
-    }
+            var result = _validator.TestValidate(model);
 
-    // PASSWORD TESTS
-    [Fact]
-    public void Should_Have_Error_When_Password_Is_Empty()
-    {
-        var model = new Register { Password = "" };
+            result.ShouldNotHaveValidationErrorFor(x => x.Email);
+        }
 
-        var result = _validator.TestValidate(model);
+        // PASSWORD TESTS
+        [Fact]
+        public void Should_Have_Error_When_Password_Is_Empty()
+        {
+            var model = new Register { Password = "" };
 
-        result.ShouldHaveValidationErrorFor(x => x.Password);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Have_Error_When_Password_Too_Weak()
-    {
-        var model = new Register { Password = "weakpass" };
+            result.ShouldHaveValidationErrorFor(x => x.Password);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Have_Error_When_Password_Too_Weak()
+        {
+            var model = new Register { Password = "weakpass" };
 
-        result.ShouldHaveValidationErrorFor(x => x.Password);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Not_Have_Error_When_Password_Is_Strong()
-    {
-        var model = new Register { Password = "StrongP@ssword1" };
+            result.ShouldHaveValidationErrorFor(x => x.Password);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Not_Have_Error_When_Password_Is_Strong()
+        {
+            var model = new Register { Password = "StrongP@ssword1" };
 
-        result.ShouldNotHaveValidationErrorFor(x => x.Password);
-    }
+            var result = _validator.TestValidate(model);
 
-    // FIRST NAME
-    [Fact]
-    public void Should_Have_Error_When_FirstName_Is_Empty()
-    {
-        var model = new Register { FirstName = "" };
+            result.ShouldNotHaveValidationErrorFor(x => x.Password);
+        }
 
-        var result = _validator.TestValidate(model);
+        // FIRST NAME
+        [Fact]
+        public void Should_Have_Error_When_FirstName_Is_Empty()
+        {
+            var model = new Register { FirstName = "" };
 
-        result.ShouldHaveValidationErrorFor(x => x.FirstName);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Not_Have_Error_When_FirstName_Is_Valid()
-    {
-        var model = new Register { FirstName = "John" };
+            result.ShouldHaveValidationErrorFor(x => x.FirstName);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Not_Have_Error_When_FirstName_Is_Valid()
+        {
+            var model = new Register { FirstName = "John" };
 
-        result.ShouldNotHaveValidationErrorFor(x => x.FirstName);
-    }
+            var result = _validator.TestValidate(model);
 
-    // LAST NAME
-    [Fact]
-    public void Should_Have_Error_When_LastName_Is_Empty()
-    {
-        var model = new Register { LastName = "" };
+            result.ShouldNotHaveValidationErrorFor(x => x.FirstName);
+        }
 
-        var result = _validator.TestValidate(model);
+        // LAST NAME
+        [Fact]
+        public void Should_Have_Error_When_LastName_Is_Empty()
+        {
+            var model = new Register { LastName = "" };
 
-        result.ShouldHaveValidationErrorFor(x => x.LastName);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Not_Have_Error_When_LastName_Is_Valid()
-    {
-        var model = new Register { LastName = "Doe" };
+            result.ShouldHaveValidationErrorFor(x => x.LastName);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Not_Have_Error_When_LastName_Is_Valid()
+        {
+            var model = new Register { LastName = "Doe" };
 
-        result.ShouldNotHaveValidationErrorFor(x => x.LastName);
-    }
+            var result = _validator.TestValidate(model);
 
-    // ROLE
-    [Fact]
-    public void Should_Have_Error_When_Role_Is_Admin()
-    {
-        var model = new Register { Role = Roles.Admin };
+            result.ShouldNotHaveValidationErrorFor(x => x.LastName);
+        }
 
-        var result = _validator.TestValidate(model);
+        // ROLE
+        [Fact]
+        public void Should_Have_Error_When_Role_Is_Admin()
+        {
+            var model = new Register { Role = Roles.Admin };
 
-        result.ShouldHaveValidationErrorFor(x => x.Role);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Have_Error_When_Role_Is_Guest()
-    {
-        var model = new Register { Role = Roles.Guest };
+            result.ShouldHaveValidationErrorFor(x => x.Role);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Have_Error_When_Role_Is_Guest()
+        {
+            var model = new Register { Role = Roles.Guest };
 
-        result.ShouldHaveValidationErrorFor(x => x.Role);
-    }
+            var result = _validator.TestValidate(model);
 
-    [Fact]
-    public void Should_Not_Have_Error_When_Role_Is_Valid()
-    {
-        var model = new Register { Role = Roles.User };
+            result.ShouldHaveValidationErrorFor(x => x.Role);
+        }
 
-        var result = _validator.TestValidate(model);
+        [Fact]
+        public void Should_Not_Have_Error_When_Role_Is_Valid()
+        {
+            var model = new Register { Role = Roles.User };
 
-        result.ShouldNotHaveValidationErrorFor(x => x.Role);
+            var result = _validator.TestValidate(model);
+
+            result.ShouldNotHaveValidationErrorFor(x => x.Role);
+        }
     }
 }

@@ -24,6 +24,7 @@ builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<ITShirtService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+// Add Validators to the container
 builder.Services.AddScoped<IValidator<Register>, RegisterValidator>();
 
 builder.Services.AddControllers();

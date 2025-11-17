@@ -6,14 +6,10 @@ using Contracts.Enums.Store;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.Common
 {
-    public class StoreItemOverviewApiMapper
+    public class StoreItemOverviewApiMapper(IImageService imageService)
     {
-        private readonly IImageService _imageService;
+        private readonly IImageService _imageService = imageService;
 
-        public StoreItemOverviewApiMapper(IImageService imageService)
-        {
-            _imageService = imageService;
-        }
 
         public static StoreItemOverviewDto ToOverviewDto(StoreItemOverview model, IImageService imageService)
         {

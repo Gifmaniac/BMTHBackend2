@@ -4,7 +4,7 @@ using Contracts.Enums.Store;
 
 namespace BusinessLayer.Mapper.ApiMapper.StoreItems.ProductsOrders
 {
-    public class PostProductOrdersApiMapper
+    public static class PostProductOrdersApiMapper
     {
         public static Order ToDomain(PostOrderDto dto)
         {
@@ -21,6 +21,5 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.ProductsOrders
                 }).ToList()
             };
         }
-
     }
 }
