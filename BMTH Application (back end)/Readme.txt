@@ -1,16 +1,18 @@
 UPDATE DATABASE BASED ON MODELS
-dotnet ef migrations add <WhatChanged?> --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
+dotnet ef migrations add NewDatabaseWhoThis --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
 
 
 
 ADDING PRODUCTS (TSHIRTS)
+-----------------------------------------
+-- MALE SHIRTS
+-----------------------------------------
 
-MALE SHIRTS
-
-
+-----------------------------------------
 -- Shirt 1: BMTHTShirtGlitch1
+-----------------------------------------
 INSERT INTO Products(name, price, category, inStock, gender, material)
-VALUES ('BMTHTShirtGlitch1', 29.99, 'T-Shirt', 1, 'Male', 'Cotton');
+VALUES ('BMTHTShirtGlitch1', 29.99, 'TShirts', 1, 'Men', 'Cotton');
 DECLARE @id1 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
@@ -27,9 +29,12 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id1, 'Pink', 'XL', 0),
 (@id1, 'Black', 'XL', 0);
 
+
+-----------------------------------------
 -- Shirt 2: RetroWave Tee
-INSERT INTO Products (name, price, category, inStock, gender, material)
-VALUES ('RetroWave Tee', 34.99, 'T-Shirt', 1, 'Male', 'Polyester');
+-----------------------------------------
+INSERT INTO Products(name, price, category, inStock, gender, material)
+VALUES ('RetroWave Tee', 34.99, 'TShirts', 1, 'Men', 'Polyester');
 DECLARE @id2 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
@@ -44,9 +49,12 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id2, 'Black', 'L', 20),
 (@id2, 'Gray', 'XL', 0);
 
+
+-----------------------------------------
 -- Shirt 3: NeonGrid Shirt
-INSERT INTO Products (name, price, category, inStock, gender, material)
-VALUES ('NeonGrid Shirt', 31.99, 'T-Shirt', 1, 'Male', 'Linen');
+-----------------------------------------
+INSERT INTO Products(name, price, category, inStock, gender, material)
+VALUES ('NeonGrid Shirt', 31.99, 'TShirts', 1, 'Men', 'Linen');
 DECLARE @id3 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
@@ -60,13 +68,14 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id3, 'Black', 'M', 15),
 (@id3, 'Black', 'L', 20),
 (@id3, 'Red', 'XL', 0);
-
-FEMALE SHIRTS
-
-
+👚 WOMEN TSHIRTS
+sql
+Code kopiëren
+-----------------------------------------
 -- Shirt 4: Luna Tee
-INSERT INTO Products (name, price, category, inStock, gender, material)
-VALUES ('Luna Tee', 27.99, 'T-Shirt', 1, 'Female', 'Cotton');
+-----------------------------------------
+INSERT INTO Products(name, price, category, inStock, gender, material)
+VALUES ('Luna Tee', 27.99, 'TShirts', 1, 'Women', 'Cotton');
 DECLARE @id4 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
@@ -81,9 +90,12 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id4, 'Lavender', 'L', 20),
 (@id4, 'Gray', 'XL', 0);
 
+
+-----------------------------------------
 -- Shirt 5: Dreamwave Tee
-INSERT INTO Products (name, price, category, inStock, gender, material)
-VALUES ('Dreamwave Tee', 32.99, 'T-Shirt', 1, 'Female', 'Silk');
+-----------------------------------------
+INSERT INTO Products(name, price, category, inStock, gender, material)
+VALUES ('Dreamwave Tee', 32.99, 'TShirts', 1, 'Women', 'Silk');
 DECLARE @id5 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
@@ -97,9 +109,13 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id5, 'White', 'M', 15),
 (@id5, 'White', 'L', 20),
 (@id5, 'Black', 'XL', 0);
+
+
+-----------------------------------------
 -- Shirt 6: Celestial Crop
-INSERT INTO Products (name, price, category, inStock, gender, material)
-VALUES ('Celestial Crop', 35.99, 'Crop Top', 1, 'Female', 'Cotton Blend');
+-----------------------------------------
+INSERT INTO Products(name, price, category, inStock, gender, material)
+VALUES ('Celestial Crop', 35.99, 'Crop Top', 1, 'Women', 'Cotton Blend');
 DECLARE @id6 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
@@ -113,4 +129,3 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id6, 'Rose', 'M', 15),
 (@id6, 'Rose', 'L', 20),
 (@id6, 'Gray', 'XL', 0);
-

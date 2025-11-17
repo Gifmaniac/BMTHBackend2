@@ -19,24 +19,16 @@ namespace BMTH_Application__back_end_.Controllers.Store
         public IActionResult PostUserOrder([FromBody] PostOrderDto request)
         {
             if (request.Items.Count == 0)
-            {
                 return BadRequest("A order cannot be empty.");
-            }
-
-            if (request.UserId == 0)
-            {
-                request.UserId = 1;
-            }
 
             try
             {
-                
                 var result = _orderService.PostUserOrder(request);
-                return Ok(result);
+                return Ok(new { orderId = result });
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return StatusCode(500, ex.Message);
             }
         }
     }

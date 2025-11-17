@@ -5,7 +5,9 @@ using Microsoft.OpenApi.Models;
 using DataLayer.Context;
 using DataLayer.Interfaces;
 using BusinessLayer.Interfaces.Store.Common;
+using BusinessLayer.Interfaces.Store.Orders;
 using BusinessLayer.Services.Store.Common;
+using BusinessLayer.Services.Store.Orders;
 using BusinessLayer.Services.Store.Product;
 using DataLayer.Repositories.Store.Orders;
 using DataLayer.Repositories.Store.Products;
@@ -18,6 +20,7 @@ builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 // Add services to the container.
 builder.Services.AddScoped<ITShirtService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddControllers();
 

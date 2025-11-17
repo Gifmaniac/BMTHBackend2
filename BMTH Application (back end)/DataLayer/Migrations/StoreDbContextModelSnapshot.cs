@@ -45,11 +45,11 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Models.Store.Orders.OrderItemModel", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("OrderItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
 
                     b.Property<int>("Color")
                         .HasColumnType("int");
@@ -66,7 +66,7 @@ namespace DataLayer.Migrations
                     b.Property<int>("VariantId")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("OrderItemId");
 
                     b.HasIndex("OrderId");
 

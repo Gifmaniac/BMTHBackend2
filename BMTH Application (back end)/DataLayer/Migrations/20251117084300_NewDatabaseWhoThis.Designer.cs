@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20251116132910_UpdatedOrderOrderItemUSer")]
-    partial class UpdatedOrderOrderItemUSer
+    [Migration("20251117084300_NewDatabaseWhoThis")]
+    partial class NewDatabaseWhoThis
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,11 +48,11 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Models.Store.Orders.OrderItemModel", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("OrderItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
 
                     b.Property<int>("Color")
                         .HasColumnType("int");
@@ -69,7 +69,7 @@ namespace DataLayer.Migrations
                     b.Property<int>("VariantId")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("OrderItemId");
 
                     b.HasIndex("OrderId");
 
