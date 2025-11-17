@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\User\Validations\**" />
+    <EmbeddedResource Remove="Services\User\Validations\**" />
+    <None Remove="Services\User\Validations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.27.8" />
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
+    <PackageReference Include="FluentValidation" Version="12.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\User\Validations\" />
+    <Folder Include="Interfaces\Helper\" />
   </ItemGroup>
 
 </Project>

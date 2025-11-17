@@ -5,36 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.Interfaces.User;
+using FluentValidation;
 
 namespace BusinessLayer.Services.User
 {
-    public class RegisterService : IRegisterService
+    public class RegisterService(IValidator<Register> validator) : IRegisterService
     {
-        public (bool Succes, List<string> errors) VerifyRegister(Register newUser)
+        private readonly IValidator<Register> _validator = validator;
+        public (bool Success, List<string> errors) RegisterUser(Register newUser)
         {
-            var errors = new List<string>();
+            var result = _validator.Validate(newUser);
 
-            var normalizedEmail = newUser.Email.ToLowerInvariant();
-
-            if (!errors.Any())
+            if (!result.IsValid)
             {
-                errors.Add("A user already exists with this email or username.");
-            }
-
-            return (errors.Count == 0, errors);
-        }
-        public (bool Succes, List<string> Errors) RegisterUser(Register newUser)
-        {
-            var (isValid, errors) = VerifyRegister(newUser);
-
-            if (!isValid)
-            {
+                var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
                 return (false, errors);
             }
-
-            return (true, errors);
-
+            
+            return (true, new List<string>());
         }
-
     }
 }

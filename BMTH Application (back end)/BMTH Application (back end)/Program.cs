@@ -11,6 +11,9 @@ using BusinessLayer.Services.Store.Orders;
 using BusinessLayer.Services.Store.Product;
 using DataLayer.Repositories.Store.Orders;
 using DataLayer.Repositories.Store.Products;
+using BusinessLayer.Domain.User;
+using BusinessLayer.Helper.Validator.User;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,7 @@ builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<ITShirtService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IValidator<Register>, RegisterValidator>();
 
 builder.Services.AddControllers();
 
