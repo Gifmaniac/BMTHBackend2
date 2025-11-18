@@ -50,12 +50,12 @@ jobs:
             /o:"gifmaniac" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.projectBaseDir="$env:GITHUB_WORKSPACE\BMTH Application (back end)" `
-            /d:sonar.cs.cobertura.reportsPaths="**/coverage-report/coverage.cobertura.xml" `
+            /d:sonar.cs.cobertura.reportsPaths="**/TestResults/*/coverage.cobertura.xml" `
             /d:sonar.exclusions="**/coverage-report/**" `
             /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/Contracts/**, **/Dockerfile**" `
             /d:sonar.scanner.skipJreProvisioning=true `
             /d:sonar.verbose=true
-            
+
           dotnet build
           dotnet test --collect:"XPlat Code Coverage"
 
