@@ -1,6 +1,8 @@
-﻿using DataLayer.Context;
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
+namespace DataLayer.Context;
 
 public abstract class IntegrationTestBase : IDisposable
 {
