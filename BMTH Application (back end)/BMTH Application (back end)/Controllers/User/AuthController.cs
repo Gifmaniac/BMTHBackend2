@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Domain.User;
 using BusinessLayer.Interfaces.User;
+using Contracts.DTOs.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BMTH_Application__back_end_.Controllers.User

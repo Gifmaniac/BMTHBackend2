@@ -19,6 +19,7 @@ namespace BusinessLayer.Services.User
         public async Task<(bool Success, List<string> Errors)> RegisterUser(RegisterDto newUser)
         {
             var domainNewUser = RegisterUserApiMapper.ToDomain(newUser);
+
             // Validates the user input
             var result = _validator.Validate(domainNewUser);
             if (!result.IsValid)
