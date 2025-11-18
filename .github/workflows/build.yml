@@ -37,6 +37,7 @@ jobs:
         run: |
           New-Item -Path ${{ runner.temp }}\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
+
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -50,7 +51,7 @@ jobs:
             /o:"gifmaniac" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.projectBaseDir="$env:GITHUB_WORKSPACE\BMTH Application (back end)" `
-           /d:sonar.cs.cobertura.reportsPaths="**/TestResults/*/coverage.cobertura.xml" `
+            /d:sonar.cs.opencover.reportsPaths="coverage-report/coverage.opencover.xml" `
             /d:sonar.exclusions="**/coverage-report/**" `
             /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/Contracts/**, **/Dockerfile**" `
             /d:sonar.scanner.skipJreProvisioning=true `
