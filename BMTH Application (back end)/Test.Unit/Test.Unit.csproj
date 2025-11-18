@@ -9,6 +9,12 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(CollectCoverage)' == 'true'">
+    <CoverletOutput>$(MSBuildProjectDirectory)\..\coverage-report\</CoverletOutput>
+    <CoverletOutputName>coverage</CoverletOutputName>
+    <CoverletOutputFormat>opencover</CoverletOutputFormat>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>

@@ -1,3 +1,9 @@
+SONARQUBE TEST COVERAGE
+-----------------------
+1. Run `dotnet test /p:CollectCoverage=true` from the solution root.  
+   The `Test.Unit` project automatically writes `coverage-report\coverage.opencover.xml` at the solution root so existing SonarQube jobs can keep using the same folder.
+2. Point SonarQube to that file with `sonar.cs.opencover.reportsPaths=coverage-report/coverage.opencover.xml` (and, if needed, `sonar.cs.vstest.reportsPaths=Test.Unit/TestResults/**/*.trx`).
+
 UPDATE DATABASE BASED ON MODELS
 dotnet ef migrations add NewDatabaseWhoThis --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
 
