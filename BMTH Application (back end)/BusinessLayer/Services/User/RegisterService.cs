@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Domain.User;
 using BusinessLayer.Interfaces.User;
+using BusinessLayer.Mapper.ApiMapper.StoreItems.User;
 using BusinessLayer.Mapper.DALMapper.User;
 using BusinessLayer.Services.Helper;
+using Contracts.DTOs.User;
 using Contracts.Enums.User;
 using DataLayer.Interfaces.User;
 using FluentValidation;
@@ -14,10 +16,11 @@ namespace BusinessLayer.Services.User
         private readonly IPasswordHasherService _passwordHasherService = passwordHasherService;
         private readonly IUserRegisterRepository _userRegisterRepository = userRegisterRepository;
 
-        public async Task<(bool Success, List<string> Errors)> RegisterUser(Register newUser)
+        public async Task<(bool Success, List<string> Errors)> RegisterUser(RegisterDto newUser)
         {
+            var domainNewUser = RegisterUserApiMapper.ToDomain(newUser);
             // Validates the user input
-            var result = _validator.Validate(newUser);
+            var result = _validator.Validate(domainNewUser);
             if (!result.IsValid)
             {
                 var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
@@ -25,18 +28,18 @@ namespace BusinessLayer.Services.User
             }
 
             // Checks if email already exists
-            if (await _userRegisterRepository.DoesEmailExists(newUser.Email))
+            if (await _userRegisterRepository.DoesEmailExists(domainNewUser.Email))
             {
                 return (false, new List<string> { "Email already exists" });
             }
 
             // Sets users password, role and creation date
-            newUser.Password = _passwordHasherService.HashPassword(newUser.Password);
-            newUser.Role = Roles.User;
-            newUser.CreatedAt = DateTime.UtcNow;
+            domainNewUser.Password = _passwordHasherService.HashPassword(domainNewUser.Password);
+            domainNewUser.Role = Roles.User;
+            domainNewUser.CreatedAt = DateTime.UtcNow;
 
             // Maps and saves the user to the database
-            var model = UserRegisterMapper.ToModel(newUser);
+            var model = UserRegisterMapper.ToModel(domainNewUser);
             var registerTask = _userRegisterRepository.RegisterUserTask(model);
 
             // Successful registration

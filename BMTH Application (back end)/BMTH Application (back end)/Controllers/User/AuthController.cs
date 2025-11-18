@@ -14,7 +14,7 @@ namespace BMTH_Application__back_end_.Controllers.User
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult RegisterUser([FromBody] Register newUser)
+        public IActionResult RegisterUser([FromBody] RegisterDto newUser)
         {
             //var (Success, errors) = _registerService.RegisterUser(newUser);
 
