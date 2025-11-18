@@ -48,14 +48,14 @@ jobs:
           & $scannerPath begin /k:"Gifmaniac_BMTHBackend2" /o:"gifmaniac" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.projectBaseDir="$env:GITHUB_WORKSPACE\BMTH Application (back end)" `
-            /d:sonar.cs.opencover.reportsPaths="**/coverage-report/coverage.opencover.xml" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml" `
             /d:sonar.exclusions="**/coverage-report/**" `
             /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/Contracts/**, **/Dockerfile**" `
             /d:sonar.scanner.skipJreProvisioning=true `
             /d:sonar.verbose=true
 
           dotnet build
-          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage-report/
+          dotnet test --collect:"XPlat Code Coverage"
 
           & $scannerPath end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 

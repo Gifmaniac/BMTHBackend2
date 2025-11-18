@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Helper;
+using BusinessLayer.Helper.Validator.User;
 using BusinessLayer.Services.Helper;
 
 namespace Test.Unit
