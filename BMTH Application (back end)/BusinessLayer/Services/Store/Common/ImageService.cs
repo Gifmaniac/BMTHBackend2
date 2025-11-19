@@ -21,9 +21,7 @@ namespace BusinessLayer.Services.Store.Common
         }
         public string BuildImageUrl(string imageName, string category, string gender, string productName)
         {
-            var categoryFolder = SwitchCaseHelper.SetStoreCategoryType(category);
-            var genderFolder = SwitchCaseHelper.SetGender(gender);
-            var folderPath = $"Store/{categoryFolder}/{genderFolder}/{productName}";
+            var folderPath = $"Store/{category}/{gender}/{productName}";
 
             return _cloudinary.Api.UrlImgUp
                 .Transform(new Transformation()

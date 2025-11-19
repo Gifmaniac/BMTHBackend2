@@ -17,23 +17,23 @@
 <table>
 <tr>
 <th>Parser:</th>
-<td class="limit-width " title="MultiReport (4x Cobertura)">MultiReport (4x Cobertura)</td>
+<td class="limit-width " title="Cobertura">Cobertura</td>
 </tr>
 <tr>
 <th>Assemblies:</th>
-<td class="limit-width right" title="2">2</td>
+<td class="limit-width right" title="3">3</td>
 </tr>
 <tr>
 <th>Classes:</th>
-<td class="limit-width right" title="32">32</td>
+<td class="limit-width right" title="28">28</td>
 </tr>
 <tr>
 <th>Files:</th>
-<td class="limit-width right" title="32">32</td>
+<td class="limit-width right" title="28">28</td>
 </tr>
 <tr>
 <th>Coverage date:</th>
-<td class="limit-width " title="18/11/2025 - 10:33:41 AM - 18/11/2025 - 1:42:06 PM">18/11/2025 - 10:33:41 AM - 18/11/2025 - 1:42:06 PM</td>
+<td class="limit-width " title="19/11/2025 - 11:20:30 AM">19/11/2025 - 11:20:30 AM</td>
 </tr>
 </table>
 </div>
@@ -42,28 +42,28 @@
 <div class="card">
 <div class="card-header">Line coverage</div>
 <div class="card-body">
-<div class="large cardpercentagebar cardpercentagebar66">34%</div>
+<div class="large cardpercentagebar cardpercentagebar75">25%</div>
 <div class="table">
 <table>
 <tr>
 <th>Covered lines:</th>
-<td class="limit-width right" title="162">162</td>
+<td class="limit-width right" title="139">139</td>
 </tr>
 <tr>
 <th>Uncovered lines:</th>
-<td class="limit-width right" title="310">310</td>
+<td class="limit-width right" title="408">408</td>
 </tr>
 <tr>
 <th>Coverable lines:</th>
-<td class="limit-width right" title="472">472</td>
+<td class="limit-width right" title="547">547</td>
 </tr>
 <tr>
 <th>Total lines:</th>
-<td class="limit-width right" title="943">943</td>
+<td class="limit-width right" title="1070">1070</td>
 </tr>
 <tr>
 <th>Line coverage:</th>
-<td class="limit-width right" title="162 of 472">34.3%</td>
+<td class="limit-width right" title="139 of 547">25.4%</td>
 </tr>
 </table>
 </div>
@@ -72,20 +72,20 @@
 <div class="card">
 <div class="card-header">Branch coverage</div>
 <div class="card-body">
-<div class="large cardpercentagebar cardpercentagebar75">25%</div>
+<div class="large cardpercentagebar cardpercentagebar95">5%</div>
 <div class="table">
 <table>
 <tr>
 <th>Covered branches:</th>
-<td class="limit-width right" title="6">6</td>
+<td class="limit-width right" title="2">2</td>
 </tr>
 <tr>
 <th>Total branches:</th>
-<td class="limit-width right" title="24">24</td>
+<td class="limit-width right" title="38">38</td>
 </tr>
 <tr>
 <th>Branch coverage:</th>
-<td class="limit-width right" title="6 of 24">25%</td>
+<td class="limit-width right" title="2 of 38">5.2%</td>
 </tr>
 </table>
 </div>
@@ -103,8 +103,32 @@
 </div>
 <h1>Risk Hotspots</h1>
 <risk-hotspots>
+<div class="table-responsive">
+<table class="overview table-fixed stripped">
+<colgroup>
+<col class="column-min-200" />
+<col class="column-min-200" />
+<col class="column-min-200" />
+<col class="column105" />
+<col class="column105" />
+</colgroup>
+<thead><tr><th>Assembly</th>
+<th>Class</th>
+<th>Method</th>
+<th>Crap Score <a href="https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" target="_blank"><i class="icon-info-circled"></i></a></th>
+<th>Cyclomatic complexity <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity" target="_blank"><i class="icon-info-circled"></i></a></th>
+</tr></thead>
+<tbody>
+<tr>
+<td>BMTH Application (back end)</td>
+<td><a href="BMTH_Application__back_end__ApiMiddleWare.html">BMTH_Application__back_end_.Middleware.ApiMiddleWare</a></td>
+<td title="InvokeAsync()"><a href="BMTH_Application__back_end__ApiMiddleWare.html#file0_line9">InvokeAsync()</a></td><td class="lightred right">72</td>
+<td class="lightgreen right">8</td>
+</tr>
+</tbody>
+</table>
+</div>
 </risk-hotspots>
-<p>No risk hotspots found.</p>
 <h1>Coverage</h1>
 <coverage-info>
 <div class="table-responsive">
@@ -126,23 +150,22 @@
 <tr class="header"><th></th><th colspan="6" class="center">Line coverage</th><th colspan="4" class="center">Branch coverage</th></tr>
 <tr><th>Name</th><th class="right">Covered</th><th class="right">Uncovered</th><th class="right">Coverable</th><th class="right">Total</th><th class="center" colspan="2">Percentage</th><th class="right">Covered</th><th class="right">Total</th><th class="center" colspan="2">Percentage</th></tr></thead>
 <tbody>
-<tr><th>BusinessLayer</th><th class="right">162</th><th class="right">231</th><th class="right">393</th><th class="right">769</th><th title="162/393" class="right">41.2%</th><th><table class="coverage"><tr><td class="green covered41">&nbsp;</td><td class="red covered59">&nbsp;</td></tr></table></th><th class="right">6</th><th class="right">22</th><th class="right" title="6/22">27.2%</th><th><table class="coverage"><tr><td class="green covered27">&nbsp;</td><td class="red covered73">&nbsp;</td></tr></table></th></tr>
-<tr><td><a href="BusinessLayer_Merchandise.html">BusinessLayer.Domain.Store.Common.Merchandise</a></td><td class="right">5</td><td class="right">0</td><td class="right">5</td><td class="right">13</td><td title="5/5" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_StoreItemOverview.html">BusinessLayer.Domain.Store.Common.StoreItemOverview</a></td><td class="right">6</td><td class="right">0</td><td class="right">6</td><td class="right">14</td><td title="6/6" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_Order.html">BusinessLayer.Domain.Store.Orders.Order</a></td><td class="right">0</td><td class="right">5</td><td class="right">5</td><td class="right">17</td><td title="0/5" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_OrderItem.html">BusinessLayer.Domain.Store.Orders.OrderItem</a></td><td class="right">0</td><td class="right">5</td><td class="right">5</td><td class="right">13</td><td title="0/5" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_Products.html">BusinessLayer.Domain.Store.Products.Products</a></td><td class="right">3</td><td class="right">0</td><td class="right">3</td><td class="right">12</td><td title="3/3" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_ProductsVariants.html">BusinessLayer.Domain.Store.Products.ProductsVariants</a></td><td class="right">6</td><td class="right">0</td><td class="right">6</td><td class="right">14</td><td title="6/6" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_Register.html">BusinessLayer.Domain.User.Register</a></td><td class="right">4</td><td class="right">2</td><td class="right">6</td><td class="right">16</td><td title="4/6" class="right">66.6%</td><td><table class="coverage"><tr><td class="green covered67">&nbsp;</td><td class="red covered33">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_NotFoundException.html">BusinessLayer.Exceptions.NotFoundException</a></td><td class="right">1</td><td class="right">0</td><td class="right">1</td><td class="right">7</td><td title="1/1" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
+<tr><th>BMTH Application (back end)</th><th class="right">0</th><th class="right">166</th><th class="right">166</th><th class="right">345</th><th title="0/166" class="right">0%</th><th><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></th><th class="right">0</th><th class="right">24</th><th class="right" title="0/24">0%</th><th><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></th></tr>
+<tr><td><a href="BMTH_Application__back_end__StoreController.html">BMTH_Application__back_end_.Controllers.Store.Common.StoreController</a></td><td class="right">0</td><td class="right">13</td><td class="right">13</td><td class="right">38</td><td title="0/13" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">4</td><td class="right" title="0/4">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BMTH_Application__back_end__OrderController.html">BMTH_Application__back_end_.Controllers.Store.OrderController</a></td><td class="right">0</td><td class="right">12</td><td class="right">12</td><td class="right">35</td><td title="0/12" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">2</td><td class="right" title="0/2">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BMTH_Application__back_end__ProductController.html">BMTH_Application__back_end_.Controllers.Store.ProductController</a></td><td class="right">0</td><td class="right">21</td><td class="right">21</td><td class="right">60</td><td title="0/21" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">4</td><td class="right" title="0/4">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BMTH_Application__back_end__AuthController.html">BMTH_Application__back_end_.Controllers.User.AuthController</a></td><td class="right">0</td><td class="right">5</td><td class="right">5</td><td class="right">30</td><td title="0/5" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BMTH_Application__back_end__ApiMiddleWare.html">BMTH_Application__back_end_.Middleware.ApiMiddleWare</a></td><td class="right">0</td><td class="right">18</td><td class="right">18</td><td class="right">33</td><td title="0/18" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">8</td><td class="right" title="0/8">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BMTH_Application__back_end__ExceptionMiddleware.html">BMTH_Application__back_end_.Middleware.ExceptionMiddleware</a></td><td class="right">0</td><td class="right">28</td><td class="right">28</td><td class="right">43</td><td title="0/28" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">4</td><td class="right" title="0/4">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BMTH_Application__back_end__Program.html">Program</a></td><td class="right">0</td><td class="right">69</td><td class="right">69</td><td class="right">106</td><td title="0/69" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">2</td><td class="right" title="0/2">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
+<tr><th>BusinessLayer</th><th class="right">139</th><th class="right">178</th><th class="right">317</th><th class="right">594</th><th title="139/317" class="right">43.8%</th><th><table class="coverage"><tr><td class="green covered44">&nbsp;</td><td class="red covered56">&nbsp;</td></tr></table></th><th class="right">2</th><th class="right">12</th><th class="right" title="2/12">16.6%</th><th><table class="coverage"><tr><td class="green covered17">&nbsp;</td><td class="red covered83">&nbsp;</td></tr></table></th></tr>
+<tr><td><a href="BusinessLayer_NotFoundException.html">BusinessLayer.Exceptions.NotFoundException</a></td><td class="right">0</td><td class="right">1</td><td class="right">1</td><td class="right">7</td><td title="0/1" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_ServiceException.html">BusinessLayer.Exceptions.ServiceException</a></td><td class="right">0</td><td class="right">1</td><td class="right">1</td><td class="right">7</td><td title="0/1" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_ValidationException.html">BusinessLayer.Exceptions.ValidationException</a></td><td class="right">0</td><td class="right">1</td><td class="right">1</td><td class="right">7</td><td title="0/1" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_EnumHelper.html">BusinessLayer.Helper.EnumHelper</a></td><td class="right">0</td><td class="right">9</td><td class="right">9</td><td class="right">23</td><td title="0/9" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">4</td><td class="right" title="0/4">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_MerchandiseValidator.html">BusinessLayer.Helper.Store.MerchandiseValidator</a></td><td class="right">5</td><td class="right">4</td><td class="right">9</td><td class="right">22</td><td title="5/9" class="right">55.5%</td><td><table class="coverage"><tr><td class="green covered56">&nbsp;</td><td class="red covered44">&nbsp;</td></tr></table></td><td class="right">2</td><td class="right">4</td><td class="right" title="2/4">50%</td><td><table class="coverage"><tr><td class="green covered50">&nbsp;</td><td class="red covered50">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_SwitchCaseHelper.html">BusinessLayer.Helper.SwitchCaseHelper</a></td><td class="right">10</td><td class="right">2</td><td class="right">12</td><td class="right">28</td><td title="10/12" class="right">83.3%</td><td><table class="coverage"><tr><td class="green covered83">&nbsp;</td><td class="red covered17">&nbsp;</td></tr></table></td><td class="right">2</td><td class="right">4</td><td class="right" title="2/4">50%</td><td><table class="coverage"><tr><td class="green covered50">&nbsp;</td><td class="red covered50">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_PasswordHasherService.html">BusinessLayer.Helper.Validator.User.PasswordHasherService</a></td><td class="right">11</td><td class="right">0</td><td class="right">11</td><td class="right">28</td><td title="11/11" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_RegisterValidator.html">BusinessLayer.Helper.Validator.User.RegisterValidator</a></td><td class="right">18</td><td class="right">0</td><td class="right">18</td><td class="right">36</td><td title="18/18" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_StoreItemOverviewApiMapper.html">BusinessLayer.Mapper.ApiMapper.StoreItems.Common.StoreItemOverviewApiMapper</a></td><td class="right">0</td><td class="right">38</td><td class="right">38</td><td class="right">58</td><td title="0/38" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BusinessLayer_StoreItemOverviewApiMapper.html">BusinessLayer.Mapper.ApiMapper.StoreItems.Common.StoreItemOverviewApiMapper</a></td><td class="right">17</td><td class="right">7</td><td class="right">24</td><td class="right">40</td><td title="17/24" class="right">70.8%</td><td><table class="coverage"><tr><td class="green covered71">&nbsp;</td><td class="red covered29">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_ProductsApiMapper.html">BusinessLayer.Mapper.ApiMapper.StoreItems.Product.ProductsApiMapper</a></td><td class="right">0</td><td class="right">46</td><td class="right">46</td><td class="right">62</td><td title="0/46" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_PostProductOrdersApiMapper.html">BusinessLayer.Mapper.ApiMapper.StoreItems.ProductsOrders.PostProductOrdersApiMapper</a></td><td class="right">0</td><td class="right">14</td><td class="right">14</td><td class="right">25</td><td title="0/14" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_RegisterUserApiMapper.html">BusinessLayer.Mapper.ApiMapper.StoreItems.User.RegisterUserApiMapper</a></td><td class="right">0</td><td class="right">9</td><td class="right">9</td><td class="right">20</td><td title="0/9" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
@@ -150,13 +173,11 @@
 <tr><td><a href="BusinessLayer_PostOrdersToModelMapper.html">BusinessLayer.Mapper.DALMapper.StoreItems.Orders.PostOrdersToModelMapper</a></td><td class="right">0</td><td class="right">17</td><td class="right">17</td><td class="right">28</td><td title="0/17" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_ProductDalMapper.html">BusinessLayer.Mapper.DALMapper.StoreItems.Product.ProductDalMapper</a></td><td class="right">46</td><td class="right">0</td><td class="right">46</td><td class="right">63</td><td title="46/46" class="right">100%</td><td><table class="coverage"><tr><td class="green covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_UserRegisterMapper.html">BusinessLayer.Mapper.DALMapper.User.UserRegisterMapper</a></td><td class="right">0</td><td class="right">11</td><td class="right">11</td><td class="right">22</td><td title="0/11" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_ImageService.html">BusinessLayer.Services.Store.Common.ImageService</a></td><td class="right">20</td><td class="right">15</td><td class="right">35</td><td class="right">64</td><td title="20/35" class="right">57.1%</td><td><table class="coverage"><tr><td class="green covered57">&nbsp;</td><td class="red covered43">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">2</td><td class="right" title="0/2">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BusinessLayer_ImageService.html">BusinessLayer.Services.Store.Common.ImageService</a></td><td class="right">18</td><td class="right">15</td><td class="right">33</td><td class="right">62</td><td title="18/33" class="right">54.5%</td><td><table class="coverage"><tr><td class="green covered54">&nbsp;</td><td class="red covered46">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">2</td><td class="right" title="0/2">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_OrderService.html">BusinessLayer.Services.Store.Orders.OrderService</a></td><td class="right">0</td><td class="right">10</td><td class="right">10</td><td class="right">30</td><td title="0/10" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="BusinessLayer_ProductService.html">BusinessLayer.Services.Store.Product.ProductService</a></td><td class="right">12</td><td class="right">7</td><td class="right">19</td><td class="right">46</td><td title="12/19" class="right">63.1%</td><td><table class="coverage"><tr><td class="green covered63">&nbsp;</td><td class="red covered37">&nbsp;</td></tr></table></td><td class="right">2</td><td class="right">4</td><td class="right" title="2/4">50%</td><td><table class="coverage"><tr><td class="green covered50">&nbsp;</td><td class="red covered50">&nbsp;</td></tr></table></td></tr>
+<tr><td><a href="BusinessLayer_ProductService.html">BusinessLayer.Services.Store.Product.ProductService</a></td><td class="right">9</td><td class="right">7</td><td class="right">16</td><td class="right">41</td><td title="9/16" class="right">56.2%</td><td><table class="coverage"><tr><td class="green covered56">&nbsp;</td><td class="red covered44">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">2</td><td class="right" title="0/2">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="BusinessLayer_RegisterService.html">BusinessLayer.Services.User.RegisterService</a></td><td class="right">0</td><td class="right">21</td><td class="right">21</td><td class="right">50</td><td title="0/21" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">4</td><td class="right" title="0/4">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
-<tr><th>DataLayer</th><th class="right">0</th><th class="right">79</th><th class="right">79</th><th class="right">174</th><th title="0/79" class="right">0%</th><th><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></th><th class="right">0</th><th class="right">2</th><th class="right" title="0/2">0%</th><th><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></th></tr>
-<tr><td><a href="DataLayer_IntegrationTestBase.html">DataLayer.Context.IntegrationTestBase</a></td><td class="right">0</td><td class="right">3</td><td class="right">3</td><td class="right">15</td><td title="0/3" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
-<tr><td><a href="DataLayer_StoreDbContext.html">DataLayer.Context.StoreDbContext</a></td><td class="right">0</td><td class="right">12</td><td class="right">12</td><td class="right">28</td><td title="0/12" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
+<tr><th>DataLayer</th><th class="right">0</th><th class="right">64</th><th class="right">64</th><th class="right">131</th><th title="0/64" class="right">0%</th><th><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></th><th class="right">0</th><th class="right">2</th><th class="right" title="0/2">0%</th><th><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></th></tr>
 <tr><td><a href="DataLayer_OrderRepository.html">DataLayer.Repositories.Store.Orders.OrderRepository</a></td><td class="right">0</td><td class="right">12</td><td class="right">12</td><td class="right">29</td><td title="0/12" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">2</td><td class="right" title="0/2">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="DataLayer_ProductsRepository.html">DataLayer.Repositories.Store.Products.ProductsRepository</a></td><td class="right">0</td><td class="right">44</td><td class="right">44</td><td class="right">78</td><td title="0/44" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
 <tr><td><a href="DataLayer_UserRegisterRepository.html">DataLayer.Repositories.User.UserRegisterRepository</a></td><td class="right">0</td><td class="right">8</td><td class="right">8</td><td class="right">24</td><td title="0/8" class="right">0%</td><td><table class="coverage"><tr><td class="red covered100">&nbsp;</td></tr></table></td><td class="right">0</td><td class="right">0</td><td class="right" title="-"></td><td><table class="coverage"><tr><td class="gray covered100">&nbsp;</td></tr></table></td></tr>
@@ -164,7 +185,7 @@
 </table>
 </div>
 </coverage-info>
-<div class="footer">Generated by: ReportGenerator 5.5.0.0<br />18/11/2025 - 3:25:41 PM<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.17.0<br />19/11/2025 - 11:22:20 AM<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div></div>
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {

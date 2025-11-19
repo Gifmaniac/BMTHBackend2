@@ -10,15 +10,14 @@ namespace DataLayer.Repositories.User
 
         public async Task<UserRegisterModel> RegisterUserTask(UserRegisterModel newUser)
         {
-            return await Task.FromResult(newUser);
+            _context.UserRegister.Add(newUser);
+            await _context.SaveChangesAsync();
+            return newUser;
         }
 
         public async Task<bool> DoesEmailExists(string email)
         {
-            return _context.Users.Any(u => u.Email == email);
-
+            return await Task.FromResult(_context.UserRegister.Any(u => u.Email == email));
         }
-
-
     }
 }

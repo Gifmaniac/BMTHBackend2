@@ -1,4 +1,7 @@
-﻿using BusinessLayer.Exceptions;
+﻿using BusinessLayer.Domain.Store.Common;
+using BusinessLayer.Exceptions;
+using BusinessLayer.Interfaces.Store.Common;
+using BusinessLayer.Mapper.ApiMapper.StoreItems.Common;
 using BusinessLayer.Services.Store.Product;
 using Contracts.Enums.Store;
 using DataLayer.Interfaces;
@@ -63,10 +66,55 @@ namespace Test.Unit
             var service = new ProductService(mockRepo.Object);
 
             // Act
-            Action act = () => service.GetTShirtsByGender("Men");
+            Action act = () => service.GetTShirtsByGender("Male");
 
             // Assert
-            Assert.Throws<NotFoundException>(act);
+            Assert.Throws<ValidationException>(act);
+        }
+
+        [Fact]
+        public void ToOverviewDto_MapsPropertiesCorrectly_AndBuildsImageUrl()
+        {
+            // Arrange
+            var model = new StoreItemOverview
+            {
+                Id = 1,
+                Name = "BMTH Hoodie",
+                Price = 99.99m,
+                InStock = true,
+                Category = StoreCategoryType.Hoodies,
+                Gender = Genders.Men
+            };
+
+            var expectedUrl = "https://cdn.example.com/Hats/Male/GoldenCap.png";
+
+            var mockImageService = new Mock<IImageService>();
+            mockImageService
+                .Setup(x => x.BuildImageUrl(
+                    "BMTH Hoodie.png",
+                    "Hoodies",
+                    "Men",
+                    "BMTH Hoodie"))
+                .Returns(expectedUrl);
+
+            // Act
+            var dto = StoreItemOverviewApiMapper.ToOverviewDto(model, mockImageService.Object);
+
+            // Assert
+            Assert.Equal(model.Id, dto.Id);
+            Assert.Equal(model.Name, dto.Name);
+            Assert.Equal(model.Price, dto.Price);
+            Assert.Equal(model.InStock, dto.InStock);
+            Assert.Equal("Hoodies", dto.Category);
+            Assert.Equal("Men", dto.Gender);
+            Assert.Equal(expectedUrl, dto.ImageUrl);
+
+            mockImageService.Verify(x => x.BuildImageUrl(
+                "BMTH Hoodie.png",
+                "Hoodies",
+                "Men",
+                "BMTH Hoodie"
+            ), Times.Once);
         }
     }
 }

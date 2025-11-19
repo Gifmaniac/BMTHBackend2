@@ -1,6 +1,7 @@
 ﻿using DataLayer.Models.Common;
 using DataLayer.Models.Store.Orders;
 using DataLayer.Models.Store.Products;
+using DataLayer.Models.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Context
@@ -17,6 +18,8 @@ namespace DataLayer.Context
         public DbSet<OrderModel> Orders { get; set; }
         public DbSet<OrderItemModel> OrderItems { get; set; }
         public DbSet<UserModel> Users { get; set; }
+
+        public DbSet<UserRegisterModel> UserRegister { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

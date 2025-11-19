@@ -8,7 +8,7 @@ CODE TEST COVERAGE
 >>   -reporttypes:Html `
 >>   -assemblyfilters:"-Contracts" `
 >>   -classfilters:"-Contracts.DTOs.*" `
->>   -filefilters:"-**/Migrations/**","-**/DTOs/**","-**/Program.cs","-**/Contracts/**","-**/Dockerfile**","-**/DataLayer/Context/Configurations/**","-**/DataLayer/Models/**"
+>>   -filefilters:"-**/Migrations/**","-**/DTOs/**","-**/Program.cs","-**/Contracts/**","-**/Dockerfile**","-**/DataLayer/Context/Configurations/**","-**/DataLayer/Models/**, **/BusinessLayer/**"
 
 
 3. Point SonarQube to that file with `sonar.cs.opencover.reportsPaths=coverage-report/coverage.opencover.xml` (and, if needed, `sonar.cs.vstest.reportsPaths=Test.Unit/TestResults/**/*.trx`).
