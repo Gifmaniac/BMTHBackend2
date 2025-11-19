@@ -40,7 +40,7 @@ namespace BusinessLayer.Services.User
             domainNewUser.CreatedAt = DateTime.UtcNow;
 
             // Maps and saves the user to the database
-            var model = UserRegisterMapper.ToModel(domainNewUser);
+            var model = UserRegisterMapper.ToUserModel(domainNewUser);
             var registerTask = _userRegisterRepository.RegisterUserTask(model);
 
             // Successful registration

@@ -13,19 +13,27 @@ using DataLayer.Repositories.Store.Orders;
 using DataLayer.Repositories.Store.Products;
 using BusinessLayer.Domain.User;
 using BusinessLayer.Helper.Validator.User;
+using BusinessLayer.Interfaces.User;
+using BusinessLayer.Services.User;
+using DataLayer.Interfaces.User;
+using DataLayer.Repositories.User;
 using FluentValidation;
+using BusinessLayer.Services.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Repositories to the container
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
+builder.Services.AddScoped<IUserRegisterRepository, UserRegisterRepository>(); 
 // Add services to the container.
 builder.Services.AddScoped<ITShirtService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IRegisterService, RegisterService>();
 // Add Validators to the container
 builder.Services.AddScoped<IValidator<Register>, RegisterValidator>();
+builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 
 builder.Services.AddControllers();
 
@@ -75,8 +83,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
-});
-var app = builder.Build();
+}); var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.

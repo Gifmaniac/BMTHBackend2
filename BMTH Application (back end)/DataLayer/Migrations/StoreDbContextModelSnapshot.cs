@@ -22,27 +22,6 @@ namespace DataLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DataLayer.Models.Common.UserModel", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("DataLayer.Models.Store.Orders.OrderItemModel", b =>
                 {
                     b.Property<int>("OrderItemId")
@@ -167,6 +146,41 @@ namespace DataLayer.Migrations
                     b.ToTable("ProductsVariants");
                 });
 
+            modelBuilder.Entity("DataLayer.Models.User.UserModel", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("DataLayer.Models.Store.Orders.OrderItemModel", b =>
                 {
                     b.HasOne("DataLayer.Models.Store.Orders.OrderModel", "Order")
@@ -180,7 +194,7 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Models.Store.Orders.OrderModel", b =>
                 {
-                    b.HasOne("DataLayer.Models.Common.UserModel", "User")
+                    b.HasOne("DataLayer.Models.User.UserModel", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -198,11 +212,6 @@ namespace DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DataLayer.Models.Common.UserModel", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
             modelBuilder.Entity("DataLayer.Models.Store.Orders.OrderModel", b =>
                 {
                     b.Navigation("Items");
@@ -211,6 +220,11 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DataLayer.Models.Store.Products.ProductsModel", b =>
                 {
                     b.Navigation("Variants");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.User.UserModel", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

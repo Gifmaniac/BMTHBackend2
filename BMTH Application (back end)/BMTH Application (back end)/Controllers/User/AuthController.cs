@@ -15,14 +15,14 @@ namespace BMTH_Application__back_end_.Controllers.User
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult RegisterUser([FromBody] RegisterDto newUser)
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterDto newUser)
         {
-            //var (Success, errors) = _registerService.RegisterUser(newUser);
+            var (success, errors) = await _registerService.RegisterUser(newUser);
 
-            //if (!Success)
-            //{
-            //    return BadRequest(new { Errors = errors });
-            //}
+            if (!success)
+            {
+                return BadRequest(new { Errors = errors });
+            }
 
             return StatusCode(201);
         }

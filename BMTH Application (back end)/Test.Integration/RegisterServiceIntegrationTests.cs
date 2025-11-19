@@ -59,7 +59,7 @@ public class RegisterServiceIntegrationTests
         Assert.True(success);
         Assert.Empty(errors);
 
-        var saved = db.UserRegister.Single(x => x.Email == "test@example.com");
+        var saved = db.Users.Single(x => x.Email == "test@example.com");
 
         Assert.NotEqual(dto.Password, saved.Password);
         Assert.False(string.IsNullOrWhiteSpace(saved.Password));
@@ -111,7 +111,7 @@ public class RegisterServiceIntegrationTests
         // Arrange
         var db = CreateTestDb();
 
-        db.UserRegister.Add(new UserRegisterModel
+        db.Users.Add(new UserModel()
         {
             Email = "taken@example.com",
             Password = "pw",

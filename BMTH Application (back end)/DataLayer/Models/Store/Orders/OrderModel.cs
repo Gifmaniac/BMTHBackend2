@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
 using Contracts.Enums.Store;
-using DataLayer.Models.Common;
+using DataLayer.Models.User;
 using Microsoft.Identity.Client;
 
 namespace DataLayer.Models.Store.Orders

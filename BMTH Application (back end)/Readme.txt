@@ -1,14 +1,18 @@
 CODE TEST COVERAGE
 -----------------------
-1. Make report reportgenerator 
+1. Generate a test template.
 
- reportgenerator `
->>   -reports:"Test.Unit/TestResults/**/coverage.cobertura.xml" `
->>   -targetdir:"Test.Unit/coverage-report" `
->>   -reporttypes:Html `
->>   -assemblyfilters:"-Contracts" `
->>   -classfilters:"-Contracts.DTOs.*" `
->>   -filefilters:"-**/Migrations/**","-**/DTOs/**","-**/Program.cs","-**/Contracts/**","-**/Dockerfile**","-**/DataLayer/Context/Configurations/**","-**/DataLayer/Models/**, **/BusinessLayer/**"
+dotnet test --collect:"XPlat Code Coverage"
+
+
+2. Run the test.
+
+reportgenerator `
+    -reports:"Test.Unit/TestResults/**/coverage.cobertura.xml;Test.Integration/TestResults/**/coverage.cobertura.xml" `
+    -targetdir:"coverage-report" `
+    -reporttypes:Html `
+    -classfilters:"-DataLayer.Context.*;-DataLayer.Models.*;-Contracts.*;-BusinessLayer.Exceptions.*" `
+    -filefilters:"-**/DataLayer/Migrations/**;-**/*.g.cs;-**/obj/**;-**/bin/**"
 
 
 3. Point SonarQube to that file with `sonar.cs.opencover.reportsPaths=coverage-report/coverage.opencover.xml` (and, if needed, `sonar.cs.vstest.reportsPaths=Test.Unit/TestResults/**/*.trx`).
@@ -16,6 +20,14 @@ CODE TEST COVERAGE
 UPDATE DATABASE BASED ON MODELS
 dotnet ef migrations add NewDatabaseWhoThis --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
 
+
+UPDATE DATABASE BASED ON MODELS
+-------------------------------------
+1. Get the latest models 
+dotnet ef migrations add NewDatabaseWhoThis --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
+
+2. Update the database 
+dotnet ef database update --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
 
 
 ADDING PRODUCTS (TSHIRTS)

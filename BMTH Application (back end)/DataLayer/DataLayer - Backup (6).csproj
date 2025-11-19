@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Context\Configurations\User\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Models\Common\" />
   </ItemGroup>
 
   <ItemGroup>

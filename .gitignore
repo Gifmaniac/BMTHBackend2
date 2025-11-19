@@ -434,3 +434,4 @@ BMTH Application (back end)/BMTH Application (back end)/appsettings.Development.
 BMTH Application (back end)/Test.Unit/coverage-report/BusinessLayer_NotFoundException.html
 /BMTH Application (back end)/Test.Unit/coverage-report
 /BMTH Application (back end)/Test.Unit
+/BMTH Application (back end)/DataLayer/Migrations

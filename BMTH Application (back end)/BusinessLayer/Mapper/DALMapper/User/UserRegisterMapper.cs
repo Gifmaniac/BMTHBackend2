@@ -6,9 +6,9 @@ namespace BusinessLayer.Mapper.DALMapper.User
 {
     public static class UserRegisterMapper
     {
-        public static UserRegisterModel ToModel(Register domain)
+        public static UserModel ToUserModel(Register domain)
         {
-            return new UserRegisterModel
+            return new UserModel
             {
                 Email = domain.Email,
                 Password = domain.Password,
