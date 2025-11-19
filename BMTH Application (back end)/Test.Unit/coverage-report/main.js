@@ -242,38 +242,10 @@ var assemblies = [
       { "name": "BusinessLayer.Services.User.RegisterService", "rp": "BusinessLayer_RegisterService.html", "cl": 0, "ucl": 21, "cal": 21, "tl": 50, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
-    "name": "Contracts",
-    "classes": [
-      { "name": "Contracts.DTOs.StoreItems.Common.MerchandiseDetailDto", "rp": "Contracts_MerchandiseDetailDto.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Common.MerchandiseDto", "rp": "Contracts_MerchandiseDto.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Common.StoreCategoryDto", "rp": "Contracts_StoreCategoryDto.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Common.StoreItemOverviewDto", "rp": "Contracts_StoreItemOverviewDto.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Orders.PostOrderDto", "rp": "Contracts_PostOrderDto.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Orders.PostOrderItemDto", "rp": "Contracts_PostOrderItemDto.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Product.ProductDetailDto", "rp": "Contracts_ProductDetailDto.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Product.ProductVariantsDto", "rp": "Contracts_ProductVariantsDto.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.StoreItems.Product.TShirtCreateDto", "rp": "Contracts_TShirtCreateDto.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Contracts.DTOs.User.RegisterDto", "rp": "Contracts_RegisterDto.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-    ]},
-  {
     "name": "DataLayer",
     "classes": [
-      { "name": "DataLayer.Context.Configurations.DatabaseConfigurations", "rp": "DataLayer_DatabaseConfigurations.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 22, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Context.Configurations.Store.CreatedOrdersConfiguration", "rp": "DataLayer_CreatedOrdersConfiguration.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Context.Configurations.Store.ProductsConfiguration", "rp": "DataLayer_ProductsConfiguration.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 32, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Context.Configurations.Store.ProductsVariantsConfiguration", "rp": "DataLayer_ProductsVariantsConfiguration.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DataLayer.Context.IntegrationTestBase", "rp": "DataLayer_IntegrationTestBase.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 15, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DataLayer.Context.StoreDbContext", "rp": "DataLayer_StoreDbContext.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 28, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Migrations.NewDatabaseWhoThis", "rp": "DataLayer_NewDatabaseWhoThis.html", "cl": 0, "ucl": 306, "cal": 306, "tl": 369, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Migrations.StoreDbContextModelSnapshot", "rp": "DataLayer_StoreDbContextModelSnapshot.html", "cl": 0, "ucl": 186, "cal": 186, "tl": 218, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.Common.UserModel", "rp": "DataLayer_UserModel.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.Store.Common.MerchandiseModel", "rp": "DataLayer_MerchandiseModel.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.Store.Common.StoreOverviewModel", "rp": "DataLayer_StoreOverviewModel.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.Store.Orders.OrderItemModel", "rp": "DataLayer_OrderItemModel.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.Store.Orders.OrderModel", "rp": "DataLayer_OrderModel.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.Store.Products.ProductsModel", "rp": "DataLayer_ProductsModel.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.Store.Products.ProductsVariantsModel", "rp": "DataLayer_ProductsVariantsModel.html", "cl": 5, "ucl": 1, "cal": 6, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DataLayer.Models.User.UserRegisterModel", "rp": "DataLayer_UserRegisterModel.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DataLayer.Repositories.Store.Orders.OrderRepository", "rp": "DataLayer_OrderRepository.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 29, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DataLayer.Repositories.Store.Products.ProductsRepository", "rp": "DataLayer_ProductsRepository.html", "cl": 0, "ucl": 44, "cal": 44, "tl": 78, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DataLayer.Repositories.User.UserRegisterRepository", "rp": "DataLayer_UserRegisterRepository.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -285,17 +257,9 @@ var metrics = [{ "name": "Crap Score", "abbreviation": "crp", "explanationUrl": 
 var historicCoverageExecutionTimes = [];
 
 var riskHotspotMetrics = [
-      { "name": "Crap Score", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" },
-      { "name": "Cyclomatic complexity", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" },
 ];
 
 var riskHotspots = [
-  {
-    "assembly": "DataLayer", "class": "DataLayer.Context.Configurations.DatabaseConfigurations", "reportPath": "DataLayer_DatabaseConfigurations.html", "methodName": "GetTestDatabaseConnection()", "methodShortName": "GetTestDatabaseConnection()", "fileIndex": 0, "line": 12,
-    "metrics": [
-      { "value": 72, "exceeded": true },
-      { "value": 8, "exceeded": false },
-    ]},
 ];
 
 var branchCoverageAvailable = true;
