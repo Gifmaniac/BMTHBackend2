@@ -24,11 +24,6 @@ namespace BusinessLayer.Services.Store.Product
             var validatedGender = MerchandiseValidator.ValidateGender(gender);
             var models = _tShirtRepository.GetTShirtOverviewByGender(validatedGender);
 
-            if (models == null)
-            {
-                throw new NotFoundException("No T-Shirts have been found for the selected gender");
-            }
-
             return StoreItemOverviewDalMapper.ToOverviewDomainList(models);
         }
 

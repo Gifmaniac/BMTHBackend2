@@ -36,23 +36,5 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.Common
                 .Select(model => ToOverviewDto(model, imageService))
                 .ToList();
         }
-
-        public static StoreItemOverview ToOverviewDomain(StoreItemOverviewDto overview)
-        {
-            return new StoreItemOverview
-            {
-                Id = overview.Id,
-                Name = overview.Name,
-                Price = overview.Price,
-                InStock = overview.InStock,
-                Category = Enum.Parse<StoreCategoryType>(overview.Category),
-                Gender = Enum.Parse<Genders>(overview.Gender)
-            };
-        }
-
-        public static List<StoreItemOverview> ToOverviewDomainList(List<StoreItemOverviewDto> overviews)
-        {
-            return overviews.Select(ToOverviewDomain).ToList();
-        }
     }
 }
