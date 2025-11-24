@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer.Services.Helper
+﻿namespace BusinessLayer.Interfaces.Helper
 {
     public interface IPasswordHasherService
     {

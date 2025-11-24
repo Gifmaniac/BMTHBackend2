@@ -1,8 +1,11 @@
 ﻿using BusinessLayer.Domain.User;
+using BusinessLayer.Interfaces.Helper;
 using BusinessLayer.Interfaces.User;
+using BusinessLayer.Mapper.ApiMapper.Auth;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.User;
 using BusinessLayer.Mapper.DALMapper.User;
-using BusinessLayer.Services.Helper;
+using BusinessLayer.Services.Helper.User;
+using Contracts.DTOs.Responses;
 using Contracts.DTOs.User;
 using Contracts.Enums.User;
 using DataLayer.Interfaces.User;
@@ -16,7 +19,7 @@ namespace BusinessLayer.Services.User
         private readonly IPasswordHasherService _passwordHasherService = passwordHasherService;
         private readonly IUserRegisterRepository _userRegisterRepository = userRegisterRepository;
 
-        public async Task<(bool Success, List<string> Errors)> RegisterUser(RegisterDto newUser)
+        public async Task<AuthResponseDto> RegisterUser(RegisterUserDto newUser)
         {
             var domainNewUser = RegisterUserApiMapper.ToDomain(newUser);
 
@@ -24,14 +27,13 @@ namespace BusinessLayer.Services.User
             var result = _validator.Validate(domainNewUser);
             if (!result.IsValid)
             {
-                var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
-                return (false, errors);
+                return AuthResponseFactory.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
             }
 
             // Checks if email already exists
             if (await _userRegisterRepository.DoesEmailExists(domainNewUser.Email))
             {
-                return (false, new List<string> { "Email already exists" });
+                return AuthResponseFactory.Fail("Email already exists");
             }
 
             // Sets users password, role and creation date
@@ -44,7 +46,7 @@ namespace BusinessLayer.Services.User
             var registerTask = _userRegisterRepository.RegisterUserTask(model);
 
             // Successful registration
-            return (true, new List<string>());
+            return AuthResponseFactory.Success();
         }
     }
 }

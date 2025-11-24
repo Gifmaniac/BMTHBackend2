@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Domain.User;
-using BusinessLayer.Services.Helper;
+using BusinessLayer.Interfaces.Helper;
 using Microsoft.AspNetCore.Identity;
 
 namespace BusinessLayer.Helper.Validator.User

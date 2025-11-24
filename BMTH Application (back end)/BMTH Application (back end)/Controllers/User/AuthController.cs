@@ -1,5 +1,8 @@
-﻿using BusinessLayer.Domain.User;
+﻿using Azure;
+using BusinessLayer.Domain.User;
 using BusinessLayer.Interfaces.User;
+using BusinessLayer.Mapper.ApiMapper.Auth;
+using Contracts.DTOs.Responses;
 using Contracts.DTOs.User;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,24 +10,41 @@ namespace BMTH_Application__back_end_.Controllers.User
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController(IRegisterService registerService) : ControllerBase
+    public class AuthController(IRegisterService registerService, ILoginService loginService) : ControllerBase
     {
         private readonly IRegisterService _registerService = registerService;
+        private readonly ILoginService _loginService = loginService;
 
         [HttpPost("register")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RegisterUser([FromBody] RegisterDto newUser)
-        {
-            var (success, errors) = await _registerService.RegisterUser(newUser);
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto newUser)
+        { 
+            AuthResponseDto response = await _registerService.RegisterUser(newUser);
 
-            if (!success)
+            if (!response.Success)
             {
-                return BadRequest(new { Errors = errors });
+                return BadRequest(response);
             }
 
-            return StatusCode(201);
+            return StatusCode(201, response);
+        }
+
+        [HttpPost("login")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> LoginUser([FromBody] LoginUserDto givenUserDto)
+        {
+            AuthResponseDto response = await _loginService.LoginUser(givenUserDto);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return StatusCode(200, response);
         }
     }
 }

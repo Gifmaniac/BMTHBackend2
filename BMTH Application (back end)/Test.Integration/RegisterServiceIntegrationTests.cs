@@ -7,15 +7,15 @@ using DataLayer.Repositories.User;
 using DataLayer.Models.User;
 using BusinessLayer.Services.User;
 using BusinessLayer.Helper.Validator.User;
-using BusinessLayer.Services.Helper;
 using Contracts.DTOs.User;
 using Contracts.Enums.User;
+using BusinessLayer.Interfaces.Helper;
+using Contracts.DTOs.Responses;   // <-- needed for AuthResponseDto
 
 namespace Test.Integration.Register;
 
 public class RegisterServiceIntegrationTests
 {
-
     // Create fresh in-memory SQLite DB
     private StoreDbContext CreateTestDb()
     {
@@ -30,7 +30,6 @@ public class RegisterServiceIntegrationTests
         return db;
     }
 
-
     // TEST 1 — Successful registration
     [Fact]
     public async Task RegisterUser_SavesUser_WhenValid()
@@ -44,7 +43,7 @@ public class RegisterServiceIntegrationTests
 
         var service = new RegisterService(validator, hasher, repo);
 
-        var dto = new RegisterDto
+        var dto = new RegisterUserDto
         {
             Email = "test@example.com",
             Password = "Password123!",
@@ -53,11 +52,11 @@ public class RegisterServiceIntegrationTests
         };
 
         // Act
-        var (success, errors) = await service.RegisterUser(dto);
+        var response = await service.RegisterUser(dto);
 
         // Assert
-        Assert.True(success);
-        Assert.Empty(errors);
+        Assert.True(response.Success);
+        Assert.Empty(response.AuthList);
 
         var saved = db.Users.Single(x => x.Email == "test@example.com");
 
@@ -71,9 +70,8 @@ public class RegisterServiceIntegrationTests
         db.Database.CloseConnection();
     }
 
-
     // TEST 2 — Validation fails
-        [Fact]
+    [Fact]
     public async Task RegisterUser_ReturnsErrors_WhenInputInvalid()
     {
         // Arrange
@@ -85,21 +83,21 @@ public class RegisterServiceIntegrationTests
 
         var service = new RegisterService(validator, hasher.Object, repo);
 
-        var dto = new RegisterDto
+        var dto = new RegisterUserDto
         {
             Email = "invalid",
-            Password = "123",  // fails every rule
+            Password = "123",
             FirstName = "",
             LastName = ""
         };
 
         // Act
-        var (success, errors) = await service.RegisterUser(dto);
+        var response = await service.RegisterUser(dto);
 
         // Assert
-        Assert.False(success);
-        Assert.NotEmpty(errors);
-        Assert.True(errors.Count >= 4); // Email, Password rules, FirstName, LastName
+        Assert.False(response.Success);
+        Assert.NotEmpty(response.AuthList);
+        Assert.True(response.AuthList.Count >= 4);
 
         db.Database.CloseConnection();
     }
@@ -129,7 +127,7 @@ public class RegisterServiceIntegrationTests
 
         var service = new RegisterService(validator, hasher.Object, repo);
 
-        var dto = new RegisterDto
+        var dto = new RegisterUserDto
         {
             Email = "taken@example.com",
             Password = "Password1!",
@@ -138,12 +136,12 @@ public class RegisterServiceIntegrationTests
         };
 
         // Act
-        var (success, errors) = await service.RegisterUser(dto);
+        var response = await service.RegisterUser(dto);
 
         // Assert
-        Assert.False(success);
-        Assert.Single(errors);
-        Assert.Equal("Email already exists", errors[0]);
+        Assert.False(response.Success);
+        Assert.Single(response.AuthList);
+        Assert.Equal("Email already exists", response.AuthList[0]);
 
         db.Database.CloseConnection();
     }
