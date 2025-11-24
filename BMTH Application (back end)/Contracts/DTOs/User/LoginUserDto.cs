@@ -1,10 +1,8 @@
 ﻿namespace Contracts.DTOs.User
 {
-    public class RegisterDto
+    public class LoginUserDto
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     }
 }

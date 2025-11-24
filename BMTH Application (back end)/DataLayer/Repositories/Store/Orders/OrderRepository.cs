@@ -24,6 +24,5 @@ namespace DataLayer.Repositories.Store.Orders
 
             return order.OrderId;
         }
-
     }
 }

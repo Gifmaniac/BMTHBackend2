@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Domain.Store.Orders;
+using BusinessLayer.Exceptions;
 using BusinessLayer.Interfaces.Store.Orders;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.ProductsOrders;
 using BusinessLayer.Mapper.DALMapper.StoreItems.Orders;
@@ -15,6 +16,16 @@ namespace BusinessLayer.Services.Store.Orders
 
         public async Task<int> PostUserOrder(PostOrderDto order)
         {
+            if (order.Items == null || !order.Items.Any())
+            {
+                throw new ValidationException("Order must include at least one order item.");
+            }
+
+            if (order.Items.Any(i => i.Quantity <= 0))
+            {
+                throw new ValidationException("Order item quantity must be greater than zero.");
+            }
+
             var domain = PostProductOrdersApiMapper.ToDomain(order);
 
             domain.Status = OrderStatus.Pending;

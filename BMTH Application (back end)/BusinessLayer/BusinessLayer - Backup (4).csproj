@@ -25,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Auth\" />
+    <Folder Include="Domain\NewFolder\" />
+    <Folder Include="Interfaces\Helper\" />
   </ItemGroup>
 
 </Project>

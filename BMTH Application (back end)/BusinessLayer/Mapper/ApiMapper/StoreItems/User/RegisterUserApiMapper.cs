@@ -6,7 +6,7 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.User
 {
     public static class RegisterUserApiMapper
     {
-        public static Register ToDomain(RegisterDto dto)
+        public static Register ToDomain(RegisterUserDto dto)
         {
             return new Register
             {

@@ -8,16 +8,16 @@ namespace DataLayer.Repositories.User
     {
         private readonly StoreDbContext _context = context;
 
-        public async Task<UserRegisterModel> RegisterUserTask(UserRegisterModel newUser)
+        public async Task<UserModel> RegisterUserTask(UserModel newUser)
         {
-            _context.UserRegister.Add(newUser);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
             return newUser;
         }
 
         public async Task<bool> DoesEmailExists(string email)
         {
-            return await Task.FromResult(_context.UserRegister.Any(u => u.Email == email));
+            return await Task.FromResult(_context.Users.Any(u => u.Email == email));
         }
     }
 }
