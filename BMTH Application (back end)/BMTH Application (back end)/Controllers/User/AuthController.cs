@@ -39,15 +39,14 @@ namespace BMTH_Application__back_end_.Controllers.User
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> LoginUser([FromBody] LoginUserDto givenUserDto)
         {
-            AuthResponseDto response = await _loginService.LoginUser(givenUserDto);
+            AuthLoginResponseDto response = await _loginService.LoginUser(givenUserDto);
 
             if (!response.Success)
             {
                 return BadRequest(response);
             }
 
-            string token = JwtTokenGenerator.GenerateToken(response);
-            return StatusCode(200, response);
+            return Ok(response);
         }
     }
 }

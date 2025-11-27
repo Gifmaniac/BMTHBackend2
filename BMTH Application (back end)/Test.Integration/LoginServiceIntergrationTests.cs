@@ -6,7 +6,7 @@ using DataLayer.Context;
 using DataLayer.Models.User;
 using DataLayer.Repositories.User;
 using Microsoft.EntityFrameworkCore;
-using Sprache;
+using Microsoft.Extensions.Configuration;
 
 namespace Test.Integration
 {
@@ -26,6 +26,19 @@ namespace Test.Integration
                 return db;
             }
 
+            private IConfiguration BuildFakeConfig()
+            {
+                return new ConfigurationBuilder()
+                    .AddInMemoryCollection(new Dictionary<string, string>
+                    {
+                        { "JwtSettings:Key", "TestKey12384784_Needs_To_Be_Longer_Lmao" },
+                        { "JwtSettings:Issuer", "TestIssuer" },
+                        { "JwtSettings:Audience", "TestAudience" },
+                        { "JwtSettings:ExpiryMinutes", "60" }
+                    })
+                    .Build();
+            }
+
             // TEST 1 — Successful login
             [Fact]
             public async Task LoginUser_ReturnsSuccess_WhenCredentialsMatch()
@@ -33,7 +46,7 @@ namespace Test.Integration
                 // Arrange
                 var db = CreateTestDb();
                 var repo = new UserLoginRepository(db);
-
+                var token = new JwtTokenGenerator(BuildFakeConfig());
                 var validator = new LoginValidator();
                 var hasher = new PasswordHasherService();
 
@@ -52,7 +65,7 @@ namespace Test.Integration
 
                 db.SaveChanges();
 
-                var service = new LoginService(validator, hasher, repo);
+                var service = new LoginService(validator, hasher, repo, token);
 
                 var dto = new LoginUserDto
                 {
@@ -77,11 +90,11 @@ namespace Test.Integration
                 // Arrange
                 var db = CreateTestDb();
                 var repo = new UserLoginRepository(db);
-
+                var token = new JwtTokenGenerator(BuildFakeConfig());
                 var validator = new LoginValidator();
                 var hasher = new PasswordHasherService();
 
-                var service = new LoginService(validator, hasher, repo);
+                var service = new LoginService(validator, hasher, repo, token);
 
                 var dto = new LoginUserDto
                 {
@@ -106,11 +119,11 @@ namespace Test.Integration
                 // Arrange
                 var db = CreateTestDb();
                 var repo = new UserLoginRepository(db);
-
+                var token = new JwtTokenGenerator(BuildFakeConfig());
                 var validator = new LoginValidator();
                 var hasher = new PasswordHasherService();
 
-                var service = new LoginService(validator, hasher, repo);
+                var service = new LoginService(validator, hasher, repo, token );
 
                 var dto = new LoginUserDto
                 {
@@ -136,7 +149,7 @@ namespace Test.Integration
                 // Arrange
                 var db = CreateTestDb();
                 var repo = new UserLoginRepository(db);
-
+                var token = new JwtTokenGenerator(BuildFakeConfig());
                 var validator = new LoginValidator();
                 var hasher = new PasswordHasherService();
 
@@ -153,7 +166,7 @@ namespace Test.Integration
 
                 db.SaveChanges();
 
-                var service = new LoginService(validator, hasher, repo);
+                var service = new LoginService(validator, hasher, repo, token);
 
                 var dto = new LoginUserDto
                 {

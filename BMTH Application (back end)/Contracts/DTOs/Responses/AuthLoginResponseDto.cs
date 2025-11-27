@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Contracts.DTOs.Responses
 {
-    public class AuthLoginResponseDto
+    public class AuthLoginResponseDto : IAuthResponse
     {
         public bool Success { get; set; }
         public string Token { get; set; }

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Domain.User;
+using BusinessLayer.Helper.Validator.User;
 using BusinessLayer.Interfaces.Helper;
 using BusinessLayer.Interfaces.User;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.User;
@@ -13,19 +14,20 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BusinessLayer.Services.User
 {
-    public class LoginService(IValidator<LoginUserDto> validator, IPasswordHasherService passwordHasherService, IUserLoginRepository loginRepository) : ILoginService
+    public class LoginService(IValidator<LoginUserDto> validator, IPasswordHasherService passwordHasherService, IUserLoginRepository loginRepository, IJwtTokenGenerator tokenGenerator) : ILoginService
     {
         private readonly IPasswordHasherService _hasher = passwordHasherService;
         private readonly IValidator<LoginUserDto> _validator = validator;
         private readonly IUserLoginRepository _loginRepository = loginRepository;
+        private readonly IJwtTokenGenerator _tokenGenerator = tokenGenerator;
 
-        public async Task<AuthResponseDto> LoginUser(LoginUserDto givenUserDto)
+        public async Task<AuthLoginResponseDto> LoginUser(LoginUserDto givenUserDto)
         {
             // Validates the user input if correct
             var result = _validator.Validate(givenUserDto);
             if (!result.IsValid)
             {
-                return AuthRegisterResponseFactory.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
+                return AuthResponseFactory.Fail<AuthLoginResponseDto>(result.Errors.Select(e => e.ErrorMessage).ToList());
             }
 
             // Checks if account exist and the password matches
@@ -33,18 +35,25 @@ namespace BusinessLayer.Services.User
             var user = await _loginRepository.GetUserByEmail(domainUser.Email);
             if (user == null)
             {
-                return AuthRegisterResponseFactory.Fail("Incorrect email or password entered. Please try again.");
+                return AuthResponseFactory.Fail<AuthLoginResponseDto>("Incorrect email or password entered. Please try again.");
             }
 
+            var domainDalUser = UserLoginMapper.ToDomain(user);
+
             // Verify password
-            bool isValid = _hasher.VerifyPassword(user.Password, domainUser.HashedPassword);
+            bool isValid = _hasher.VerifyPassword(domainDalUser.HashedPassword, domainUser.HashedPassword);
             if (!isValid)
             {
-                return AuthRegisterResponseFactory.Fail("Incorrect email or password entered. Please try again.");
+                return AuthResponseFactory.Fail<AuthLoginResponseDto>("Incorrect email or password entered. Please try again.");
             }
 
             // Successful Login
-            return AuthRegisterResponseFactory.Success();
+            var response = AuthResponseFactory.Success<AuthLoginResponseDto>();
+            response.Token = _tokenGenerator.GenerateToken(domainDalUser);
+            response.Email = user.Email;
+            response.Role = user.Role.ToString();
+
+            return response;
         }
     }
 }

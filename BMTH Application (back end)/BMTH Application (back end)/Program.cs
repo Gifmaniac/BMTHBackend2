@@ -38,6 +38,7 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IValidator<Register>, RegisterValidator>();
 builder.Services.AddScoped<IValidator<LoginUserDto>, LoginValidator>();
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 builder.Services.AddControllers();
 

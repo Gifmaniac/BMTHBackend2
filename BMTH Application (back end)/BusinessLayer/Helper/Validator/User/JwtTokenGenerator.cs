@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Domain.User;
+using BusinessLayer.Interfaces.User;
 using Contracts.DTOs.User;
 using Contracts.Enums.User;
 using Microsoft.Extensions.Configuration;
@@ -12,11 +14,11 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BusinessLayer.Helper.Validator.User
 {
-    public class JwtTokenGenerator(IConfiguration config)
+    public class JwtTokenGenerator(IConfiguration config) : IJwtTokenGenerator
     {
         private readonly IConfiguration _config = config;
 
-        public string GenerateToken(LoginUserDto providedDto)
+        public string GenerateToken(LoginUser providedUser)
         {
             var jwtSettings = _config.GetSection("JwtSettings");
 
@@ -28,9 +30,9 @@ namespace BusinessLayer.Helper.Validator.User
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, providedDto..ToString()),
-                new Claim(ClaimTypes.Name, email),
-                new Claim(ClaimTypes.Role, role.ToString())
+                new Claim(ClaimTypes.NameIdentifier, providedUser.Id.ToString()),
+                new Claim(ClaimTypes.Email, providedUser.Email),
+                new Claim(ClaimTypes.Role, providedUser.Role.ToString())
             };
 
             var token = new JwtSecurityToken(

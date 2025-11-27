@@ -10,6 +10,6 @@ namespace BusinessLayer.Interfaces.User
 {
     public interface ILoginService
     {
-        public Task<AuthResponseDto> LoginUser(LoginUserDto givenUserDto);
+        public Task<AuthLoginResponseDto> LoginUser(LoginUserDto givenUserDto);
     }
 }

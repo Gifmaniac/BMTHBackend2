@@ -27,13 +27,13 @@ namespace BusinessLayer.Services.User
             var result = _validator.Validate(domainNewUser);
             if (!result.IsValid)
             {
-                return AuthRegisterResponseFactory.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
+                return AuthResponseFactory.Fail<AuthResponseDto>(result.Errors.Select(e => e.ErrorMessage).ToList());
             }
 
             // Checks if email already exists
             if (await _userRegisterRepository.DoesEmailExists(domainNewUser.Email))
             {
-                return AuthRegisterResponseFactory.Fail("Email already exists");
+                return AuthResponseFactory.Fail<AuthResponseDto>("Email already exists");
             }
 
             // Sets users password, role and creation date
@@ -46,7 +46,7 @@ namespace BusinessLayer.Services.User
             var registerTask = _userRegisterRepository.RegisterUserTask(model);
 
             // Successful registration
-            return AuthRegisterResponseFactory.Success();
+            return AuthResponseFactory.Success<AuthResponseDto>();
         }
     }
 }

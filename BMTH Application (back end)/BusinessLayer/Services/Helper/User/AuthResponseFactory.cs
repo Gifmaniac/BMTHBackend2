@@ -2,35 +2,33 @@
 
 namespace BusinessLayer.Services.Helper.User
 {
-    public static class AuthRegisterResponseFactory
+    public static class AuthResponseFactory
     {
-        public static AuthResponseDto Success()
+        public static T Success<T>() where T : IAuthResponse, new()
         {
-            return new AuthResponseDto
+            return new T
             {
                 Success = true,
                 AuthList = new List<string>()
             };
         }
 
-        public static AuthResponseDto Fail(List<string> errors)
+        public static T Fail<T>(List<string> errors) where T : IAuthResponse, new()
         {
-            return new AuthResponseDto
+            return new T
             {
                 Success = false,
                 AuthList = errors
             };
         }
 
-        public static AuthResponseDto Fail(string error)
+        public static T Fail<T>(string error) where T : IAuthResponse, new()
         {
-            return new AuthResponseDto
+            return new T
             {
                 Success = false,
                 AuthList = new List<string> { error }
             };
         }
-
-        public static AuthResponseDto
     }
 }

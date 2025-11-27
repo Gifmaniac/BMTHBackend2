@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Moq;
 using DataLayer.Context;
 using DataLayer.Repositories.Store.Products;
 using BusinessLayer.Services.Store.Product;
 using BusinessLayer.Exceptions;
 using Contracts.Enums.Store;
 using DataLayer.Models.Store.Products;
+using Moq;
 
 namespace Test.Integration;
 
