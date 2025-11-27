@@ -1,5 +1,6 @@
 ﻿using Azure;
 using BusinessLayer.Domain.User;
+using BusinessLayer.Helper.Validator.User;
 using BusinessLayer.Interfaces.User;
 using BusinessLayer.Mapper.ApiMapper.Auth;
 using Contracts.DTOs.Responses;
@@ -10,10 +11,11 @@ namespace BMTH_Application__back_end_.Controllers.User
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController(IRegisterService registerService, ILoginService loginService) : ControllerBase
+    public class AuthController(IRegisterService registerService, ILoginService loginService, JwtTokenGenerator tokenGenerator) : ControllerBase
     {
         private readonly IRegisterService _registerService = registerService;
         private readonly ILoginService _loginService = loginService;
+        private readonly JwtTokenGenerator _tokenGenerator = tokenGenerator;
 
         [HttpPost("register")]
         [Consumes("application/json")]
@@ -44,6 +46,7 @@ namespace BMTH_Application__back_end_.Controllers.User
                 return BadRequest(response);
             }
 
+            string token = JwtTokenGenerator.GenerateToken(response);
             return StatusCode(200, response);
         }
     }

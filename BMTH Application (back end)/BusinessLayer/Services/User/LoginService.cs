@@ -25,26 +25,26 @@ namespace BusinessLayer.Services.User
             var result = _validator.Validate(givenUserDto);
             if (!result.IsValid)
             {
-                return AuthResponseFactory.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
+                return AuthRegisterResponseFactory.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
             }
 
             // Checks if account exist and the password matches
-            var domainNewUser = LoginUserApiMapper.toDomain(givenUserDto);
-            var user = await _loginRepository.GetUserByEmail(domainNewUser.Email);
+            var domainUser = LoginUserApiMapper.toDomain(givenUserDto);
+            var user = await _loginRepository.GetUserByEmail(domainUser.Email);
             if (user == null)
             {
-                return AuthResponseFactory.Fail("Incorrect email or password entered. Please try again.");
+                return AuthRegisterResponseFactory.Fail("Incorrect email or password entered. Please try again.");
             }
 
             // Verify password
-            bool isValid = _hasher.VerifyPassword(user.Password, domainNewUser.HashedPassword);
+            bool isValid = _hasher.VerifyPassword(user.Password, domainUser.HashedPassword);
             if (!isValid)
             {
-                return AuthResponseFactory.Fail("Incorrect email or password entered. Please try again.");
+                return AuthRegisterResponseFactory.Fail("Incorrect email or password entered. Please try again.");
             }
 
             // Successful Login
-            return AuthResponseFactory.Success();
+            return AuthRegisterResponseFactory.Success();
         }
     }
 }

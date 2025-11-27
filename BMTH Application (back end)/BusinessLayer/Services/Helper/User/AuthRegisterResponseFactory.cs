@@ -2,7 +2,7 @@
 
 namespace BusinessLayer.Services.Helper.User
 {
-    public static class AuthResponseFactory
+    public static class AuthRegisterResponseFactory
     {
         public static AuthResponseDto Success()
         {
@@ -30,5 +30,7 @@ namespace BusinessLayer.Services.Helper.User
                 AuthList = new List<string> { error }
             };
         }
+
+        public static AuthResponseDto
     }
 }

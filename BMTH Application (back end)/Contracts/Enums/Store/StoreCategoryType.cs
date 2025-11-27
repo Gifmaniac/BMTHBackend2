@@ -12,6 +12,7 @@ namespace Contracts.Enums.Store
         Jackets,
         Misc,
         Hoodies,
-        Accessories
+        Accessories,
+        CropTop
     }
 }

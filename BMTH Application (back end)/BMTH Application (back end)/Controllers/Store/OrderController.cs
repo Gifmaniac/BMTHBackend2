@@ -19,7 +19,10 @@ namespace BMTH_Application__back_end_.Controllers.Store
         public IActionResult PostUserOrder([FromBody] PostOrderDto request)
         {
             if (request.Items.Count == 0)
+            {
                 return BadRequest("A order cannot be empty.");
+            }
+                
 
             try
             {

@@ -6,6 +6,7 @@ using DataLayer.Context;
 using DataLayer.Models.User;
 using DataLayer.Repositories.User;
 using Microsoft.EntityFrameworkCore;
+using Sprache;
 
 namespace Test.Integration
 {
@@ -123,7 +124,7 @@ namespace Test.Integration
                 // Assert
                 Assert.False(response.Success);
                 Assert.Single(response.AuthList);
-                Assert.Equal("Incorrect username or password entered. Please try again.", response.AuthList[0]);
+                Assert.Equal("Incorrect email or password entered. Please try again.", response.AuthList[0]);
 
                 db.Database.CloseConnection();
             }
@@ -166,7 +167,7 @@ namespace Test.Integration
                 // Assert
                 Assert.False(response.Success);
                 Assert.Single(response.AuthList);
-                Assert.Equal("Incorrect username or password entered. Please try again.", response.AuthList[0]);
+                Assert.Equal("Incorrect email or password entered. Please try again.", response.AuthList[0]);
 
                 db.Database.CloseConnection();
             }
