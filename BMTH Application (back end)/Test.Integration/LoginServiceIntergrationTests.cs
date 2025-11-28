@@ -7,6 +7,9 @@ using DataLayer.Models.User;
 using DataLayer.Repositories.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
+
+
 
 namespace Test.Integration
 {
@@ -73,12 +76,14 @@ namespace Test.Integration
                     Password = "Password123!"
                 };
 
+
                 // Act
                 var response = await service.LoginUser(dto);
 
                 // Assert
                 Assert.True(response.Success);
                 Assert.Empty(response.AuthList);
+                Assert.Equal(3, response.Token.Split('.').Length);
 
                 db.Database.CloseConnection();
             }

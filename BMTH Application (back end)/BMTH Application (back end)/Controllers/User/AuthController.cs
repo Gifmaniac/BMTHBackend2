@@ -1,21 +1,24 @@
-﻿using Azure;
+﻿using System.Linq.Expressions;
+using Azure;
 using BusinessLayer.Domain.User;
 using BusinessLayer.Helper.Validator.User;
 using BusinessLayer.Interfaces.User;
 using BusinessLayer.Mapper.ApiMapper.Auth;
 using Contracts.DTOs.Responses;
 using Contracts.DTOs.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BMTH_Application__back_end_.Controllers.User
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController(IRegisterService registerService, ILoginService loginService, JwtTokenGenerator tokenGenerator) : ControllerBase
+    public class AuthController(IRegisterService registerService, ILoginService loginService, IJwtTokenGenerator tokenGenerator) : ControllerBase
     {
         private readonly IRegisterService _registerService = registerService;
         private readonly ILoginService _loginService = loginService;
-        private readonly JwtTokenGenerator _tokenGenerator = tokenGenerator;
+        private readonly IJwtTokenGenerator _tokenGenerator = tokenGenerator;
 
         [HttpPost("register")]
         [Consumes("application/json")]
@@ -46,7 +49,45 @@ namespace BMTH_Application__back_end_.Controllers.User
                 return BadRequest(response);
             }
 
+            Response.Cookies.Append("jwt", response.Token, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddHours(1)
+            });
+
             return Ok(response);
+        }
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Append("jwt", "", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTimeOffset.UtcNow
+            });
+
+            return Ok(new { message = "Logged out" });
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult Me()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            return Ok(new
+            {
+                userId,
+                email,
+                role
+            });
         }
     }
 }

@@ -50,8 +50,6 @@ namespace BusinessLayer.Services.User
             // Successful Login
             var response = AuthResponseFactory.Success<AuthLoginResponseDto>();
             response.Token = _tokenGenerator.GenerateToken(domainDalUser);
-            response.Email = user.Email;
-            response.Role = user.Role.ToString();
 
             return response;
         }

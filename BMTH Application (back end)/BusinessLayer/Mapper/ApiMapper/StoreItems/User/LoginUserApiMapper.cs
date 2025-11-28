@@ -18,6 +18,7 @@ namespace BusinessLayer.Mapper.ApiMapper.StoreItems.User
         {
             return new LoginUser()
             {
+                Id = loginUserDto.Id,
                 Email = loginUserDto.Email,
                 HashedPassword = loginUserDto.Password
             };

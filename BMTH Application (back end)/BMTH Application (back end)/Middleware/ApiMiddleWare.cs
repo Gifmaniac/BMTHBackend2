@@ -7,6 +7,12 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
+            if (HttpMethods.IsOptions(context.Request.Method))
+            {
+                await next(context);
+                return;
+            }
+
             if (context.Request.Path.StartsWithSegments("/swagger"))
             {
                 await next(context);

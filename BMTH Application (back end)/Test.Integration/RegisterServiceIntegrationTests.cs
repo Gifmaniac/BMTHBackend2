@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using DataLayer.Context;
 using DataLayer.Repositories.User;
 using DataLayer.Models.User;
@@ -8,8 +7,7 @@ using BusinessLayer.Helper.Validator.User;
 using Contracts.DTOs.User;
 using Contracts.Enums.User;
 using BusinessLayer.Interfaces.Helper;
-using Contracts.DTOs.Responses;
-using Moq; // <-- needed for AuthResponseDto
+using Moq;
 
 namespace Test.Integration.Register;
 
