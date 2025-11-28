@@ -1,5 +1,19 @@
+USERS
+-----------------------------------------
+-----------------------------------------
+NORMAL USER
+-----------------------------------------
+Email:		TestUser@bmth.com
+Password:	Test123!
+
+-----------------------------------------
+ADMIN USER
+-----------------------------------------
+Email:		Admin@bmth.com
+Password:	Admin123!
+
 CODE TEST COVERAGE
------------------------
+-----------------------------------------
 1. Generate a test template.
 
 dotnet test --collect:"XPlat Code Coverage"
