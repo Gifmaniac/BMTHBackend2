@@ -74,7 +74,7 @@ namespace BMTH_Application__back_end_.Controllers.User
             return Ok(new { message = "Logged out" });
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         [HttpGet("me")]
         public IActionResult Me()
         {
