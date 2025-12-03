@@ -7,7 +7,7 @@ namespace BusinessLayer.Domain.Store.Orders
 {
     public class Order
     {
-        public required int UserId { get; set; }
+        public int? UserId { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

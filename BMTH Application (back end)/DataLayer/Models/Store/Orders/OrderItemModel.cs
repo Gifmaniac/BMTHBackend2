@@ -1,5 +1,6 @@
 ﻿using Contracts.Enums.Store;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace DataLayer.Models.Store.Orders
@@ -7,13 +8,19 @@ namespace DataLayer.Models.Store.Orders
     public class OrderItemModel
     {
         [Key]
-        public int OrderItemId { get; set; }  // PK
-        public int OrderId { get; set; }    // FK
-        public OrderModel? Order { get; set; }  // Navigation
+        public int OrderItemId { get; set; }   // PK
 
-        public required int VariantId { get; set; }
-        public required int Quantity { get; set; }
-        public required Color Color { get; set; }
-        public required Sizes Size { get; set; }
+        [ForeignKey("Order")]
+        public int OrderId { get; set; }       // FK to Orders
+
+        public OrderModel Order { get; set; }  // Navigation
+
+        public int ProductId { get; set; }     // FK to Product
+
+        public int VariantId { get; set; }
+        public int Quantity { get; set; }
+        public Color Color { get; set; }
+        public Sizes Size { get; set; }
     }
 }
+

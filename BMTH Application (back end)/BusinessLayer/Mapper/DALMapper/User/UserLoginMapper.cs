@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Exceptions;
 
 namespace BusinessLayer.Mapper.DALMapper.User
 {
@@ -14,7 +15,7 @@ namespace BusinessLayer.Mapper.DALMapper.User
         {
             return new LoginUser
             {
-                Id = model.UserId,
+                Id = model.UserId ?? throw new ValidationException("Something went wrong please try again."),
                 Email = model.Email,
                 HashedPassword = model.Password,
                 Role = model.Role

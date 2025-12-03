@@ -11,9 +11,8 @@ namespace DataLayer.Models.Store.Orders
         [Key]
         public int OrderId { get; set; }  // PK
 
-        public int UserId { get; set; }   // FK
+        public int? UserId { get; set; }   // FK
         public UserModel? User { get; set; }  // navigation
-
         public OrderStatus Status { get; set; }
 
         public DateTime CreatedAt { get; set; }

@@ -8,7 +8,8 @@ namespace DataLayer.Models.User
     public class UserModel
     {
         [Key]
-        public int UserId { get; set; }
+        // Nullable for guest users.    
+        public int? UserId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

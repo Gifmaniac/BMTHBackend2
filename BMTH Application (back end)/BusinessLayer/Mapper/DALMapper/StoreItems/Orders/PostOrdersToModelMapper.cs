@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Domain.Store.Orders;
+using BusinessLayer.Exceptions;
 using Contracts.Enums.Store;
 using DataLayer.Models.Store.Orders;
 
@@ -14,9 +15,10 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.Orders
                 CreatedAt = domain.CreatedAt,
                 UpdatedAt = domain.UpdatedAt,
                 Status = domain.Status,
+
                 Items = domain.Items.Select(o => new OrderItemModel()
                 {
-                    OrderItemId = o.ProductId,
+                    ProductId = o.ProductId,
                     VariantId = o.VariantId,
                     Color = o.Color,
                     Size = o.Size,

@@ -26,6 +26,11 @@ namespace BusinessLayer.Services.Store.Orders
                 throw new ValidationException("Order item quantity must be greater than zero.");
             }
 
+            if (order.UserId == 0)
+            {
+                order.UserId = null;
+            }
+
             var domain = PostProductOrdersApiMapper.ToDomain(order);
 
             domain.Status = OrderStatus.Pending;
