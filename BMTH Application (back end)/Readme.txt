@@ -1,5 +1,6 @@
 USERS
 -----------------------------------------
+
 -----------------------------------------
 NORMAL USER
 -----------------------------------------
@@ -11,6 +12,8 @@ ADMIN USER
 -----------------------------------------
 Email:		Admin@bmth.com
 Password:	Admin123!
+
+
 
 CODE TEST COVERAGE
 -----------------------------------------
@@ -38,7 +41,7 @@ dotnet ef migrations add NewDatabaseWhoThis --project "DataLayer/DataLayer.cspro
 UPDATE DATABASE BASED ON MODELS
 -------------------------------------
 1. Get the latest models 
-dotnet ef migrations add NewDatabaseWhoThis --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
+dotnet ef migrations add "Name" --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
 
 2. Update the database 
 dotnet ef database update --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
@@ -72,23 +75,17 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 
 
 -----------------------------------------
--- Shirt 2: RetroWave Tee
+-- Shirt 2: BMTHTShirt
 -----------------------------------------
 INSERT INTO Products(name, price, category, inStock, gender, material)
 VALUES ('RetroWave Tee', 34.99, 'TShirts', 1, 'Men', 'Polyester');
 DECLARE @id2 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
-(@id2, 'Purple', 'S', 10),
-(@id2, 'Purple', 'M', 15),
-(@id2, 'Purple', 'L', 20),
-(@id2, 'White', 'S', 10),
-(@id2, 'White', 'M', 15),
-(@id2, 'White', 'L', 20),
 (@id2, 'Black', 'S', 10),
 (@id2, 'Black', 'M', 15),
 (@id2, 'Black', 'L', 20),
-(@id2, 'Gray', 'XL', 0);
+(@id2, 'Black', 'XL', 0);
 
 
 -----------------------------------------
