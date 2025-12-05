@@ -1,24 +1,19 @@
-﻿using System.Linq.Expressions;
-using Azure;
-using BusinessLayer.Domain.User;
-using BusinessLayer.Helper.Validator.User;
-using BusinessLayer.Interfaces.User;
-using BusinessLayer.Mapper.ApiMapper.Auth;
+﻿using BusinessLayer.Interfaces.User;
 using Contracts.DTOs.Responses;
 using Contracts.DTOs.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace BMTH_Application__back_end_.Controllers.User
+namespace BMTHApplication.BackEnd.Controllers.User
+
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController(IRegisterService registerService, ILoginService loginService, IJwtTokenGenerator tokenGenerator) : ControllerBase
+    public class AuthController(IRegisterService registerService, ILoginService loginService) : ControllerBase
     {
         private readonly IRegisterService _registerService = registerService;
         private readonly ILoginService _loginService = loginService;
-        private readonly IJwtTokenGenerator _tokenGenerator = tokenGenerator;
 
         [HttpPost("register")]
         [Consumes("application/json")]
@@ -26,7 +21,7 @@ namespace BMTH_Application__back_end_.Controllers.User
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto newUser)
         { 
-            AuthResponseDto response = await _registerService.RegisterUser(newUser);
+            AuthResponseDto response = await _registerService.RegisterUser(newUser).ConfigureAwait(false);
 
             if (!response.Success)
             {
@@ -42,11 +37,16 @@ namespace BMTH_Application__back_end_.Controllers.User
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> LoginUser([FromBody] LoginUserDto givenUserDto)
         {
-            AuthLoginResponseDto response = await _loginService.LoginUser(givenUserDto);
+            AuthLoginResponseDto response = await _loginService.LoginUser(givenUserDto).ConfigureAwait(false);
 
             if (!response.Success)
             {
                 return BadRequest(response);
+            }
+
+            if (response.Token is null)
+            {
+                throw new InvalidOperationException("Generated token cannot be null.");
             }
 
             Response.Cookies.Append("jwt", response.Token, new CookieOptions

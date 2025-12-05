@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using BMTH_Application__back_end_.Middleware;
 using BusinessLayer.Interfaces.Store.TShirts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -23,6 +22,8 @@ using BusinessLayer.Interfaces.Helper;
 using Contracts.DTOs.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using BMTH_Application_back_end_.Middleware;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -96,7 +97,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // "B
             ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
             ValidAudience = builder.Configuration["JwtSettings:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"] 
+                                       ?? throw new InvalidOperationException("Jwt:Key is missing from configuration")))
+                               
         };
 
         // read token from cookie
@@ -142,12 +145,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseWhen(
-    context => !context.Request.Path.StartsWithSegments("/swagger"),
+    context => !context.Request.Path.StartsWithSegments(
+        new PathString("/swagger"),
+        StringComparison.OrdinalIgnoreCase),
     branch =>
     {
         branch.UseMiddleware<ApiMiddleWare>();
     });
-
 app.MapControllers();
 
 app.Run();

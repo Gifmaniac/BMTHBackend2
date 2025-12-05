@@ -6,7 +6,7 @@ using Contracts.DTOs.StoreItems.Common;
 using Contracts.DTOs.StoreItems.Product;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BMTH_Application__back_end_.Controllers.Store
+namespace BMTH_Application__back_end.Controllers.Store
 {
     [ApiController]
 

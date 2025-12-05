@@ -10,8 +10,8 @@ namespace BusinessLayer.Domain.User
     public class LoginUser
     {
         public int Id { get; set; }
-        public string Email { get; set; }
-        public string HashedPassword { get; set; }
+        public required string Email { get; set; }
+        public required string HashedPassword { get; set; }
         public Roles Role { get; set; }
 
     }

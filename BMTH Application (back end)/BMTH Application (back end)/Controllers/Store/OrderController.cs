@@ -1,9 +1,8 @@
 ﻿using BusinessLayer.Interfaces.Store.Orders;
-using BusinessLayer.Services.Store.Orders;
 using Contracts.DTOs.StoreItems.Orders;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BMTH_Application__back_end_.Controllers.Store
+namespace BMTH_Application_back_end_.Controllers.Store
 {
     [ApiController]
     [Route("/api/orders")]
@@ -18,21 +17,16 @@ namespace BMTH_Application__back_end_.Controllers.Store
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult PostUserOrder([FromBody] PostOrderDto request)
         {
-            if (request.Items.Count == 0)
-            {
-                return BadRequest("A order cannot be empty.");
-            }
-                
+            // Validate required argument
+            ArgumentNullException.ThrowIfNull(request);
 
-            try
-            {
-                var result = _orderService.PostUserOrder(request);
-                return Ok(new { orderId = result });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            if (request.Items == null || request.Items.Count == 0)
+                return BadRequest("An order cannot be empty.");
+
+            // Let your service throw exceptions -> your ExceptionMiddleware handles them
+            var orderId = _orderService.PostUserOrder(request);
+
+            return Ok(new { orderId });
         }
     }
 }

@@ -3,7 +3,7 @@ using Contracts.Enums.Store;
 using Contracts.DTOs.StoreItems.Common;
 
 
-namespace BMTH_Application__back_end_.Controllers.Store.Common
+namespace BMTH_Application_back_end_.Controllers.Store.Common
 {
     [ApiController]
     [Route("store")]
@@ -30,7 +30,7 @@ namespace BMTH_Application__back_end_.Controllers.Store.Common
                 new StoreCategoryDto { Category = StoreCategoryType.Jackets, DisplayName = "Jackets" },
                 new StoreCategoryDto { Category = StoreCategoryType.Misc, DisplayName = "Miscellaneous" }
             };
-            
+
             return Ok(categories);
         }
     }

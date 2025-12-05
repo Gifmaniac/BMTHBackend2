@@ -1,39 +1,38 @@
-﻿namespace BMTH_Application__back_end_.Middleware
+﻿namespace BMTH_Application_back_end_.Middleware;
+
+public class ApiMiddleWare
 {
-    public class ApiMiddleWare(RequestDelegate next, IConfiguration config)
+    private readonly RequestDelegate _next;
+    private readonly IConfiguration _config;
+    private const string ApiAuthorazition = "ApiKey";
+
+    public ApiMiddleWare(RequestDelegate next, IConfiguration config)
     {
-        private const string ApiAuthorazition = "ApiKey";
+        _next = next ?? throw new ArgumentNullException(nameof(next));
+        _config = config ?? throw new ArgumentNullException(nameof(config));
+    }
 
+    public async Task InvokeAsync(HttpContext context)
+    {
+        ArgumentNullException.ThrowIfNull(context);
 
-        public async Task InvokeAsync(HttpContext context)
+        if (!context.Request.Headers.TryGetValue(ApiAuthorazition, out var extractedApiKey))
         {
-            if (HttpMethods.IsOptions(context.Request.Method))
-            {
-                await next(context);
-                return;
-            }
+            return;
+        }
 
-            if (context.Request.Path.StartsWithSegments("/swagger"))
-            {
-                await next(context);
-                return;
-            }
+        // Allow OPTIONS calls
+        if (HttpMethods.IsOptions(context.Request.Method))
+        {
+            await _next(context).ConfigureAwait(false);
+            return;
+        }
 
-            if (!context.Request.Headers.TryGetValue(ApiAuthorazition, out var extractedApiKey))
-            {
-                context.Response.StatusCode = 401;      // Unauthorized
-                await context.Response.WriteAsync("API Key is missing");
-                return;
-            }
-
-            var apiKey = config["ApiKey"];
-            if (apiKey == null || !apiKey.Equals(extractedApiKey))
-            {
-                context.Response.StatusCode = 403;      //Forbidden
-                return;
-            }
-
-            await next(context);
+        // Skip API key check for swagger
+        if (context.Request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase))
+        {
+            await _next(context).ConfigureAwait(false);
+            return;
         }
     }
 }
