@@ -32,7 +32,7 @@ namespace Test.Integration
             private IConfiguration BuildFakeConfig()
             {
                 return new ConfigurationBuilder()
-                    .AddInMemoryCollection(new Dictionary<string, string>
+                    .AddInMemoryCollection(new Dictionary<string, string?>
                     {
                         { "JwtSettings:Key", "TestKey12384784_Needs_To_Be_Longer_Lmao" },
                         { "JwtSettings:Issuer", "TestIssuer" },
