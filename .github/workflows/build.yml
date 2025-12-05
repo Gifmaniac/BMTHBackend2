@@ -43,21 +43,25 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-            $scannerPath = "$env:RUNNER_TEMP\scanner\dotnet-sonarscanner"
-            cd "$env:GITHUB_WORKSPACE\BMTH Application (back end)"
+          $scannerPath = "$env:RUNNER_TEMP\scanner\dotnet-sonarscanner"
+          cd "$env:GITHUB_WORKSPACE\BMTH Application (back end)"
 
-            & $scannerPath begin `
-              /k:"Gifmaniac_BMTHBackend2" `
-              /o:"gifmaniac" `
-              /d:sonar.token="$env:SONAR_TOKEN" `
-              /d:sonar.projectBaseDir="$env:GITHUB_WORKSPACE\BMTH Application (back end)" `
-              /d:sonar.cs.opencover.reportsPaths="coverage-report/coverage.opencover.xml" `
-              /d:sonar.exclusions="**/coverage-report/**" `
-              /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/Contracts/**, **/Dockerfile**" `
-              /d:sonar.scanner.skipJreProvisioning=true `
-              /d:sonar.verbose=true `
+          & $scannerPath begin `
+            /k:"Gifmaniac_BMTHBackend2" `
+            /o:"gifmaniac" `
+            /d:sonar.token="$env:SONAR_TOKEN" `
+            /d:sonar.projectBaseDir="$env:GITHUB_WORKSPACE\BMTH Application (back end)" `
+            /d:sonar.cs.opencover.reportsPaths="coverage-report/coverage.opencover.xml" `
+            /d:sonar.exclusions="**/coverage-report/**" `
+            /d:sonar.coverage.exclusions="**/Migrations/**, **/DTOs/**, **/Program.cs**, **/Contracts/**, **/Dockerfile**" `
+            /d:sonar.scanner.skipJreProvisioning=true `
+            /d:sonar.verbose=true `
 
-            dotnet build
-            dotnet test --collect:"XPlat Code Coverage"
+          dotnet build
 
-            & $scannerPath end /d:sonar.token="$env:SONAR_TOKEN"
+          dotnet test `
+            /p:CollectCoverage=true `
+            /p:CoverletOutput=coverage-report/ `
+            /p:CoverletOutputFormat=opencover
+
+          & $scannerPath end /d:sonar.token="$env:SONAR_TOKEN"
