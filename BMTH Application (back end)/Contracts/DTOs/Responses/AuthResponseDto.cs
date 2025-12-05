@@ -3,6 +3,6 @@
     public class AuthResponseDto : IAuthResponse
     {
         public bool Success { get; set; }
-        public List<string> AuthList { get; set; }
+        public required List<string> AuthList { get; set; }
     }
 }
