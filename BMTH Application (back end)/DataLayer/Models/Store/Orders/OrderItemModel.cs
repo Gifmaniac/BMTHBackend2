@@ -13,14 +13,14 @@ namespace DataLayer.Models.Store.Orders
         [ForeignKey("Order")]
         public int OrderId { get; set; }       // FK to Orders
 
-        public OrderModel Order { get; set; }  // Navigation
+        public required OrderModel Order { get; set; }  // Navigation
 
         public int ProductId { get; set; }     // FK to Product
 
-        public int VariantId { get; set; }
-        public int Quantity { get; set; }
-        public Color Color { get; set; }
-        public Sizes Size { get; set; }
+        public required int VariantId { get; set; }
+        public required int Quantity { get; set; }
+        public required Color Color { get; set; }
+        public required Sizes Size { get; set; }
     }
 }
 

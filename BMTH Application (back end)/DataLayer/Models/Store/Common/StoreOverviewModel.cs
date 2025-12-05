@@ -6,9 +6,9 @@ namespace DataLayer.Models.Store.Common
     {
         public int Id { get; set; }
         public required string Name { get; set; }
-        public decimal Price { get; set; }
-        public bool InStock { get; set; }
-        public StoreCategoryType Category { get; set; }
-        public Genders Gender { get; set; }
+        public required decimal Price { get; set; }
+        public required bool InStock { get; set; }
+        public required StoreCategoryType Category { get; set; }
+        public required Genders Gender { get; set; }
     }
 }
