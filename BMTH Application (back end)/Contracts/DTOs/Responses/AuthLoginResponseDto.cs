@@ -9,7 +9,7 @@ namespace Contracts.DTOs.Responses
     public class AuthLoginResponseDto : IAuthResponse
     {
         public bool Success { get; set; }
-        public string? Token { get; set; }
-        public List<string>? AuthList { get; set; }
+        public required string Token { get; set; }
+        public required List<string> AuthList { get; set; }
     }
 }
