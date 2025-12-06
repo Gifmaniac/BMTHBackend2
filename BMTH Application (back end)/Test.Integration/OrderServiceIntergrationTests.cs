@@ -60,7 +60,7 @@ public class OrderServiceIntegrationTests
         var dto = new PostOrderDto
         {
             UserId = 10,
-            Items =
+            Items = new List<PostOrderItemDto>
             {
                 new PostOrderItemDto
                 {
@@ -68,7 +68,7 @@ public class OrderServiceIntegrationTests
                     VariantId = 101,
                     Quantity = 2,
                     Color = Color.Black.ToString(),
-                    Size = Sizes.L.ToString()
+                    Size = Sizes.L.ToString(),
                 }
             }
         };
@@ -127,7 +127,7 @@ public class OrderServiceIntegrationTests
         var dto = new PostOrderDto
         {
             UserId = 7,
-            Items =
+            Items = new List<PostOrderItemDto>()
             {
                 new PostOrderItemDto
                 {
