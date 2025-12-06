@@ -52,19 +52,19 @@ jobs:
             --configuration Release `
             /p:TreatWarningsAsErrors=true
 
-          - name: Begin Sonar Analysis
+      - name: Begin Sonar Analysis
+        shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          shell: powershell
-          run: |
-            $scanner = "${{ runner.temp }}\scanner\dotnet-sonarscanner"
-            & $scanner begin `
-              /k:"Gifmaniac_BMTHBackend2" `
-              /o:"gifmaniac" `
-              /d:sonar.token="$env:SONAR_TOKEN" `
-              /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
-              /d:sonar.inclusions="**/BusinessLayer/**, **/DataLayer/**" `
-              /d:sonar.coverage.exclusions="**/Migrations/**, **/Contracts/**, **/*Mapper*/**, **/*Validator*/**, **/DTOs/**, **/BusinessLayer/Domain/**"
+        run: |
+          $scanner = "${{ runner.temp }}\scanner\dotnet-sonarscanner"
+          & $scanner begin `
+            /k:"Gifmaniac_BMTHBackend2" `
+            /o:"gifmaniac" `
+            /d:sonar.token="$env:SONAR_TOKEN" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
+            /d:sonar.inclusions="**/BusinessLayer/**, **/DataLayer/**" `
+            /d:sonar.coverage.exclusions="**/Migrations/**, **/Contracts/**, **/*Mapper*/**, **/*Validator*/**, **/DTOs/**, **/BusinessLayer/Domain/**"
 
       - name: Build Solution
         shell: powershell
