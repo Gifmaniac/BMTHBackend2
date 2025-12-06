@@ -40,6 +40,7 @@ public class ProductServiceIntegrationTests
             Category = StoreCategoryType.TShirts,
             Gender = Genders.Men,
             Material = "Cotton",
+            InStock = true,
             Variants = new List<ProductsVariantsModel>
             {
                 new ProductsVariantsModel
@@ -111,6 +112,7 @@ public class ProductServiceIntegrationTests
             Category = StoreCategoryType.TShirts,
             Gender = Genders.Men,
             Material = "Cotton",
+            InStock = true,
             Variants = new List<ProductsVariantsModel>
             {
                 new ProductsVariantsModel
@@ -132,6 +134,7 @@ public class ProductServiceIntegrationTests
             Category = StoreCategoryType.TShirts,
             Gender = Genders.Female,
             Material = "Cotton",
+            InStock = true,
             Variants = new List<ProductsVariantsModel>
             {
                 new ProductsVariantsModel

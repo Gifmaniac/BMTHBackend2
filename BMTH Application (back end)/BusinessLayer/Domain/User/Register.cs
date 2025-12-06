@@ -12,5 +12,6 @@ namespace BusinessLayer.Domain.User
         public Roles Role { get; set; }
         public DateTime CreatedAt { get; set; }
 
+
     }
 }

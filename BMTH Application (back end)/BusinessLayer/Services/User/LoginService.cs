@@ -1,16 +1,12 @@
-﻿using BusinessLayer.Domain.User;
-using BusinessLayer.Helper.Validator.User;
-using BusinessLayer.Interfaces.Helper;
+﻿using BusinessLayer.Interfaces.Helper;
 using BusinessLayer.Interfaces.User;
 using BusinessLayer.Mapper.ApiMapper.StoreItems.User;
 using BusinessLayer.Mapper.DALMapper.User;
 using BusinessLayer.Services.Helper.User;
 using Contracts.DTOs.Responses;
 using Contracts.DTOs.User;
-using Contracts.Enums.User;
 using DataLayer.Interfaces.User;
 using FluentValidation;
-using Microsoft.AspNetCore.Identity;
 
 namespace BusinessLayer.Services.User
 {
@@ -48,10 +44,15 @@ namespace BusinessLayer.Services.User
             }
 
             // Successful Login
-            var response = AuthResponseFactory.Success<AuthLoginResponseDto>();
-            response.Token = _tokenGenerator.GenerateToken(domainDalUser);
+            var responseDto = new AuthLoginResponseDto
+            {
+                Success = true,
+                Token = _tokenGenerator.GenerateToken(domainDalUser),
+                AuthList = new()
+            };
 
-            return response;
+
+            return AuthResponseFactory.Success(responseDto);
         }
     }
 }

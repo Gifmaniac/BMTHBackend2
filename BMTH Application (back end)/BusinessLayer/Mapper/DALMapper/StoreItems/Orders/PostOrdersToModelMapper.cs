@@ -22,7 +22,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.Orders
                     VariantId = o.VariantId,
                     Color = o.Color,
                     Size = o.Size,
-                    Quantity = o.Quantity
+                    Quantity = o.Quantity,
                 }).ToList()
             };
         }

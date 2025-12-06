@@ -27,7 +27,8 @@ namespace Test.Unit
                     Name = "Classic Tee",
                     Price = 19.99m,
                     InStock = true,
-                    Category = StoreCategoryType.TShirts
+                    Category = StoreCategoryType.TShirts,
+                    Gender = Genders.Female
                 },
                 new StoreOverviewModel
                 {
@@ -35,7 +36,8 @@ namespace Test.Unit
                     Name = "Logo Tee",
                     Price = 24.99m,
                     InStock = false,
-                    Category = StoreCategoryType.TShirts
+                    Category = StoreCategoryType.TShirts,
+                    Gender = Genders.Men
                 }
             };
 

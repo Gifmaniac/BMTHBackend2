@@ -45,8 +45,14 @@ namespace BusinessLayer.Services.User
             var model = UserRegisterMapper.ToUserModel(domainNewUser);
             var registerTask = _userRegisterRepository.RegisterUserTask(model);
 
+            var successResponse = new AuthResponseDto()
+            {
+                Success = true,
+                AuthList = new()
+            };
+
             // Successful registration
-            return AuthResponseFactory.Success<AuthResponseDto>();
+            return AuthResponseFactory.Success<AuthResponseDto>(successResponse);
         }
     }
 }

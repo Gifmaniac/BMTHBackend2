@@ -13,10 +13,10 @@ namespace DataLayer.Models.Store.Orders
 
         public int? UserId { get; set; }   // FK
         public UserModel? User { get; set; }  // navigation
-        public OrderStatus Status { get; set; }
+        public required OrderStatus Status { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public required DateTime CreatedAt { get; set; }
+        public required DateTime UpdatedAt { get; set; }
 
         // Order has many items
         public List<OrderItemModel> Items { get; set; } = new();

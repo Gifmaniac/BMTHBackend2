@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLayer.Exceptions
+﻿namespace BusinessLayer.Exceptions
 {
     public class TokenGenerationException : Exception
     {
         public TokenGenerationException(string message) : base(message) { }
+        public TokenGenerationException(string message, Exception inner) : base(message, inner) { }
     }
 }
+
