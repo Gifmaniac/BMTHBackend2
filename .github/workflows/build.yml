@@ -63,8 +63,15 @@ jobs:
             /o:"gifmaniac" `
             /d:sonar.token="$env:SONAR_TOKEN" `
             /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
-            /d:sonar.inclusions="**/BusinessLayer/**, **/DataLayer/**" `
-            /d:sonar.coverage.exclusions="**/Migrations/**, **/Contracts/**, **/*Mapper*/**, **/*Validator*/**, **/DTOs/**, **/BusinessLayer/Domain/**"
+            /d:sonar.coverage.exclusions="\
+            **/DataLayer/Context/**,\
+            **/DataLayer/Models/**,\
+            **/DataLayer/Migrations/**,\
+            **/Contracts/**,\
+            **/BusinessLayer/Exceptions/**,\
+            **/*.g.cs,\
+            **/obj/**,\
+            **/bin/**,\
 
       - name: Build Solution
         shell: powershell
