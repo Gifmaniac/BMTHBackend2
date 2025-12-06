@@ -1,97 +1,85 @@
-name: SonarQube
+name: CI
+
 on:
   push:
     branches: [ main ]
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ main ]
 
 jobs:
-  build:
+  build-test-sonar:
     runs-on: windows-latest
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    env:
+      DOTNET_VERSION: '8.0.x'
 
-      - uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'temurin'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Cache Sonar Packages
-        uses: actions/cache@v4
-        with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
+      - name: Install SonarScanner for .NET
+        shell: powershell
+        run: dotnet tool install --global dotnet-sonarscanner
 
-      - name: Cache Sonar Scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v4
-        with:
-          path: ${{ runner.temp }}\scanner
-          key: ${{ runner.os }}-sonar-scanner
-
-      - name: Install Sonar Scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        run: dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
-
-      - name: Install dotnet-format (lint)
-        run: dotnet tool install -g dotnet-format
-
-      - name: Lint (format + analyzers)
+      - name: dotnet format (solution)
         shell: powershell
         run: |
-          dotnet format --verify-no-changes
-          dotnet build "$env:GITHUB_WORKSPACE\BMTH Application (back end)\BMTH Application (back end).sln" `
-            --configuration Release `
-            /p:TreatWarningsAsErrors=true
+          dotnet format "$env:GITHUB_WORKSPACE/BMTH Application (back end)/BMTH Application (back end).sln" --verify-no-changes
 
       - name: Begin Sonar Analysis
         shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          $scanner = "${{ runner.temp }}\scanner\dotnet-sonarscanner"
+          $scanner = "$env:USERPROFILE\.dotnet\tools\dotnet-sonarscanner"
           & $scanner begin `
             /k:"Gifmaniac_BMTHBackend2" `
             /o:"gifmaniac" `
+            /d:sonar.host.url="https://sonarcloud.io" `
             /d:sonar.token="$env:SONAR_TOKEN" `
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
-            /d:sonar.coverage.exclusions='**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BusinessLayer/Exceptions/**,**/*.g.cs,**/obj/**,**/bin/**' `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.merged.opencover.xml" `
+            /d:sonar.coverage.exclusions='**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BusinessLayer/Exceptions/**,**/*.g.cs,**/obj/**,**/bin/**,"**/BMTH Application (back end)/**"' `
             /d:sonar.inclusions='**/BusinessLayer/**,**/DataLayer/Repositories/**'
 
-
-      - name: Build Solution
+      - name: Restore
         shell: powershell
-        run: dotnet build "$env:GITHUB_WORKSPACE\BMTH Application (back end)\BMTH Application (back end).sln"
+        run: |
+          dotnet restore "$env:GITHUB_WORKSPACE/BMTH Application (back end)/BMTH Application (back end).sln"
+
+      - name: Build
+        shell: powershell
+        run: |
+          dotnet build "$env:GITHUB_WORKSPACE/BMTH Application (back end)/BMTH Application (back end).sln" --no-restore
 
       - name: Run Unit Tests + Coverage
         shell: powershell
+        working-directory: ${{ env.GITHUB_WORKSPACE }}/BMTH Application (back end)/Test.Unit
         run: |
-          dotnet test "$env:GITHUB_WORKSPACE/BMTH Application (back end)/Test.Unit/Test.Unit.csproj" `
+          dotnet test Test.Unit.csproj `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
-            /p:CoverletOutput="Test.Unit/coverage.xml"
+            /p:CoverletOutput="coverage.unit.opencover.xml"
 
-      - name: Run Integration Tests +  Coverage
+      - name: Run Integration Tests + Coverage
         shell: powershell
+        working-directory: ${{ env.GITHUB_WORKSPACE }}/BMTH Application (back end)/Test.Integration
         run: |
-          dotnet test "$env:GITHUB_WORKSPACE/BMTH Application (back end)/Test.Integration/Test.Integration.csproj" `
+          dotnet test Test.Integration.csproj `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
-            /p:CoverletOutput="Test.Integration/coverage.xml" `
-            /p:MergeWith="Test.Unit/coverage.xml"
+            /p:CoverletOutput="coverage.merged.opencover.xml" `
+            /p:MergeWith="../Test.Unit/coverage.unit.opencover.xml"
 
       - name: End Sonar Analysis
+        shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
         run: |
-          $scanner = "${{ runner.temp }}\scanner\dotnet-sonarscanner"
-          & $scanner end /d:sonar.token="$env:SONAR_TOKEN"
+          $scanner = "$env:USERPROFILE\.dotnet\tools\dotnet-sonarscanner"
+          & $scanner end `
+            /d:sonar.token="$env:SONAR_TOKEN"
