@@ -18,7 +18,7 @@ namespace Test.Unit
         public void BuildImageUrl_ShouldReturnValidCloudinaryUrl()
         {
             // Arrange
-            var inMemorySettings = new Dictionary<string, string>
+            var inMemorySettings = new Dictionary<string, string?>
             {
                 {"Cloudinary:CloudName", "demo"},
                 {"Cloudinary:ApiKey", "1234567890"},

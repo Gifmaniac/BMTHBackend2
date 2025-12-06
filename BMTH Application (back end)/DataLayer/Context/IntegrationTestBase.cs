@@ -6,7 +6,7 @@ namespace DataLayer.Context;
 
 public abstract class IntegrationTestBase : IDisposable
 {
-    protected readonly StoreDbContext _context;
+    protected readonly StoreDbContext _context = null!;
 
     public void Dispose()
     {
