@@ -61,16 +61,17 @@ jobs:
 
       - name: Run Unit Tests + Coverage
         shell: powershell
-        working-directory: ${{ env.GITHUB_WORKSPACE }}/BMTH Application (back end)/Test.Unit
+        working-directory: "${{ github.workspace }}/BMTH Application (back end)/Test.Unit"
         run: |
           dotnet test Test.Unit.csproj `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
             /p:CoverletOutput="coverage.unit.opencover.xml"
 
+
       - name: Run Integration Tests + Coverage
         shell: powershell
-        working-directory: ${{ env.GITHUB_WORKSPACE }}/BMTH Application (back end)/Test.Integration
+        working-directory: "${{ github.workspace }}/BMTH Application (back end)/Test.Integration"
         run: |
           dotnet test Test.Integration.csproj `
             /p:CollectCoverage=true `
