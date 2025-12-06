@@ -77,9 +77,8 @@ jobs:
         run: |
           dotnet test Test.Integration.csproj `
             /p:CollectCoverage=true `
-            /p:CoverletOutputFormat=opencover `
-            /p:CoverletOutput="${{ github.workspace }}/coverage/coverage.integration.opencover.xml" `
-            /p:MergeWith="${{ github.workspace }}/coverage/coverage.unit.opencover.xml"
+            /p:CoverletOutputFormat=cobertura `
+            /p:CoverletOutput="${{ github.workspace }}/coverage/coverage.integration.xml"
 
       - name: End Sonar Analysis
         shell: powershell
