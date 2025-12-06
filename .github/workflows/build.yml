@@ -29,7 +29,10 @@ jobs:
       - name: dotnet format (solution)
         shell: powershell
         run: |
-          dotnet format "$env:GITHUB_WORKSPACE/BMTH Application (back end)/BMTH Application (back end).sln" --verify-no-changes
+          dotnet format --verify-no-changes
+          dotnet build "$env:GITHUB_WORKSPACE\BMTH Application (back end)\BMTH Application (back end).sln" `
+            --configuration Release `
+            /p:TreatWarningsAsErrors=true
 
       - name: Begin Sonar Analysis
         shell: powershell
