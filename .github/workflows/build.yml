@@ -71,13 +71,22 @@ jobs:
         shell: powershell
         run: dotnet build "$env:GITHUB_WORKSPACE\BMTH Application (back end)\BMTH Application (back end).sln"
 
-      - name: Run Tests + Coverage
+      - name: Run Unit Tests + Coverage
         shell: powershell
         run: |
-          dotnet test "$env:GITHUB_WORKSPACE/BMTH Application (back end)/BMTH Application (back end).sln" `
+          dotnet test "$env:GITHUB_WORKSPACE/BMTH Application (back end)/Test.Unit/Test.Unit.csproj" `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
-            /p:CoverletOutput=coverage/coverage.opencover.xml
+            /p:CoverletOutput="Test.Unit/coverage.xml"
+
+      - name: Run Integration Tests +  Coverage
+        shell: powershell
+        run: |
+          dotnet test "$env:GITHUB_WORKSPACE/BMTH Application (back end)/Test.Integration/Test.Integration.csproj" `
+            /p:CollectCoverage=true `
+            /p:CoverletOutputFormat=opencover `
+            /p:CoverletOutput="Test.Integration/coverage.xml" `
+            /p:MergeWith="Test.Unit/coverage.xml"
 
       - name: End Sonar Analysis
         env:
