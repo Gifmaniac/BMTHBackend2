@@ -50,8 +50,8 @@ jobs:
             /d:sonar.token="$env:SONAR_TOKEN" `
             /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/coverage/coverage.integration.opencover.xml" `
             /d:sonar.coverage.exclusions='**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BusinessLayer/Exceptions/**,**/*.g.cs,**/obj/**,**/bin/**,"**/BMTH Application (back end)/**"' `
-            /d:sonar.inclusions="**/BusinessLayer/**/*.cs,**/DataLayer/Repositories/**/*.cs"'
-
+            /d:sonar.inclusions="**/BusinessLayer/**/*.cs,**/DataLayer/Repositories/**/*.cs" `
+            
       - name: Restore
         shell: powershell
         run: |
