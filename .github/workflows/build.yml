@@ -34,6 +34,9 @@ jobs:
             --configuration Release `
             /p:TreatWarningsAsErrors=true
 
+      - name: Create coverage output folder
+        run: mkdir "${{ github.workspace }}/coverage"
+
       - name: Begin Sonar Analysis
         shell: powershell
         env:
@@ -45,7 +48,7 @@ jobs:
             /o:"gifmaniac" `
             /d:sonar.host.url="https://sonarcloud.io" `
             /d:sonar.token="$env:SONAR_TOKEN" `
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.merged.opencover.xml" `
+            /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/coverage/coverage.integration.opencover.xml" `
             /d:sonar.coverage.exclusions='**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BusinessLayer/Exceptions/**,**/*.g.cs,**/obj/**,**/bin/**,"**/BMTH Application (back end)/**"' `
             /d:sonar.inclusions='**/BusinessLayer/**,**/DataLayer/Repositories/**'
 
@@ -66,8 +69,7 @@ jobs:
           dotnet test Test.Unit.csproj `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
-            /p:CoverletOutput="coverage.unit.opencover.xml"
-
+            /p:CoverletOutput="${{ github.workspace }}/coverage/coverage.unit.opencover.xml"
 
       - name: Run Integration Tests + Coverage
         shell: powershell
@@ -76,8 +78,8 @@ jobs:
           dotnet test Test.Integration.csproj `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
-            /p:CoverletOutput="coverage.merged.opencover.xml" `
-            /p:MergeWith="../Test.Unit/coverage.unit.opencover.xml"
+            /p:CoverletOutput="${{ github.workspace }}/coverage/coverage.integration.opencover.xml" `
+            /p:MergeWith="${{ github.workspace }}/coverage/coverage.unit.opencover.xml"
 
       - name: End Sonar Analysis
         shell: powershell
