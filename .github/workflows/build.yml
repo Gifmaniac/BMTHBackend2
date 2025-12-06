@@ -74,7 +74,7 @@ jobs:
       - name: Run Tests + Coverage
         shell: powershell
         run: |
-          dotnet test "$env:GITHUB_WORKSPACE\BMTH Application (back end)\Test.Unit\Test.Unit.csproj" `
+          dotnet test "$env:GITHUB_WORKSPACE/BMTHBackend2.sln" `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
             /p:CoverletOutput=coverage.opencover.xml
