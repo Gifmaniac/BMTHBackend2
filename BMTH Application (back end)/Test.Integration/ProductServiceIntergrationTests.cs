@@ -7,6 +7,7 @@ using BusinessLayer.Exceptions;
 using Contracts.Enums.Store;
 using DataLayer.Models.Store.Products;
 using Moq;
+using Contracts.DTOs.Responses;
 
 namespace Test.Integration;
 
@@ -25,7 +26,7 @@ public class ProductServiceIntegrationTests
         return db;
     }
 
-    // TEST 1 — GetShirtById: SUCCESS
+    // TEST 1 — GetProductById: SUCCESS
     [Fact]
     public void GetShirtById_ReturnsProduct_WhenExists()
     {
@@ -63,7 +64,7 @@ public class ProductServiceIntegrationTests
         var service = new ProductService(repo);
 
         // Act
-        var result = service.GetShirtById(1);
+        var result = service.GetProductById(1);
 
         // Assert
         Assert.NotNull(result);
@@ -78,7 +79,7 @@ public class ProductServiceIntegrationTests
         db.Database.CloseConnection();
     }
 
-    // TEST 2 — GetShirtById: NOT FOUND
+    // TEST 2 — GetProductById: NOT FOUND
     [Fact]
     public void GetShirtById_ThrowsNotFound_WhenMissing()
     {
@@ -92,12 +93,12 @@ public class ProductServiceIntegrationTests
         var service = new ProductService(repo);
 
         // Act & Assert
-        Assert.Throws<NotFoundException>(() => service.GetShirtById(777));
+        Assert.Throws<NotFoundException>(() => service.GetProductById(777));
 
         db.Database.CloseConnection();
     }
 
-    // TEST 3 — GetTShirtsByGender: RETURNS LIST
+    // TEST 3 — GetProductByGender: RETURNS LIST
     [Fact]
     public void GetTShirtsByGender_ReturnsCorrectList()
     {
@@ -155,7 +156,7 @@ public class ProductServiceIntegrationTests
         var service = new ProductService(repo);
 
         // Act
-        var result = service.GetTShirtsByGender("Men");
+        var result = service.GetProductByGender(Genders.Men);
 
 
         // Assert
@@ -167,7 +168,7 @@ public class ProductServiceIntegrationTests
     }
 
 
-    // TEST 4 — GetTShirtsByGender: THROWS WHEN EMPTY
+    // TEST 4 — GetProductByGender: THROWS WHEN EMPTY
     [Fact]
     public void GetTShirtsByGender_ThrowsNotFound_WhenEmpty()
     {
@@ -177,15 +178,15 @@ public class ProductServiceIntegrationTests
         var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
         var service = new ProductService(repo);
 
-        // Act & Assert
-        Assert.Throws<ValidationException>(() => service.GetTShirtsByGender("Women"));
+        // Act + Assert
+        Assert.Throws<NotFoundException>(() => service.GetProductByGender(Genders.Men));
 
         db.Database.CloseConnection();
     }
 
-    // TEST 5 — GetTShirtsByGender: INVALID GENDER
+    // TEST 5 — UpdateStock: PRODUCT NOT FOUND
     [Fact]
-    public void GetTShirtsByGender_Throws_ValidationError_OnInvalidGender()
+    public void AddStock_ThrowsNotFound_WhenProductMissing()
     {
         // Arrange
         var db = CreateTestDb();
@@ -194,7 +195,92 @@ public class ProductServiceIntegrationTests
         var service = new ProductService(repo);
 
         // Act & Assert
-        Assert.Throws<ValidationException>(() => service.GetTShirtsByGender("Alain"));
+        Assert.Throws<NotFoundException>(() => service.UpdateStock(productId: 999, variantId: 1, amount: 5));
+
+        db.Database.CloseConnection();
+    }
+
+    // TEST 6 — UpdateStock: VARIANT NOT FOUND
+    [Fact]
+    public void AddStock_ThrowsNotFound_WhenVariantMissing()
+    {
+        // Arrange
+        var db = CreateTestDb();
+
+        var product = new ProductsModel
+        {
+            Id = 1,
+            Name = "Test Shirt",
+            Price = 40,
+            Category = StoreCategoryType.TShirts,
+            Gender = Genders.Men,
+            Material = "Cotton",
+            InStock = true,
+            Variants = new List<ProductsVariantsModel>() // no variants
+        };
+
+        db.Products.Add(product);
+        db.SaveChanges();
+
+        var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
+        var service = new ProductService(repo);
+
+        // Act & Assert
+        Assert.Throws<NotFoundException>(() => service.UpdateStock(productId: 1, variantId: 555, amount: 2));
+
+        db.Database.CloseConnection();
+    }
+
+    // TEST 7— UpdateStock: SUCCESS
+    [Fact]
+    public void AddStock_UpdatesVariantQuantity_WhenValid()
+    {
+        // Arrange
+        var db = CreateTestDb();
+
+        var product = new ProductsModel
+        {
+            Id = 1,
+            Name = "Stock Test Shirt",
+            Price = 40,
+            Category = StoreCategoryType.TShirts,
+            Gender = Genders.Men,
+            Material = "Cotton",
+            InStock = true,
+            Variants = new List<ProductsVariantsModel>
+            {
+                new ProductsVariantsModel
+                {
+                    VariantId = 10,
+                    ProductModelId = 1,
+                    Color = Color.Black,
+                    Size = Sizes.L,
+                    Quantity = 5
+                }
+            }
+        };
+
+        db.Products.Add(product);
+        db.SaveChanges();
+
+        var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
+        var service = new ProductService(repo);
+
+        // Act
+        var updated = service.UpdateStock(productId: 1, variantId: 10, amount: 4);
+
+        // Assert (domain object)
+        Assert.NotNull(updated);
+        Assert.Single(updated.Variants);
+        Assert.Equal(9, updated.Variants.First().Quantity);
+
+        // Assert (database)
+        var dbVariant = db.Products
+            .Include(p => p.Variants)
+            .First(p => p.Id == 1)
+            .Variants.First(v => v.VariantId == 10);
+
+        Assert.Equal(9, dbVariant.Quantity);
 
         db.Database.CloseConnection();
     }

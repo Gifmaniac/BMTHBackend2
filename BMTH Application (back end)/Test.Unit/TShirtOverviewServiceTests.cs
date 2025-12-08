@@ -6,6 +6,7 @@ using BusinessLayer.Services.Store.Product;
 using Contracts.Enums.Store;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.Common;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 
 
@@ -41,13 +42,13 @@ namespace Test.Unit
                 }
             };
 
-            mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Men))
+            mockRepo.Setup(r => r.GetProductOverviewByGender(Genders.Men))
                     .Returns(dbModels);
 
             var service = new ProductService(mockRepo.Object);
 
             // Act
-            var result = service.GetTShirtsByGender("Men");
+            var result = service.GetProductByGender(Genders.Men);
 
             // Assert
             Assert.NotNull(result);
@@ -62,16 +63,17 @@ namespace Test.Unit
         {
             // Arrange
             var mockRepo = new Mock<IProductsRepository>();
-            mockRepo.Setup(r => r.GetTShirtOverviewByGender(Genders.Female))
-                    .Returns(new List<StoreOverviewModel>());
+
+            mockRepo.Setup(r => r.GetProductOverviewByGender(It.IsAny<Genders>()))
+                .Returns(new List<StoreOverviewModel>()); // empty list
 
             var service = new ProductService(mockRepo.Object);
 
             // Act
-            Action act = () => service.GetTShirtsByGender("Male");
+            Action act = () => service.GetProductByGender(Genders.Men);
 
             // Assert
-            Assert.Throws<ValidationException>(act);
+            Assert.Throws<NotFoundException>(act);
         }
 
         [Fact]

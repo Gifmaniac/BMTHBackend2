@@ -12,3 +12,4 @@ namespace BusinessLayer.Domain.Store.Products
         public bool InStock => Quantity > 0;
     }
 }
+ 

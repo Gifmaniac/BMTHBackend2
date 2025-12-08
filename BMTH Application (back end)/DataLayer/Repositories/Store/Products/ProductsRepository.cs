@@ -20,7 +20,7 @@ namespace DataLayer.Repositories.Store.Products
             _logger = logger;
         }
 
-        public List<StoreOverviewModel> GetTShirtOverviewByGender(Genders gender)
+        public List<StoreOverviewModel> GetProductOverviewByGender(Genders gender)
         {
             try
             {
@@ -68,6 +68,39 @@ namespace DataLayer.Repositories.Store.Products
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Unexpected error in GetById({Id})", id);
+                throw;
+            }
+        }
+
+        public ProductsModel? UpdateStock(ProductsModel model)
+        {
+            try
+            {
+                var product = _context.Products
+                    .Include(p => p.Variants)
+                    .FirstOrDefault(p => p.Id == model.Id);
+
+                if (product == null)
+                {
+                    return null;
+                }
+
+                foreach (var updatedVariant in model.Variants)
+                {
+                    var existingVariant = product.Variants
+                        .FirstOrDefault(v => v.VariantId == updatedVariant.VariantId);
+
+                    if (existingVariant != null)
+                    {
+                        existingVariant.Quantity = updatedVariant.Quantity;
+                    }
+                }
+                _context.SaveChanges();
+                return product;
+            }
+            catch (SqlException ex)
+            {
+                _logger.LogError(ex, "Database error while retrieving product {Id}", model.Id);
                 throw;
             }
         }

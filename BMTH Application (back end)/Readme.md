@@ -1,13 +1,12 @@
-USERS
+TEST USERS
 -----------------------------------------
 
------------------------------------------
 NORMAL USER
 -----------------------------------------
 Email:		TestUser@bmth.com
 Password:	Test123!
 
------------------------------------------
+
 ADMIN USER
 -----------------------------------------
 Email:		Admin@bmth.com
@@ -17,13 +16,11 @@ Password:	Admin123!
 
 CODE TEST COVERAGE
 -----------------------------------------
-1. Generate a test template.
-
+1. Generate Test Template
 dotnet test --collect:"XPlat Code Coverage"
 
 
 2. Run the test.
-
 reportgenerator `
     -reports:"Test.Unit/TestResults/**/coverage.cobertura.xml;Test.Integration/TestResults/**/coverage.cobertura.xml" `
     -targetdir:"coverage-report" `
@@ -32,19 +29,20 @@ reportgenerator `
     -filefilters:"-**/DataLayer/Migrations/**;-**/*.g.cs;-**/obj/**;-**/bin/**"
 
 
-3. Point SonarQube to that file with `sonar.cs.opencover.reportsPaths=coverage-report/coverage.opencover.xml` (and, if needed, `sonar.cs.vstest.reportsPaths=Test.Unit/TestResults/**/*.trx`).
-
-UPDATE DATABASE BASED ON MODELS
-dotnet ef migrations add NewDatabaseWhoThis --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
+3. Configure SonarQube (doesnt work for some reason.)
+sonar.cs.opencover.reportsPaths=coverage-report/coverage.opencover.xml
+sonar.cs.vstest.reportsPaths=Test.Unit/TestResults/**/*.trx
 
 
 UPDATE DATABASE BASED ON MODELS
 -------------------------------------
 1. Get the latest models 
-dotnet ef migrations add "Name" --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
+dotnet ef migrations add "Name" 
+--project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
 
 2. Update the database 
 dotnet ef database update --project "DataLayer/DataLayer.csproj" --startup-project "BMTH Application (back end)/BMTH Application (back end).csproj"
+
 
 
 ADDING PRODUCTS (TSHIRTS)
@@ -52,7 +50,7 @@ ADDING PRODUCTS (TSHIRTS)
 -- MALE SHIRTS
 -----------------------------------------
 
------------------------------------------
+
 -- Shirt 1: BMTHTShirtGlitch1
 -----------------------------------------
 INSERT INTO Products(name, price, category, inStock, gender, material)
@@ -73,12 +71,11 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id1, 'Pink', 'XL', 0),
 (@id1, 'Black', 'XL', 0);
 
-
 -----------------------------------------
 -- Shirt 2: BMTHTShirt
 -----------------------------------------
 INSERT INTO Products(name, price, category, inStock, gender, material)
-VALUES ('RetroWave Tee', 34.99, 'TShirts', 1, 'Men', 'Polyester');
+VALUES ('BMTHTShirt', 34.99, 'TShirts', 1, 'Men', 'Polyester');
 DECLARE @id2 INT = SCOPE_IDENTITY();
 
 INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
@@ -88,29 +85,11 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id2, 'Black', 'XL', 0);
 
 
+WOMEN TSHIRTS
 -----------------------------------------
--- Shirt 3: NeonGrid Shirt
------------------------------------------
-INSERT INTO Products(name, price, category, inStock, gender, material)
-VALUES ('NeonGrid Shirt', 31.99, 'TShirts', 1, 'Men', 'Linen');
-DECLARE @id3 INT = SCOPE_IDENTITY();
 
-INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
-(@id3, 'Cyan', 'S', 10),
-(@id3, 'Cyan', 'M', 15),
-(@id3, 'Cyan', 'L', 20),
-(@id3, 'White', 'S', 10),
-(@id3, 'White', 'M', 15),
-(@id3, 'White', 'L', 20),
-(@id3, 'Black', 'S', 10),
-(@id3, 'Black', 'M', 15),
-(@id3, 'Black', 'L', 20),
-(@id3, 'Red', 'XL', 0);
-👚 WOMEN TSHIRTS
-sql
-Code kopiëren
------------------------------------------
--- Shirt 4: Luna Tee
+
+-- Shirt 3: Luna Tee
 -----------------------------------------
 INSERT INTO Products(name, price, category, inStock, gender, material)
 VALUES ('Luna Tee', 27.99, 'TShirts', 1, 'Women', 'Cotton');
@@ -129,28 +108,8 @@ INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
 (@id4, 'Gray', 'XL', 0);
 
 
------------------------------------------
--- Shirt 5: Dreamwave Tee
------------------------------------------
-INSERT INTO Products(name, price, category, inStock, gender, material)
-VALUES ('Dreamwave Tee', 32.99, 'TShirts', 1, 'Women', 'Silk');
-DECLARE @id5 INT = SCOPE_IDENTITY();
 
-INSERT INTO ProductsVariants (productModelId, color, size, quantity) VALUES
-(@id5, 'Teal', 'S', 10),
-(@id5, 'Teal', 'M', 15),
-(@id5, 'Teal', 'L', 20),
-(@id5, 'Coral', 'S', 10),
-(@id5, 'Coral', 'M', 15),
-(@id5, 'Coral', 'L', 20),
-(@id5, 'White', 'S', 10),
-(@id5, 'White', 'M', 15),
-(@id5, 'White', 'L', 20),
-(@id5, 'Black', 'XL', 0);
-
-
------------------------------------------
--- Shirt 6: Celestial Crop
+-- Shirt 4: Celestial Crop
 -----------------------------------------
 INSERT INTO Products(name, price, category, inStock, gender, material)
 VALUES ('Celestial Crop', 35.99, 'Crop Top', 1, 'Women', 'Cotton Blend');

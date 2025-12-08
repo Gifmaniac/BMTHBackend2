@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using BusinessLayer.Interfaces.Store.TShirts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using DataLayer.Context;
@@ -23,6 +22,9 @@ using Contracts.DTOs.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using BMTH_Application_back_end_.Middleware;
+using BusinessLayer.Domain.Store.Products;
+using BusinessLayer.Helper.Validator.Store;
+using BusinessLayer.Interfaces.Store;
 
 
 
@@ -34,7 +36,7 @@ builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<IUserRegisterRepository, UserRegisterRepository>();
 builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
 // Add services to the container.
-builder.Services.AddScoped<ITShirtService, ProductService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
@@ -42,6 +44,7 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 // Add Validators to the container
 builder.Services.AddScoped<IValidator<Register>, RegisterValidator>();
 builder.Services.AddScoped<IValidator<LoginUserDto>, LoginValidator>();
+builder.Services.AddScoped<IValidator<Products>, ProductsValidator>();
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 

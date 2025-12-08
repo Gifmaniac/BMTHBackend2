@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using BusinessLayer.Exceptions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using ValidationException = System.ComponentModel.DataAnnotations.ValidationException;
+﻿using BusinessLayer.Exceptions;
 
 namespace BMTH_Application_back_end_.Middleware;
 
@@ -32,7 +27,7 @@ public class ExceptionMiddleware
         {
             await _next(context).ConfigureAwait(false);
         }
-        catch (ValidationException ex)
+        catch (BusinessLayer.Exceptions.ValidationException ex)
         {
             _logValidationError(_logger, ex.Message, ex);
 

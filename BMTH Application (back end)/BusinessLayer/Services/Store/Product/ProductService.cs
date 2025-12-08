@@ -1,41 +1,77 @@
 ﻿using BusinessLayer.Domain.Store.Common;
 using BusinessLayer.Domain.Store.Products;
 using BusinessLayer.Exceptions;
-using BusinessLayer.Helper.Store;
-using BusinessLayer.Interfaces.Store.TShirts;
+using BusinessLayer.Interfaces.Store;
 using BusinessLayer.Mapper.DALMapper.StoreItems.Common;
 using BusinessLayer.Mapper.DALMapper.StoreItems.Product;
+using Contracts.Enums.Store;
 using DataLayer.Interfaces;
 using DataLayer.Models.Store.Products;
 
+
 namespace BusinessLayer.Services.Store.Product
 {
-    public class ProductService : ITShirtService
+    public class ProductService(IProductsRepository productsRepository) : IProductService
     {
-        private readonly IProductsRepository _tShirtRepository;
+        private readonly IProductsRepository _productsRepository = productsRepository;
 
-        public ProductService(IProductsRepository repo)
+        public List<StoreItemOverview> GetProductByGender(Genders gender)
         {
-            _tShirtRepository = repo;
-        }
 
-        public List<StoreItemOverview> GetTShirtsByGender(string? gender)
-        {
-            var validatedGender = MerchandiseValidator.ValidateGender(gender);
-            var models = _tShirtRepository.GetTShirtOverviewByGender(validatedGender);
+            var models = productsRepository.GetProductOverviewByGender(gender);
+
+            if (models == null || models.Count == 0)
+            {
+                throw new NotFoundException($"No products found for gender: {gender}");
+            }
 
             return StoreItemOverviewDalMapper.ToOverviewDomainList(models);
         }
 
-        public Products? GetShirtById(int? id)
+        public Products GetProductById(int productId)
         {
-            ProductsModel? tShirtId = _tShirtRepository.GetById(id);
+            ProductsModel? productById = productsRepository.GetById(productId);
 
-            if (tShirtId == null)
+            if (productById == null)
             {
-                throw new NotFoundException($"No T-shirt found with ID {id}.");
+                throw new NotFoundException($"No product found with ID {productId}.");
             }
-            return ProductDalMapper.ToDomain(tShirtId);
+            return ProductDalMapper.ToDomain(productById);
         }
+
+        public Products? UpdateStock(int productId, int variantId, int amount)
+        {
+            ProductsModel? productById = productsRepository.GetById(productId);
+
+            if (productById == null)
+            {
+                throw new NotFoundException($"No product found with ID {productId}.");
+            }
+
+            Products productDomain = ProductDalMapper.ToDomain(productById);
+
+            var variant = productDomain.Variants.FirstOrDefault(v => v.VariantId == variantId);
+
+            if (variant == null)
+            {
+                throw new NotFoundException($"No variant was found with ID {variantId}");
+            }
+
+            int newQuantity = variant.Quantity + amount;
+            if (newQuantity < 0)
+            {
+                throw new ValidationException(
+                    $"Updating stock for variant {variantId} would result in negative quantity.");
+            }
+
+            variant.Quantity += amount;
+
+            var updatedProductModel = ProductDalMapper.ToDetailEntity(productDomain);
+
+            productsRepository.UpdateStock(updatedProductModel);
+
+            return productDomain;
+        }
+
     }
 }
