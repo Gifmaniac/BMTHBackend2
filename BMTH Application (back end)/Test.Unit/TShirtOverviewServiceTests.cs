@@ -29,7 +29,7 @@ namespace Test.Unit
                     Price = 19.99m,
                     InStock = true,
                     Category = StoreCategoryType.TShirts,
-                    Gender = Genders.Female
+                    Gender = Genders.Women
                 },
                 new StoreOverviewModel
                 {
