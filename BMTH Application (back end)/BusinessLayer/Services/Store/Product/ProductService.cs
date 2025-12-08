@@ -30,7 +30,7 @@ namespace BusinessLayer.Services.Store.Product
 
         public Products GetProductById(int productId)
         {
-            ProductsModel? productById = productsRepository.GetById(productId);
+            ProductsModel? productById = _productsRepository.GetById(productId);
 
             if (productById == null)
             {
@@ -41,7 +41,7 @@ namespace BusinessLayer.Services.Store.Product
 
         public Products? UpdateStock(int productId, int variantId, int amount)
         {
-            ProductsModel? productById = productsRepository.GetById(productId);
+            ProductsModel? productById = _productsRepository.GetById(productId);
 
             if (productById == null)
             {
@@ -68,7 +68,7 @@ namespace BusinessLayer.Services.Store.Product
 
             var updatedProductModel = ProductDalMapper.ToDetailEntity(productDomain);
 
-            productsRepository.UpdateStock(updatedProductModel);
+            _productsRepository.UpdateStock(updatedProductModel);
 
             return productDomain;
         }
