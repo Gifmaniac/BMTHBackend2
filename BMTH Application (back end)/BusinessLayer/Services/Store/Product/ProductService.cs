@@ -18,7 +18,7 @@ namespace BusinessLayer.Services.Store.Product
         public List<StoreItemOverview> GetProductByGender(Genders gender)
         {
 
-            var models = productsRepository.GetProductOverviewByGender(gender);
+            var models = _productsRepository.GetProductOverviewByGender(gender);
 
             if (models == null || models.Count == 0)
             {

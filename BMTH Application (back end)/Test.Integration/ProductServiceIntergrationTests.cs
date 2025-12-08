@@ -133,7 +133,7 @@ public class ProductServiceIntegrationTests
             Name = "Female Shirt",
             Price = 30,
             Category = StoreCategoryType.TShirts,
-            Gender = Genders.Female,
+            Gender = Genders.Women,
             Material = "Cotton",
             InStock = true,
             Variants = new List<ProductsVariantsModel>
