@@ -14,20 +14,6 @@ namespace BusinessLayer.Services.Store.Product
     public class ProductService(IProductsRepository productsRepository) : IProductService
     {
         private readonly IProductsRepository _productsRepository = productsRepository;
-
-        public List<StoreItemOverview> GetProductByGender(Genders gender)
-        {
-
-            var models = _productsRepository.GetProductOverviewByGender(gender);
-
-            if (models == null || models.Count == 0)
-            {
-                throw new NotFoundException($"No products found for gender: {gender}");
-            }
-
-            return StoreItemOverviewDalMapper.ToOverviewDomainList(models);
-        }
-
         public Products GetProductById(int productId)
         {
             ProductsModel? productById = _productsRepository.GetById(productId);
@@ -39,38 +25,71 @@ namespace BusinessLayer.Services.Store.Product
             return ProductDalMapper.ToDomain(productById);
         }
 
-        public Products? UpdateStock(int productId, int variantId, int amount)
+        private static ProductsVariants GetVariants(Products product, int variantId)
         {
-            ProductsModel? productById = _productsRepository.GetById(productId);
+            var variants = product.Variants.FirstOrDefault(v => v.VariantId == variantId);
 
-            if (productById == null)
+            if (variants == null)
             {
-                throw new NotFoundException($"No product found with ID {productId}.");
+                throw new NotFoundException($"No variant were found for {product.Name}.");
             }
 
-            Products productDomain = ProductDalMapper.ToDomain(productById);
+            return variants;
+        }
+        public List<StoreItemOverview> GetProductByGender(Genders gender)
+        {
+            var models = _productsRepository.GetProductOverviewByGender(gender);
 
-            var variant = productDomain.Variants.FirstOrDefault(v => v.VariantId == variantId);
-
-            if (variant == null)
+            if (models == null || models.Count == 0)
             {
-                throw new NotFoundException($"No variant was found with ID {variantId}");
+                throw new NotFoundException($"No products found for gender: {gender}.");
             }
 
-            int newQuantity = variant.Quantity + amount;
-            if (newQuantity < 0)
+            return StoreItemOverviewDalMapper.ToOverviewDomainList(models);
+        }
+
+        public Products UpdateStock(int productId, int variantId, int amount)
+        {
+            Products productDomain = GetProductById(productId);
+
+            var variant = GetVariants(productDomain, variantId);
+
+            if (variant.Quantity + amount < 0)
             {
-                throw new ValidationException(
-                    $"Updating stock for variant {variantId} would result in negative quantity.");
+                throw new ValidationException($"Decreasing the stock for {productDomain.Name} ({variant.Color}, {variant.Size}) would result in negative quantity.");
             }
 
             variant.Quantity += amount;
 
-            var updatedProductModel = ProductDalMapper.ToDetailEntity(productDomain);
+            var updatedProductModel = ProductDalMapper.ToDetailModel(productDomain);
 
             _productsRepository.UpdateStock(updatedProductModel);
 
             return productDomain;
+        }
+
+        public void DeleteProduct(int productId)
+        {
+            Products productDomain = GetProductById(productId);
+
+            var DeletedProduct = _productsRepository.DeleteProduct(productId);
+
+            if (!DeletedProduct)
+            {
+                throw new ValidationException("Product could not be deleted.");
+            }
+        }
+
+        public void DeleteVariants(int productId, int productVariantId)
+        {
+            Products productDomain = GetProductById(productId);
+
+            var DeletedVariant = _productsRepository.DeleteProductVariant(productId, productVariantId);
+
+            if (!DeletedVariant)
+            {
+                throw new ValidationException("Product variant could not be deleted.");
+            }
         }
 
     }

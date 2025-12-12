@@ -5,7 +5,7 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.Product
 {
     public static class ProductDalMapper
     {
-        public static ProductsModel ToDetailEntity(Products domain)
+        public static ProductsModel ToDetailModel(Products domain)
         {
             return new ProductsModel
             {
@@ -27,9 +27,9 @@ namespace BusinessLayer.Mapper.DALMapper.StoreItems.Product
             };
         }
 
-        public static List<ProductsModel> ToEntityList(List<Products> domain)
+        public static List<ProductsModel> ToModelList(List<Products> domain)
         {
-            return domain.Select(ToDetailEntity).ToList();
+            return domain.Select(ToDetailModel).ToList();
         }
 
         public static Products ToDomain(ProductsModel model)

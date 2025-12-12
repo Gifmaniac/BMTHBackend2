@@ -284,4 +284,160 @@ public class ProductServiceIntegrationTests
 
         db.Database.CloseConnection();
     }
+
+    // TEST 8 — DeleteProduct: SUCCESS
+    [Fact]
+    public void DeleteProduct_RemovesProduct_WhenExists()
+    {
+        // Arrange
+        var db = CreateTestDb();
+
+        var product = new ProductsModel
+        {
+            Id = 1,
+            Name = "Delete Me Shirt",
+            Price = 25,
+            Category = StoreCategoryType.TShirts,
+            Gender = Genders.Men,
+            Material = "Cotton",
+            InStock = true,
+            Variants = new List<ProductsVariantsModel>()
+        };
+
+        db.Products.Add(product);
+        db.SaveChanges();
+
+        var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
+        var service = new ProductService(repo);
+
+        // Act
+        service.DeleteProduct(1);
+
+        // Assert
+        var deletedProduct = db.Products.FirstOrDefault(p => p.Id == 1);
+        Assert.Null(deletedProduct);
+
+        db.Database.CloseConnection();
+    }
+
+    // TEST 9 — DeleteProduct: THROWS WHEN PRODUCT MISSING
+    [Fact]
+    public void DeleteProduct_ThrowsNotFound_WhenMissing()
+    {
+        // Arrange
+        var db = CreateTestDb();
+
+        var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
+        var service = new ProductService(repo);
+
+        // Act & Assert
+        Assert.Throws<NotFoundException>(() => service.DeleteProduct(999));
+
+        db.Database.CloseConnection();
+    }
+
+    // TEST 10 — DeleteProductVariant: SUCCESS
+    [Fact]
+    public void DeleteProductVariant_RemovesOnlyVariant_WhenExists()
+    {
+        // Arrange
+        var db = CreateTestDb();
+
+        var product = new ProductsModel
+        {
+            Id = 1,
+            Name = "Variant Delete Test",
+            Price = 30,
+            Category = StoreCategoryType.TShirts,
+            Gender = Genders.Men,
+            Material = "Cotton",
+            InStock = true,
+            Variants = new List<ProductsVariantsModel>
+            {
+                new ProductsVariantsModel
+                {
+                    VariantId = 10,
+                    ProductModelId = 1,
+                    Color = Color.Black,
+                    Size = Sizes.L,
+                    Quantity = 5
+                },
+                new ProductsVariantsModel
+                {
+                    VariantId = 11,
+                    ProductModelId = 1,
+                    Color = Color.White,
+                    Size = Sizes.M,
+                    Quantity = 3
+                }
+            }
+        };
+
+        db.Products.Add(product);
+        db.SaveChanges();
+
+        var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
+        var service = new ProductService(repo);
+
+        // Act
+        service.DeleteVariants(1, 10);
+
+        // Assert
+        var variants = db.Products
+            .Include(p => p.Variants)
+            .First(p => p.Id == 1)
+            .Variants;
+
+        Assert.Single(variants);
+        Assert.Equal(11, variants.First().VariantId);
+
+        db.Database.CloseConnection();
+    }
+
+    // TEST 11 — DeleteProductVariant: PRODUCT NOT FOUND
+    [Fact]
+    public void DeleteProductVariant_ThrowsNotFound_WhenProductMissing()
+    {
+        // Arrange
+        var db = CreateTestDb();
+
+        var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
+        var service = new ProductService(repo);
+
+        // Act & Assert
+        Assert.Throws<NotFoundException>(() => service.DeleteVariants(999, 1));
+
+        db.Database.CloseConnection();
+    }
+
+    // TEST 12 — DeleteProductVariant: VARIANT NOT FOUND
+    [Fact]
+    public void DeleteProductVariant_ThrowsNotFound_WhenVariantMissing()
+    {
+        // Arrange
+        var db = CreateTestDb();
+
+        var product = new ProductsModel
+        {
+            Id = 1,
+            Name = "Variant Missing Test",
+            Price = 30,
+            Category = StoreCategoryType.TShirts,
+            Gender = Genders.Men,
+            Material = "Cotton",
+            InStock = true,
+            Variants = new List<ProductsVariantsModel>()
+        };
+
+        db.Products.Add(product);
+        db.SaveChanges();
+
+        var repo = new ProductsRepository(db, Mock.Of<ILogger<ProductsRepository>>());
+        var service = new ProductService(repo);
+
+        // Act & Assert
+        Assert.Throws<ValidationException>(() => service.DeleteVariants( 1, 999));
+
+        db.Database.CloseConnection();
+    }
 }

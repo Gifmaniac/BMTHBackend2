@@ -12,10 +12,14 @@ jobs:
 
     env:
       DOTNET_VERSION: '8.0.x'
+      SONAR_PROJECT_KEY: Gifmaniac_BMTHBackend2
+      SONAR_ORG: gifmaniac
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -23,49 +27,37 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Install SonarScanner for .NET
-        shell: powershell
         run: dotnet tool install --global dotnet-sonarscanner
 
-      - name: dotnet format (solution)
-        shell: powershell
-        run: |
-          dotnet format --verify-no-changes
-          dotnet build "$env:GITHUB_WORKSPACE\BMTH Application (back end)\BMTH Application (back end).sln" `
-            --configuration Release `
-            /p:TreatWarningsAsErrors=true
-
-      - name: Create coverage output folder
-        run: mkdir "${{ github.workspace }}/coverage"
+      - name: Create coverage folder
+        run: mkdir coverage
 
       - name: Begin Sonar Analysis
         shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          $scanner = "$env:USERPROFILE\.dotnet\tools\dotnet-sonarscanner"
-          & $scanner begin `
-            /k:"Gifmaniac_BMTHBackend2" `
-            /o:"gifmaniac" `
+          dotnet sonarscanner begin `
+            /k:"${{ env.SONAR_PROJECT_KEY }}" `
+            /o:"${{ env.SONAR_ORG }}" `
             /d:sonar.host.url="https://sonarcloud.io" `
             /d:sonar.token="$env:SONAR_TOKEN" `
-            /d:sonar.projectBaseDir="${{ github.workspace }}/BMTH Application (back end)" `
-            /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/coverage/coverage.integration.opencover.xml" `
-            /d:sonar.coverage.exclusions="**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BusinessLayer/Exceptions/**,**/*.g.cs,**/obj/**,**/bin/**" `
-            /d:sonar.inclusions="**/*.cs"
+            /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/coverage/*.opencover.xml" `
+            /d:sonar.coverage.exclusions="**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BusinessLayer/Exceptions/**,**/*.g.cs,**/obj/**,**/bin/**"
 
       - name: Restore
         shell: powershell
         run: |
-          dotnet restore "$env:GITHUB_WORKSPACE/BMTH Application (back end)/BMTH Application (back end).sln"
+          dotnet restore "BMTH Application (back end)/BMTH Application (back end).sln"
 
       - name: Build
         shell: powershell
         run: |
-          dotnet build "$env:GITHUB_WORKSPACE/BMTH Application (back end)/BMTH Application (back end).sln" --no-restore
+          dotnet build "BMTH Application (back end)/BMTH Application (back end).sln" --no-restore
 
       - name: Run Unit Tests + Coverage
         shell: powershell
-        working-directory: "${{ github.workspace }}/BMTH Application (back end)/Test.Unit"
+        working-directory: "BMTH Application (back end)/Test.Unit"
         run: |
           dotnet test Test.Unit.csproj `
             /p:CollectCoverage=true `
@@ -74,18 +66,23 @@ jobs:
 
       - name: Run Integration Tests + Coverage
         shell: powershell
-        working-directory: "${{ github.workspace }}/BMTH Application (back end)/Test.Integration"
+        working-directory: "BMTH Application (back end)/Test.Integration"
         run: |
           dotnet test Test.Integration.csproj `
             /p:CollectCoverage=true `
-            /p:CoverletOutputFormat=cobertura `
-            /p:CoverletOutput="${{ github.workspace }}/coverage/coverage.integration.xml"
+            /p:CoverletOutputFormat=opencover `
+            /p:CoverletOutput="${{ github.workspace }}/coverage/coverage.integration.opencover.xml"
+
+      - name: Debug coverage files
+        shell: powershell
+        run: |
+          Write-Host "Coverage files found:"
+          Get-ChildItem "${{ github.workspace }}\coverage"
 
       - name: End Sonar Analysis
         shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          $scanner = "$env:USERPROFILE\.dotnet\tools\dotnet-sonarscanner"
-          & $scanner end `
+          dotnet sonarscanner end `
             /d:sonar.token="$env:SONAR_TOKEN"

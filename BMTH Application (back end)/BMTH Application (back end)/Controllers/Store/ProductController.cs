@@ -52,6 +52,7 @@ namespace BMTH_Application__back_end_.Controllers.Store
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetProductByIdResponse(int id)
         {
+
             var productById = _productService.GetProductById(id);
 
             if (productById == null)
@@ -81,6 +82,27 @@ namespace BMTH_Application__back_end_.Controllers.Store
 
             return Ok(dto);
         }
-    }
 
+        [HttpDelete("{productId}")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public IActionResult DeleteProduct(int productId)
+        {
+            _productService.DeleteProduct(productId);
+            return NoContent();
+        }
+
+        [HttpDelete("{productId}/variants/{variantId}")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public IActionResult DeleteProductVariant(int productId, int variantId)
+        {
+            _productService.DeleteVariants(productId, variantId);
+            return NoContent();
+        }
+    }
 }

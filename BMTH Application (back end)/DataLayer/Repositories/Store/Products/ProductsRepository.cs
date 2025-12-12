@@ -40,12 +40,12 @@ namespace DataLayer.Repositories.Store.Products
             }
             catch (SqlException ex)
             {
-                _logger.LogError(ex, "A database error while retrieving T-shirt with Gender {Gender}", gender);
+                _logger.LogError(ex, "A database error while retrieving Product with Gender {Gender}", gender);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unexpected error in GetTShirtByGender{Gender}", gender);
+                _logger.LogError(ex, "Unexpected error in GetProductByGender{Gender}", gender);
                 throw;
             }
         }
@@ -101,6 +101,76 @@ namespace DataLayer.Repositories.Store.Products
             catch (SqlException ex)
             {
                 _logger.LogError(ex, "Database error while retrieving product {Id}", model.Id);
+                throw;
+            }
+        }
+
+        public bool DeleteProduct(int productId)
+        {
+            try
+            {
+                var product = _context.Products
+                    .Include(p => p.Variants)
+                    .FirstOrDefault(p => p.Id == productId);
+
+                if (product == null)
+                {
+                    return false;
+                }
+
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                _logger.LogError(ex, "Database error while deleting product {ProductId}", productId);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error in DeleteProduct({ProductId})", productId);
+                throw;
+            }
+        }
+
+        public bool DeleteProductVariant(int productId, int variantId)
+        {
+            try
+            {
+                var product = _context.Products
+                    .Include(p => p.Variants)
+                    .FirstOrDefault(p => p.Id == productId);
+
+                if (product == null)
+                {
+                    return false;
+                }
+
+                var variant = product.Variants
+                    .FirstOrDefault(v => v.VariantId == variantId);
+
+                if (variant == null)
+                {
+                    return false;
+                }
+
+                _context.ProductsVariants.Remove(variant);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                _logger.LogError(ex, "Database error while deleting variant {VariantId} from product {ProductId}", variantId, productId);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,
+                    "Unexpected error in DeleteProductVariant(ProductId={ProductId}, VariantId={VariantId})",
+                    productId, variantId);
                 throw;
             }
         }

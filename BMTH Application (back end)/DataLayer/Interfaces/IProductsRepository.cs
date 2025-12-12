@@ -11,5 +11,9 @@ namespace DataLayer.Interfaces
         public ProductsModel? GetById(int? id);
 
         public ProductsModel? UpdateStock(ProductsModel model);
+
+        public bool DeleteProduct(int productId);
+
+        public bool DeleteProductVariant(int productId, int variantId);        
     }
 }

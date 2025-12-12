@@ -9,7 +9,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	  <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>

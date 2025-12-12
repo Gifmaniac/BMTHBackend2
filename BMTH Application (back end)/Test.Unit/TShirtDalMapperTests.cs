@@ -116,7 +116,7 @@ namespace Test.Unit
             };
 
             // Act
-            var result = ProductDalMapper.ToEntityList(domain);
+            var result = ProductDalMapper.ToModelList(domain);
 
             // Assert
             Assert.Equal(2, result.Count);
