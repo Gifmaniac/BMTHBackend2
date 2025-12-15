@@ -68,7 +68,7 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Description = "Please enter JWT with Bearer into field.",
+        Description = "Please enter JWT.",
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey
     });
@@ -144,7 +144,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseWhen(
-    context => !context.Request.Path.StartsWithSegments("/swagger"),
+    context => !context.Request.Path.StartsWithSegments("/swagger") &&
+               !context.Request.Path.StartsWithSegments("/auth"),
     branch =>
     {
         branch.UseMiddleware<ApiMiddleWare>();

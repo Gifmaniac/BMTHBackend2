@@ -45,8 +45,8 @@ dotnet ef database update --project "DataLayer/DataLayer.csproj" --startup-proje
 
 # RUN DOCKER LOCAL
 ---
-## 1. Run command
-docker build -t myapp .
+## 1. Swagger UI
+http://localhost:8080/swagger/index.html
 
 
 # ADDING PRODUCTS
