@@ -15,4 +15,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Docker Image
-        run: docker build -t myapp -f "BMTH Application (back end)/BMTH Application (back end)/Dockerfile" .
+        run: docker build -t myapp .

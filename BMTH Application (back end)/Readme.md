@@ -43,6 +43,12 @@ dotnet ef database update --project "DataLayer/DataLayer.csproj" --startup-proje
 
 
 
+# RUN DOCKER LOCAL
+---
+## 1. Run command
+docker build -t myapp .
+
+
 # ADDING PRODUCTS
 ---
 ## MALE SHIRTS
