@@ -2,7 +2,6 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
@@ -12,10 +11,15 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["BMTH Application (back end)/BMTH Application (back end).csproj", "BMTH Application (back end)/"]
-COPY ["Contracts/Contracts.csproj", "Contracts/"]
-COPY ["BusinessLayer/BusinessLayer.csproj", "BusinessLayer/"]
-COPY ["DataLayer/DataLayer.csproj", "DataLayer/"]
+COPY "BMTH Application (back end)/BMTH Application (back end).csproj" "BMTH Application (back end)/"
+COPY "BusinessLayer/BusinessLayer.csproj" "BusinessLayer/"
+COPY "Contracts/Contracts.csproj" "Contracts/"
+COPY "DataLayer/DataLayer.csproj" "DataLayer/"
+COPY "APIContracts/APIContracts.csproj" "APIContracts/"
+COPY "Domain/Domain.csproj" "Domain/"
+COPY "DAL/DAL.csproj" "DAL/"
+COPY "DALContracts/DALContracts.csproj" "DALContracts/"
+COPY "Repositories/Repositories.csproj" "Repositories/"
 RUN dotnet restore "./BMTH Application (back end)/BMTH Application (back end).csproj"
 COPY . .
 WORKDIR "/src/BMTH Application (back end)"
