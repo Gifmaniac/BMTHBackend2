@@ -57,6 +57,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<StoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BMTH_Real")));
 
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -64,31 +65,9 @@ builder.Services.AddSwaggerGen(c =>
         Title = "BMTH API",
         Version = "v1"
     });
-
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please enter JWT.",
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
-    });
-
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
 });
 
+// JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -100,25 +79,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
             ValidAudience = builder.Configuration["JwtSettings:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"] 
-                                       ?? throw new InvalidOperationException("Jwt:Key is missing from configuration")))
-                               
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]
+                    ?? throw new InvalidOperationException("Jwt:Key missing"))
+            )
         };
 
-        // read token from cookie
+        // Allow JWT from cookie
         options.Events = new JwtBearerEvents
         {
             OnMessageReceived = context =>
             {
                 if (context.Request.Cookies.TryGetValue("jwt", out var token))
-                {
                     context.Token = token;
-                }
+
                 return Task.CompletedTask;
             }
         };
     });
 
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -128,29 +107,61 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowCredentials();
     });
-}); var app = builder.Build();
+});
 
-// Configure the HTTP request pipeline.
-    app.UseSwagger();
-    app.UseSwaggerUI();
+var app = builder.Build();
 
-// app.UseHttpsRedirection();
 
-// Configures the ExceptionHandeling
+// Swagger UI
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.DocumentTitle = "BMTH API Docs";
+    c.InjectJavascript("/swagger-auth.js");
+});
+
+
+// Middleware
+app.UseStaticFiles();
 app.UseCors("AllowFrontend");
 app.UseMiddleware<ExceptionMiddleware>();
 
+// Block everything except login & swagger until logged in
+app.Use(async (context, next) =>
+{
+    var path = context.Request.Path;
+
+    if (path.StartsWithSegments("/swagger"))
+    {
+        await next();
+        return;
+    }
+
+    if (path == "/swagger-auth.js")
+    {
+        await next();
+        return;
+    }
+
+    if (path.StartsWithSegments("/api/auth"))
+    {
+        await next();
+        return;
+    }
+
+    // Everything else requires authentication
+    if (!context.User.Identity!.IsAuthenticated)
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Unauthorized");
+        return;
+    }
+
+    await next();
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseWhen(
-    context => !context.Request.Path.StartsWithSegments("/swagger") &&
-               !context.Request.Path.StartsWithSegments("/auth"),
-    branch =>
-    {
-        branch.UseMiddleware<ApiMiddleWare>();
-    });
-
 
 app.MapControllers();
 

@@ -43,10 +43,19 @@ dotnet ef database update --project "DataLayer/DataLayer.csproj" --startup-proje
 
 
 
-# RUN DOCKER LOCAL
+# RUN DOCKER
 ---
-## 1. Swagger UI
+## 1. Make the image
+docker run -d -p 8080:8080 --name bmth-backend willembroek1997/myapp:latest
+
+## 2. Swagger UI
 http://localhost:8080/swagger/index.html
+
+## 3. Login with Admin account
+
+### ADMIN USER
+Email:		Admin@bmth.com
+Password:	Admin123!
 
 
 # ADDING PRODUCTS
