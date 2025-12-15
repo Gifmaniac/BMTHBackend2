@@ -12,6 +12,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["BMTH Application (back end)/BMTH Application (back end)/BMTH Application (back end).csproj", "BMTH Application (back end)/BMTH Application (back end)/"]
+COPY ["BMTH Application (back end)/BMTH Application (back end)/appsettings.json", "BMTH Application (back end)/BMTH Application (back end)/"]
+COPY ["BMTH Application (back end)/BMTH Application (back end)/appsettings.Development.json", "BMTH Application (back end)/BMTH Application (back end)/"]
 COPY ["BMTH Application (back end)/BusinessLayer/BusinessLayer.csproj", "BMTH Application (back end)/BusinessLayer/"]
 COPY ["BMTH Application (back end)/Contracts/Contracts.csproj", "BMTH Application (back end)/Contracts/"]
 COPY ["BMTH Application (back end)/DataLayer/DataLayer.csproj", "BMTH Application (back end)/DataLayer/"]
