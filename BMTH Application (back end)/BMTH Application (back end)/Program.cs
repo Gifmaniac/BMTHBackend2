@@ -65,11 +65,11 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 
-    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "To view the JSON info, please fill in the Api key",
         In = ParameterLocation.Header,
-        Name = "ApiKey",
+        Description = "Please enter JWT with Bearer into field. Example: Bearer {token}",
+        Name = "Authorization",
         Type = SecuritySchemeType.ApiKey
     });
 
@@ -81,7 +81,7 @@ builder.Services.AddSwaggerGen(c =>
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = "ApiKey"
+                    Id = "Bearer"
                 }
             },
             Array.Empty<string>()
@@ -147,14 +147,6 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseWhen(
-    context => !context.Request.Path.StartsWithSegments(
-        new PathString("/swagger"),
-        StringComparison.OrdinalIgnoreCase),
-    branch =>
-    {
-        branch.UseMiddleware<ApiMiddleWare>();
-    });
 app.MapControllers();
 
 app.Run();
