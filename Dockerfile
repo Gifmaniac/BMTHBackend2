@@ -17,8 +17,6 @@ COPY ["Contracts/Contracts.csproj", "Contracts/"]
 COPY ["DataLayer/DataLayer.csproj", "DataLayer/"]
 COPY ["APIContracts/APIContracts.csproj", "APIContracts/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
-COPY ["DAL/DAL.csproj", "DAL/"]
-COPY ["DALContracts/DALContracts.csproj", "DALContracts/"]
 RUN dotnet restore "./BMTH Application (back end)/BMTH Application (back end).csproj"
 COPY . .
 WORKDIR "/src/BMTH Application (back end)"
