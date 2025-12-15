@@ -68,7 +68,7 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Description = "Please enter JWT with Bearer into field. Example: Bearer {token}",
+        Description = "Please enter JWT with Bearer into field.",
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey
     });
@@ -89,7 +89,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // "Bearer"
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -138,7 +138,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 // Configures the ExceptionHandeling
 app.UseCors("AllowFrontend");
