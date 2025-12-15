@@ -48,10 +48,16 @@ dotnet ef database update --project "DataLayer/DataLayer.csproj" --startup-proje
 ## 1. Make the image
 docker run -d -p 8080:8080 --name bmth-backend willembroek1997/myapp:latest
 
-## 2. Swagger UI
+## 2. Run with Connection string
+docker run -d -p 8080:8080 --name bmth-backend ^
+ -e ConnectionStrings__BMTH_Real="Server=mssqlstud.fhict.local;Database=dbi567108_bmthdev;User Id=dbi567108_bmthdev;Password=Test123!;TrustServerCertificate=True;" ^
+ myapp:latest
+
+
+## 3. Go to Swagger UI
 http://localhost:8080/swagger/index.html
 
-## 3. Login with Admin account
+## 4. Login with Admin account
 
 ### ADMIN USER
 Email:		Admin@bmth.com
