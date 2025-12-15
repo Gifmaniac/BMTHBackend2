@@ -15,15 +15,15 @@ COPY ["BMTH Application (back end)/BMTH Application (back end)/BMTH Application 
 COPY ["BMTH Application (back end)/BusinessLayer/BusinessLayer.csproj", "BMTH Application (back end)/BusinessLayer/"]
 COPY ["BMTH Application (back end)/Contracts/Contracts.csproj", "BMTH Application (back end)/Contracts/"]
 COPY ["BMTH Application (back end)/DataLayer/DataLayer.csproj", "BMTH Application (back end)/DataLayer/"]
-RUN dotnet restore "./BMTH Application (back end)/BMTH Application (back end).csproj"
+RUN dotnet restore "BMTH Application (back end)/BMTH Application (back end)/BMTH Application (back end).csproj"
 COPY . .
-WORKDIR "/src/BMTH Application (back end)"
-RUN dotnet build "./BMTH Application (back end).csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/BMTH Application (back end)/BMTH Application (back end)"
+RUN dotnet build "BMTH Application (back end).csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./BMTH Application (back end).csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "BMTH Application (back end).csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
