@@ -11,10 +11,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["BMTH Application (back end)/BMTH Application (back end).csproj", "BMTH Application (back end)/"]
-COPY ["BMTH Application (back end)/BusinessLayer/BusinessLayer.csproj", "BusinessLayer/"]
-COPY ["BMTH Application (back end)/Contracts/Contracts.csproj", "Contracts/"]
-COPY ["BMTH Application (back end)/DataLayer/DataLayer.csproj", "DataLayer/"]
+COPY ["BMTH Application (back end)/BMTH Application (back end)/BMTH Application (back end).csproj", "BMTH Application (back end)/BMTH Application (back end)/"]
+COPY ["BMTH Application (back end)/BusinessLayer/BusinessLayer.csproj", "BMTH Application (back end)/BusinessLayer/"]
+COPY ["BMTH Application (back end)/Contracts/Contracts.csproj", "BMTH Application (back end)/Contracts/"]
+COPY ["BMTH Application (back end)/DataLayer/DataLayer.csproj", "BMTH Application (back end)/DataLayer/"]
 RUN dotnet restore "./BMTH Application (back end)/BMTH Application (back end).csproj"
 COPY . .
 WORKDIR "/src/BMTH Application (back end)"
