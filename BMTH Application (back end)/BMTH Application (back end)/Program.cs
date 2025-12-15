@@ -89,6 +89,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             OnMessageReceived = context =>
             {
+                if (context.Request.Path.StartsWithSegments("/api/auth/login"))
+                    return Task.CompletedTask;
+
                 if (context.Request.Cookies.TryGetValue("jwt", out var token))
                     context.Token = token;
 
