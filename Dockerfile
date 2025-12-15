@@ -30,6 +30,7 @@ RUN dotnet publish "BMTH Application (back end).csproj" -c $BUILD_CONFIGURATION 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
+EXPOSE 8080
 COPY --from=publish /app/publish .
 ENV ASPNETCORE_ENVIRONMENT=Development
 ENTRYPOINT ["dotnet", "BMTH Application (back end).dll"]
