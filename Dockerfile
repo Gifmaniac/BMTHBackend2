@@ -17,6 +17,7 @@ COPY ["BMTH Application (back end)/BMTH Application (back end)/appsettings.Devel
 COPY ["BMTH Application (back end)/BusinessLayer/BusinessLayer.csproj", "BMTH Application (back end)/BusinessLayer/"]
 COPY ["BMTH Application (back end)/Contracts/Contracts.csproj", "BMTH Application (back end)/Contracts/"]
 COPY ["BMTH Application (back end)/DataLayer/DataLayer.csproj", "BMTH Application (back end)/DataLayer/"]
+COPY ["BMTH Application (back end)/BMTH Application (back end)/wwwroot", "BMTH Application (back end)/BMTH Application (back end)/wwwroot"]
 RUN dotnet restore "BMTH Application (back end)/BMTH Application (back end)/BMTH Application (back end).csproj"
 COPY . .
 WORKDIR "/src/BMTH Application (back end)/BMTH Application (back end)"
