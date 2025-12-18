@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using DataLayer.Context;
@@ -81,7 +82,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]
                     ?? throw new InvalidOperationException("Jwt:Key missing"))
-            )
+            ),
+            RoleClaimType = ClaimTypes.Role
         };
 
         // Allow JWT from cookie
@@ -129,6 +131,9 @@ app.UseStaticFiles();
 app.UseCors("AllowFrontend");
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 // Block everything except login & swagger until logged in
 app.Use(async (context, next) =>
 {
@@ -162,9 +167,6 @@ app.Use(async (context, next) =>
 
     await next();
 });
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllers();
 

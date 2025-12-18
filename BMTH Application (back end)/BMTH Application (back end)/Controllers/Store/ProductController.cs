@@ -94,7 +94,7 @@ namespace BMTH_Application__back_end_.Controllers.Store
             return NoContent();
         }
 
-        [HttpDelete("{productId}/variants/{variantId}")]
+        [HttpDelete("{productId}/{variantId}")]
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
