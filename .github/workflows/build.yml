@@ -49,7 +49,7 @@ jobs:
             /d:sonar.host.url="https://sonarcloud.io" `
             /d:sonar.token="$env:SONAR_TOKEN" `
             /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/coverage/*.opencover.xml" `
-            /d:sonar.coverage.exclusions="**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BMTH Application (back end)/**/Controllers/**,**/BMTH Application (back end)/**/Middleware/**,**/BMTH Application (back end)/**/Program.cs,**/BMTH Application (back end)/**/wwwroot/**,**/obj/**,**/bin/**,**/BusinessLayer/Helper/AutoMapper/**,**/BusinessLayer/Exceptions/**,**/BusinessLayer/Helper/Validator/**"
+            /d:sonar.coverage.exclusions="**/DataLayer/Context/**,**/DataLayer/Models/**,**/DataLayer/Migrations/**,**/Contracts/**,**/BMTH Application (back end)/**/Controllers/**,**/BMTH Application (back end)/**/Middleware/**,**/BMTH Application (back end)/**/Program.cs,**/BMTH Application (back end)/**/wwwroot/**,**/obj/**,**/bin/**,**/BusinessLayer/Helper/AutoMapper/**,**/BusinessLayer/Exceptions/**,**/BusinessLayer/Mapper/ApiMapper/**,**/BusinessLayer/Helper/Validator/**"
 
       - name: Restore
         shell: powershell
