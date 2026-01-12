@@ -11,14 +11,20 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-RUN dotnet restore "BMTH Application (back end)/BMTH Application (back end)/BMTH Application (back end).csproj"
+
+# Copy source so the .csproj exists for restore
 COPY . .
+
+# Restore using the correct relative path
+RUN dotnet restore "BMTH Application (back end)/BMTH Application (back end)/BMTH Application (back end).csproj"
+
 WORKDIR "/src/BMTH Application (back end)/BMTH Application (back end)"
 RUN dotnet build "BMTH Application (back end).csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
+WORKDIR "/src/BMTH Application (back end)/BMTH Application (back end)"
 RUN dotnet publish "BMTH Application (back end).csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
@@ -26,5 +32,6 @@ FROM base AS final
 WORKDIR /app
 EXPOSE 8080
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_ENVIRONMENT=Release
+ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet", "BMTH Application (back end).dll"]
