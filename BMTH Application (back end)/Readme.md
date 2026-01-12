@@ -1,5 +1,4 @@
 # TEST USERS
----
 
 ## NORMAL USER
 Email:		TestUser@bmth.com
@@ -11,25 +10,6 @@ Email:		Admin@bmth.com
 Password:	Admin123!
 
 
-
-# CODE TEST COVERAGE
-
-## 1. Generate Test Template
-dotnet test --collect:"XPlat Code Coverage"
-
-
-## 2. Run the test.
-reportgenerator `
-    -reports:"Test.Unit/TestResults/**/coverage.cobertura.xml;Test.Integration/TestResults/**/coverage.cobertura.xml" `
-    -targetdir:"coverage-report" `
-    -reporttypes:Html `
-    -classfilters:"-DataLayer.Context.*;-DataLayer.Models.*;-Contracts.*;-BusinessLayer.Exceptions.*" `
-    -filefilters:"-**/DataLayer/Migrations/**;-**/*.g.cs;-**/obj/**;-**/bin/**"
-
-
-## 3. Configure SonarQube (doesnt work for some reason.)
-sonar.cs.opencover.reportsPaths=coverage-report/coverage.opencover.xml
-sonar.cs.vstest.reportsPaths=Test.Unit/TestResults/**/*.trx
 
 
 # UPDATE DATABASE BASED ON MODELS

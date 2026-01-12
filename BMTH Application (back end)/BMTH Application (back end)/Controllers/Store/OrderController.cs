@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces.Store.Orders;
 using Contracts.DTOs.StoreItems.Orders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BMTH_Application_back_end_.Controllers.Store
@@ -15,6 +16,7 @@ namespace BMTH_Application_back_end_.Controllers.Store
         [Consumes("application/json")]
         [ProducesResponseType(typeof(IEnumerable<PostOrderDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [AllowAnonymous]
         public IActionResult PostUserOrder([FromBody] PostOrderDto request)
         {
             // Validate required argument
