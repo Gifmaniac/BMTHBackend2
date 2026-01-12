@@ -19,6 +19,7 @@ namespace BMTHApplication.BackEnd.Controllers.User
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto newUser)
         { 
             AuthResponseDto response = await _registerService.RegisterUser(newUser).ConfigureAwait(false);
@@ -35,6 +36,7 @@ namespace BMTHApplication.BackEnd.Controllers.User
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginUser([FromBody] LoginUserDto givenUserDto)
         {
             AuthLoginResponseDto response = await _loginService.LoginUser(givenUserDto).ConfigureAwait(false);

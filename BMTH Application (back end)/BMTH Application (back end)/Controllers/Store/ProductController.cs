@@ -29,6 +29,7 @@ namespace BMTH_Application__back_end_.Controllers.Store
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StoreItemOverviewDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [AllowAnonymous]
         public IActionResult GetProductOverviewResponse([FromQuery] string genders)
         {
             if (!Enum.TryParse<Genders>(genders, true, out var genderEnum))
@@ -50,6 +51,7 @@ namespace BMTH_Application__back_end_.Controllers.Store
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(IEnumerable<ProductDetailDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [AllowAnonymous]
         public IActionResult GetProductByIdResponse(int id)
         {
 

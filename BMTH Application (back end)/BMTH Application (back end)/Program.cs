@@ -114,6 +114,14 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Authorization
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
 var app = builder.Build();
 
 
@@ -134,39 +142,6 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Block everything except login & swagger until logged in
-app.Use(async (context, next) =>
-{
-    var path = context.Request.Path;
-
-    if (path.StartsWithSegments("/swagger"))
-    {
-        await next();
-        return;
-    }
-
-    if (path == "/swagger-auth.js")
-    {
-        await next();
-        return;
-    }
-
-    if (path.StartsWithSegments("/api/auth"))
-    {
-        await next();
-        return;
-    }
-
-    // Everything else requires authentication
-    if (!context.User.Identity!.IsAuthenticated)
-    {
-        context.Response.StatusCode = 401;
-        await context.Response.WriteAsync("Unauthorized");
-        return;
-    }
-
-    await next();
-});
 
 app.MapControllers();
 
