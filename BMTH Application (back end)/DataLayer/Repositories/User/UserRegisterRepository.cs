@@ -1,6 +1,7 @@
 ﻿using DataLayer.Context;
 using DataLayer.Interfaces.User;
 using DataLayer.Models.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Repositories.User
 {
@@ -17,7 +18,8 @@ namespace DataLayer.Repositories.User
 
         public async Task<bool> DoesEmailExists(string email)
         {
-            return await Task.FromResult(_context.Users.Any(u => u.Email == email));
+            var normalized = email.Trim().ToLower();
+            return await _context.Users.AnyAsync(u => u.Email.ToLower() == normalized);
         }
     }
 }
