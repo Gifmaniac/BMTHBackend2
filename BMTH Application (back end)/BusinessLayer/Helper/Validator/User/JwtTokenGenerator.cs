@@ -15,33 +15,32 @@ namespace BusinessLayer.Helper.Validator.User
 
         public string GenerateToken(LoginUser providedUser)
         {
-            if (providedUser == null)
-            {
-                throw new ValidationException("User cannot be null when generating a JWT token");
-            }
             var jwtSettings = _config.GetSection("JwtSettings");
 
+            var keyValue = jwtSettings["Key"]
+                           ?? Environment.GetEnvironmentVariable("JWT_SIGNING_KEY")
+                           ?? throw new InvalidOperationException("JWT signing key is missing.");
+
+            var issuer = jwtSettings["Issuer"]
+                         ?? Environment.GetEnvironmentVariable("JWT_ISSUER")
+                         ?? throw new ValidationException("JWT issuer is missing.");
+
+            var audience = jwtSettings["Audience"]
+                           ?? Environment.GetEnvironmentVariable("JWT_AUDIENCE")
+                           ?? throw new ValidationException("JWT audience is missing.");
+
+            var expiryValue = jwtSettings["ExpiryMinutes"]
+                              ?? Environment.GetEnvironmentVariable("JWT_EXPIRY_MINUTES")
+                              ?? throw new ValidationException("JWT expiry minutes is missing.");
+
+            if (!int.TryParse(expiryValue, out int expiryMinutes))
+            {
+                throw new ValidationException("JwtSettings:ExpiryMinutes must be an integer.");
+            }
+
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtSettings["Key"] ?? 
-                                       throw new InvalidOperationException("Jwt:Key is missing from configuration"))
+                Encoding.UTF8.GetBytes(keyValue)
             );
-
-            string? issuer = jwtSettings["Issuer"];
-            if (string.IsNullOrWhiteSpace(issuer))
-            {
-                throw new ValidationException("JwtSettings:Issuer is missing.");
-            }
-
-            string? audience = jwtSettings["Audience"];
-            if (string.IsNullOrWhiteSpace(audience))
-            {
-                throw new ValidationException("JwtSettings:Audience is missing.");
-            }
-
-            if (!int.TryParse(jwtSettings["ExpiryMinutes"], out int expiryMinutes))
-            {
-                throw new ValidationException("JwtSettings:ExpiryMinutes must be a integer.");
-            }
 
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
