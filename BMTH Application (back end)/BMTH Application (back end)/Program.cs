@@ -69,25 +69,36 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // JWT Authentication
+var jwtSection = builder.Configuration.GetSection("JwtSettings");
+var issuer = jwtSection["Issuer"];
+var audience = jwtSection["Audience"];
+var key = jwtSection["Key"];
+
+
+if (string.IsNullOrWhiteSpace(key))
+{
+    throw new InvalidOperationException("JwtSettings:Key missing from configuration (User Secrets).");
+}
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
+            ValidIssuer = issuer,
             ValidateAudience = true,
+            ValidAudience = audience,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-            ValidAudience = builder.Configuration["JwtSettings:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]
-                    ?? throw new InvalidOperationException("Jwt:Key missing"))
-            ),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromSeconds(60),
+
             RoleClaimType = ClaimTypes.Role
         };
 
-        // Allow JWT from cookie
-        options.Events = new JwtBearerEvents
+// Allow JWT from cookie
+options.Events = new JwtBearerEvents
         {
             OnMessageReceived = context =>
             {
