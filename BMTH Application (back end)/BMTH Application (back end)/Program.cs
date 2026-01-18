@@ -69,15 +69,23 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // JWT Authentication
-var jwtSection = builder.Configuration.GetSection("JwtSettings");
-var issuer = jwtSection["Issuer"];
-var audience = jwtSection["Audience"];
-var key = jwtSection["Key"];
-
+var key = Environment.GetEnvironmentVariable("JWT_SIGNING_KEY");
+var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
+var audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
 
 if (string.IsNullOrWhiteSpace(key))
 {
-    throw new InvalidOperationException("JwtSettings:Key missing from configuration (User Secrets).");
+    throw new InvalidOperationException("JWT_SIGNING_KEY environment variable is missing.");
+}
+
+if (string.IsNullOrWhiteSpace(issuer))
+{
+    throw new InvalidOperationException("JWT_ISSUER environment variable is missing.");
+}
+
+if (string.IsNullOrWhiteSpace(audience))
+{
+    throw new InvalidOperationException("JWT_AUDIENCE environment variable is missing.");
 }
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -85,12 +93,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+
             ValidateIssuer = true,
             ValidIssuer = issuer,
+
             ValidateAudience = true,
             ValidAudience = audience,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+
             ValidateLifetime = true,
             ClockSkew = TimeSpan.FromSeconds(60),
 
