@@ -19,14 +19,17 @@ namespace BusinessLayer.Helper.Validator.User
 
             var keyValue = jwtSettings["Key"]
                            ?? Environment.GetEnvironmentVariable("JWT_SIGNING_KEY")
+                           ?? config["JwtSettings:Key"]
                            ?? throw new InvalidOperationException("JWT signing key is missing.");
 
             var issuer = jwtSettings["Issuer"]
-                         ?? Environment.GetEnvironmentVariable("JWT_ISSUER")
+                         ?? Environment.GetEnvironmentVariable("JwtSettings_ISSUER")
+                         ?? config["JwtSettings:Issuer"]
                          ?? throw new ValidationException("JWT issuer is missing.");
 
             var audience = jwtSettings["Audience"]
-                           ?? Environment.GetEnvironmentVariable("JWT_AUDIENCE")
+                           ?? Environment.GetEnvironmentVariable("JwtSettings_AUDIENCE")
+                           ?? config["Jwtsettings:audience"]
                            ?? throw new ValidationException("JWT audience is missing.");
 
             var expiryValue = jwtSettings["ExpiryMinutes"]
@@ -55,8 +58,7 @@ namespace BusinessLayer.Helper.Validator.User
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(int.Parse(jwtSettings["ExpiryMinutes"] ??
-                                                              throw new InvalidOperationException("Expiry time wasn't found"))),
+                expires: DateTime.UtcNow.AddMinutes(int.Parse(jwtSettings["ExpiryMinutes"])),
                 signingCredentials: credentials
             );
 
