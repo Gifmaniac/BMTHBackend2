@@ -13,7 +13,7 @@ namespace BusinessLayer.Helper.Validator.User
     {
         private readonly IConfiguration _config = config;
 
-        public string GenerateToken(LoginUser providedUser)
+        public string GenerateToken(LoginUser user)
         {
             var jwtSettings = _config.GetSection("JwtSettings");
 
@@ -49,9 +49,9 @@ namespace BusinessLayer.Helper.Validator.User
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, providedUser.Id.ToString()),
-                new Claim(ClaimTypes.Email, providedUser.Email),
-                new Claim(ClaimTypes.Role, providedUser.Role.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role.ToString())
             };
 
             var token = new JwtSecurityToken(

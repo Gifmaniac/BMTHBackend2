@@ -19,9 +19,9 @@ namespace BusinessLayer.Services.User
         private readonly IPasswordHasherService _passwordHasherService = passwordHasherService;
         private readonly IUserRegisterRepository _userRegisterRepository = userRegisterRepository;
 
-        public async Task<AuthResponseDto> RegisterUser(RegisterUserDto newUser)
+        public async Task<AuthResponseDto> RegisterUser(RegisterUserDto newUserDto)
         {
-            var domainNewUser = RegisterUserApiMapper.ToDomain(newUser);
+            var domainNewUser = RegisterUserApiMapper.ToDomain(newUserDto);
 
             // Validates the user input
             var result = _validator.Validate(domainNewUser);

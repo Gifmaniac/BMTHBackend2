@@ -14,13 +14,13 @@ namespace BusinessLayer.Services.Store.Product
     public class ProductService(IProductsRepository productsRepository) : IProductService
     {
         private readonly IProductsRepository _productsRepository = productsRepository;
-        public Products GetProductById(int productId)
+        public Products GetProductById(int id)
         {
-            ProductsModel? productById = _productsRepository.GetById(productId);
+            ProductsModel? productById = _productsRepository.GetById(id);
 
             if (productById == null)
             {
-                throw new NotFoundException($"No product found with ID {productId}.");
+                throw new NotFoundException($"No product found with ID {id}.");
             }
             return ProductDalMapper.ToDomain(productById);
         }
@@ -80,11 +80,11 @@ namespace BusinessLayer.Services.Store.Product
             }
         }
 
-        public void DeleteVariants(int productId, int productVariantId)
+        public void DeleteVariants(int productId, int variantId)
         {
             Products productDomain = GetProductById(productId);
 
-            var DeletedVariant = _productsRepository.DeleteProductVariant(productId, productVariantId);
+            var DeletedVariant = _productsRepository.DeleteProductVariant(productId, variantId);
 
             if (!DeletedVariant)
             {
